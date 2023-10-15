@@ -28,6 +28,7 @@ jobs:
           msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\xtradev.vcxproj
           msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\xtraevt.vcxproj
           set cms=codemodels\x64\Release
+	  md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           dir visualc\%cms%
           msbuild -property:Configuration=Release -property:Platform=x64 visualc\vngspice.vcxproj
