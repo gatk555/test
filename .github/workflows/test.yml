@@ -23,7 +23,9 @@ jobs:
           set config=Release
           set plat=Win32
           set suffix=""
-          set opt="-property:Configuration=%config% -property:Platform=%plat%"
+          set opt=-property:Configuration=%config% -property:Platform=%plat%
+          set
+          echo command msbuild %opts% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opts% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opts% visualc\xspice\analog.vcxproj
           msbuild %opts% visualc\xspice\digital.vcxproj
@@ -36,7 +38,7 @@ jobs:
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           dir visualc\%cms%
           msbuild %opts% visualc\vngspice.vcxproj
-          xcopy /s /c examples c:\Spice%suffix%/share/examples
+          xcopy /s /i examples c:\Spice%suffix%/share/examples
       - name: Save
         uses: actions/upload-artifact@v3
         with:
