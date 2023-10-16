@@ -20,20 +20,25 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\analog.vcxproj
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\digital.vcxproj
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\spice2poly.vcxproj
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\table.vcxproj
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\xtradev.vcxproj
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\xtraevt.vcxproj
-          set cms=codemodels\x64\Release
+          set config=Release
+          set plat=Win32
+          set suffix=""
+          set opt="-property:Configuration=%config% -property:Platform=%plat%"
+          msbuild %opts% visualc\xspice\cmpp\cmpp.vcxproj
+          msbuild %opts% visualc\xspice\analog.vcxproj
+          msbuild %opts% visualc\xspice\digital.vcxproj
+          msbuild %opts% visualc\xspice\spice2poly.vcxproj
+          msbuild %opts% visualc\xspice\table.vcxproj
+          msbuild %opts% visualc\xspice\xtradev.vcxproj
+          msbuild %opts% visualc\xspice\xtraevt.vcxproj
+          set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           dir visualc\%cms%
-          msbuild -property:Configuration=Release -property:Platform=x64 visualc\vngspice.vcxproj
+          msbuild %opts% visualc\vngspice.vcxproj
+          xcopy /s /c examples c:\Spice%suffix%/share/examples
       - name: Save
         uses: actions/upload-artifact@v3
         with:
-          name: Ngspice-41, Windows X86-64
-          path: C:\Spice64
+          name: Ngspice-41, Windows 32-bit
+          path: C:\Spice
