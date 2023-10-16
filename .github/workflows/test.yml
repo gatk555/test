@@ -22,23 +22,23 @@ jobs:
         run: |
           set config=Release
           set plat=Win32
-          set suffix=""
+          set suffix=
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           set
-          echo command msbuild %opts% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opts% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opts% visualc\xspice\analog.vcxproj
-          msbuild %opts% visualc\xspice\digital.vcxproj
-          msbuild %opts% visualc\xspice\spice2poly.vcxproj
-          msbuild %opts% visualc\xspice\table.vcxproj
-          msbuild %opts% visualc\xspice\xtradev.vcxproj
-          msbuild %opts% visualc\xspice\xtraevt.vcxproj
+          echo command msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
+          msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
+          msbuild %opt% visualc\xspice\analog.vcxproj
+          msbuild %opt% visualc\xspice\digital.vcxproj
+          msbuild %opt% visualc\xspice\spice2poly.vcxproj
+          msbuild %opt% visualc\xspice\table.vcxproj
+          msbuild %opt% visualc\xspice\xtradev.vcxproj
+          msbuild %opt% visualc\xspice\xtraevt.vcxproj
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           dir visualc\%cms%
-          msbuild %opts% visualc\vngspice.vcxproj
-          xcopy /s /i examples c:\Spice%suffix%/share/examples
+          msbuild %opt% visualc\vngspice.vcxproj
+          xcopy /s /i examples c:\Spice%suffix%\share\ngspice\examples
       - name: Save
         uses: actions/upload-artifact@v3
         with:
