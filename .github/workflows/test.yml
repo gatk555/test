@@ -21,11 +21,12 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          xcopy /s /i src\include\ngspice\cmtypes.h c:\Spice%suffix%\share\ngspice\include\ngspice
-          copy src\include\ngspice\cosim.h c:\Spice%suffix%\share\ngspice\include\ngspice
           set config=Release
           set plat=x64
           set suffix=64
+          md c:\Spice%suffix%\share\ngspice\include\ngspice 
+          copy src\include\ngspice\cmtypes.h c:\Spice%suffix%\share\ngspice\include\ngspice
+          copy src\include\ngspice\cosim.h c:\Spice%suffix%\share\ngspice\include\ngspice
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opt% visualc\xspice\analog.vcxproj
