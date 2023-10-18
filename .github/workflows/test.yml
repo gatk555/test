@@ -15,17 +15,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: gatk555/ngspice
-          ref: master
+          ref: ga_test
       - uses: microsoft/setup-msbuild@v1.1
       - name: Build
         shell: cmd
         run: |
           set config=Release
-          set plat=Win32
-          set suffix=
+          set plat=x64
+          set suffix=64
           set opt=-property:Configuration=%config% -property:Platform=%plat%
-          set
-          echo command msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opt% visualc\xspice\analog.vcxproj
           msbuild %opt% visualc\xspice\digital.vcxproj
@@ -36,11 +34,13 @@ jobs:
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
-          dir visualc\%cms%
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples c:\Spice%suffix%\share\ngspice\examples
+          xcopy /i src\xspice\verilog\*.* c:\Spice%suffix%\share\ngspice\verilog\verilator
+          xcopy /i src\include\ngspice\cmtypes.h c:\Spice%suffix%\share\ngspice\cosim\verilator
+          xcopy /i src\include\ngspice\cosim.h c:\Spice%suffix%\share\ngspice\cosim\verilator
       - name: Save
         uses: actions/upload-artifact@v3
         with:
-          name: Ngspice-41, Windows 32-bit
-          path: C:\Spice
+          name: Test, Windows 64-bit
+          path: C:\Spice64
