@@ -1,6 +1,7 @@
 name: Test
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   test:
@@ -20,6 +21,8 @@ jobs:
       - name: Build
         shell: cmd
         run: |
+          xcopy /s /i src\include\ngspice\cmtypes.h c:\Spice%suffix%\share\ngspice\include\ngspice
+          copy src\include\ngspice\cosim.h c:\Spice%suffix%\share\ngspice\include\ngspice
           set config=Release
           set plat=x64
           set suffix=64
@@ -37,8 +40,6 @@ jobs:
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples c:\Spice%suffix%\share\ngspice\examples
           xcopy /i src\xspice\verilog\*.* c:\Spice%suffix%\share\ngspice\verilog\verilator
-          xcopy /i src\include\ngspice\cmtypes.h c:\Spice%suffix%\share\ngspice\cosim\verilator
-          xcopy /i src\include\ngspice\cosim.h c:\Spice%suffix%\share\ngspice\cosim\verilator
       - name: Save
         uses: actions/upload-artifact@v3
         with:
