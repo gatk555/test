@@ -48,7 +48,6 @@ jobs:
           c:
           cd \Spice%suffix%\share\ngspice\verilog\verilator
           \Spice%suffix%\bin\ngspice sogen.sp \Spice%suffix%\share\ngspice\examples\xspice\verilator\adc.v
-g\verilator
       - name: Save
         uses: actions/upload-artifact@v3
         with:
