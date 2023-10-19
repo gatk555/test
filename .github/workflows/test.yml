@@ -35,8 +35,8 @@ jobs:
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
-          msbuild %opt% visualc\vngspice.vcxproj
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
+          msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples c:\Spice%suffix%\share\ngspice\examples
           xcopy /i src\xspice\verilog\*.* c:\Spice%suffix%\share\ngspice\verilog\verilator
           md c:\Spice%suffix%\share\ngspice\include\ngspice 
