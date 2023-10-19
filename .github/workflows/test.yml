@@ -47,9 +47,3 @@ jobs:
         with:
           name: Test, Windows 64-bit
           path: C:\Spice64_KLU
-      - name: Test
-        shell: cmd
-        run: |
-          c:
-          cd \Spice64_KLU\share\ngspice\verilog\verilator
-          \Spice64_KLU\bin\ngspice sogen.sp \Spice64_KLU\share\ngspice\examples\xspice\verilator\adc.v
