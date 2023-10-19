@@ -23,7 +23,7 @@ jobs:
         run: |
           set config=Release
           set plat=x64
-          set suffix=64
+          set suffix=64_KLU
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opt% visualc\xspice\analog.vcxproj
@@ -46,4 +46,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Test, Windows 64-bit
-          path: C:\Spice64
+          path: C:\Spice64_KLU
