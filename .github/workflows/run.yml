@@ -1,0 +1,23 @@
+name: Test
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Download artifact
+      - uses: actions/download-artifact@v3
+        with:
+         name: Test, Windows 64-bit
+         path: C:\Spice64_KLU
+      - name: Download artifact
+        shell: cmd
+        run: |
+          DIR C:\Spice64_KLU
+          C:
+          cd \Spice64_KLU\share\ngspice\verilo\g\verilator
+          \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilog\adc.v
+          dir
+          type log.txt
