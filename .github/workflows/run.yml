@@ -12,7 +12,7 @@ jobs:
         with:
          name: Test, Windows 64-bit
          path: C:\Spice64_KLU
-      - name: Download artifact
+      - name: Run
         shell: cmd
         run: |
           DIR C:\Spice64_KLU
