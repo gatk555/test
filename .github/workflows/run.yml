@@ -21,8 +21,8 @@ jobs:
       - name: Run
         shell: msys2 {0}
         run: |
-          cd C:/Spice64_KLU/share/ngspice/verilog/verilator
+          cd /c/Spice64_KLU/share/ngspice/verilog/verilator
           ls
-          /Spice64_KLU/bin/ngspice.exe -b -o log.txt sogen.sp ../../examples/xspice/verilog/adc.v
+          /c/Spice64_KLU/bin/ngspice.exe -b -o log.txt sogen.sp ../../examples/xspice/verilog/adc.v
           ls
           cat log.txt
