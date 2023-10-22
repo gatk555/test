@@ -37,5 +37,5 @@ jobs:
           dir d:\msys64\mingw64\share
           dir d:\msys64\mingw64\share\verilator
           dir d:\msys64\mingw64\share\verilator\include
-          perl d:/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng -I/d/msys64 --cc ../../examples/xspice/verilator/adc.v
+          perl d:/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng -Id:/msys64 --cc ../../examples/xspice/verilator/adc.v
           dir
