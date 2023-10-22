@@ -23,7 +23,7 @@ jobs:
         run: |
           cd \
           C:
-	  dir d:\mingw64\bin
+          dir d:\mingw64\bin
           set PATH=%PATH%;d:\mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilog\adc.v
