@@ -28,8 +28,8 @@ jobs:
           C:
           set PATH=%PATH%;d:\msys64\mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
-          \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilog\adc.v
+          \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
           dir
           type log.txt
           echo Running directly
-          perl d:/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng -I /d/msys64/mingw64/share/verilator/include --cc ../../examples/xspice/verilog/adc.v
+          perl d:/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng -I/d/msys64/mingw64/share/verilator/include --cc ../../examples/xspice/verilator/adc.v
