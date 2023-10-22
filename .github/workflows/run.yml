@@ -19,6 +19,7 @@ jobs:
          run_number: 22
          name: Test, Windows 64-bit
          path: C:\Spice64_KLU
+      - uses: actions/checkout@v3
       - name: Run
         shell: cmd
         run: |
