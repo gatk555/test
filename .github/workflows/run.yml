@@ -1,4 +1,4 @@
-name: Test
+name: Run
 on:
   workflow_dispatch:
   push:
@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
+         workflow: test.yml
          name: Test, Windows 64-bit
          path: C:\Spice64_KLU
       - name: Run
