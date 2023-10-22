@@ -32,6 +32,10 @@ jobs:
           dir
           type log.txt
           echo Running directly
+	  dir d:\msys64
+	  dir d:\msys64\mingw64
+	  dir d:\msys64\mingw64\share
+	  dir d:\msys64\mingw64\share\verilator
 	  dir d:\msys64\mingw64\share\verilator\include
           perl d:/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng -I/d/msys64/mingw64/share/verilator/include --cc ../../examples/xspice/verilator/adc.v
           dir
