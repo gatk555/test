@@ -22,11 +22,11 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          dir d:\
+          dir d:\msys64
           cd \
           C:
-          dir d:\mingw64\bin
-          set PATH=%PATH%;d:\mingw64\bin
+          dir d:\msys64\mingw64\bin
+          set PATH=%PATH%;d:\msys64\mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilog\adc.v
           dir
