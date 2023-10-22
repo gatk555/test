@@ -11,7 +11,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          location d:\
+          location: d:\
           install: mingw-w64-x86_64-verilator
       - uses: dawidd6/action-download-artifact@v2
         with:
