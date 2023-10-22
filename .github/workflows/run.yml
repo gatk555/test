@@ -16,9 +16,9 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          DIR C:\Spice64_KLU
+          cd \
           C:
-          cd \Spice64_KLU\share\ngspice\verilo\g\verilator
+          cd \Spice64_KLU\share\ngspice\verilog\verilator
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilog\adc.v
           dir
           type log.txt
