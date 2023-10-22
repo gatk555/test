@@ -22,7 +22,10 @@ jobs:
         shell: msys2 {0}
         run: |
           cd /c/Spice64_KLU/share/ngspice/verilog/verilator
-          ls
+          which verilator
+          ln -s `which verilator` .
+          echo $PATH
+          export PATH=.:$PATH
           /c/Spice64_KLU/bin/ngspice.exe -b -o log.txt sogen.sp ../../examples/xspice/verilog/adc.v
           ls
           cat log.txt
