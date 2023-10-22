@@ -19,13 +19,13 @@ jobs:
          name: Test, Windows 64-bit
          path: C:\Spice64_KLU
       - name: Run
-        shell: msys2 {0}
+        shell: cmd
         run: |
-          cd /c/Spice64_KLU/share/ngspice/verilog/verilator
-          which verilator
-          ln -s `which verilator` .
-          echo $PATH
-          export PATH=.:$PATH
-          /c/Spice64_KLU/bin/ngspice.exe -b -o log.txt sogen.sp ../../examples/xspice/verilog/adc.v
-          ls
-          cat log.txt
+          cd \
+          C:
+	  dir d:\mingw64\bin
+	  set PATH=%PATH%;d:\mingw64\bin
+          cd \Spice64_KLU\share\ngspice\verilog\verilator
+          \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilog\adc.v
+          dir
+          type log.txt
