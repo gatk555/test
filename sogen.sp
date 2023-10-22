@@ -38,6 +38,7 @@ else
    set run_verilator=verilator
    setcs cflags="--CFLAGS -fpic" // For g++
 end
+echo Compiled $oscompiled Using $run_verilator
 
 if $oscompiled = 2 | $oscompiled = 3 | $oscompiled = 8 // Windows
    set windows=1
