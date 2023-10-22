@@ -7,6 +7,11 @@ jobs:
   test:
     runs-on: windows-latest
     steps:
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: verilator
       - uses: dawidd6/action-download-artifact@v2
         with:
          workflow: test.yml
