@@ -22,7 +22,8 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          dir d:\msys64
+          copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
+          dir d:\msys64\mingw64\bin
           cd \
           C:
           dir d:\msys64\mingw64\bin
