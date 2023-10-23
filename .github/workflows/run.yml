@@ -11,7 +11,6 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          location: d:\
           install: mingw-w64-x86_64-verilator
       - uses: dawidd6/action-download-artifact@v2
         with:
@@ -23,19 +22,21 @@ jobs:
       - name: Run
         shell: cmd
         run: |
+          dir c:
+          dir d:
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
           cd \
           C:
-          set PATH=%PATH%;d:\msys64\mingw64\bin
+          set PATH=%PATH%;c:\msys64\mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
           dir
           type log.txt
           echo Running directly
-          dir d:\msys64
-          dir d:\msys64\mingw64
-          dir d:\msys64\mingw64\share
-          dir d:\msys64\mingw64\share\verilator
-          dir d:\msys64\mingw64\share\verilator\include
-          perl d:/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng -Id:/msys64 --cc ../../examples/xspice/verilator/adc.v
+          dir c:\msys64
+          dir c:\msys64\mingw64
+          dir c:\msys64\mingw64\share
+          dir c:\msys64\mingw64\share\verilator
+          dir c:\msys64\mingw64\share\verilator\include
+          perl c:/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
           dir
