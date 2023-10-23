@@ -16,6 +16,7 @@ jobs:
         shell: msys2 {0}
         run: |
           ls /c
+          echo Listing of /c/msys64/share
+          ls /c/msys64/share
+          echo Listing of /d
           ls /d
-          find /c -name verilator
-          find /d -name verilator
