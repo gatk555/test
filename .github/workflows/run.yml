@@ -13,7 +13,7 @@ jobs:
           update: true
           install: mingw-w64-x86_64-verilator
       - name: Run
-        shell: cmd
+        shell: msys2 {0}
         run: |
-          dir c:\*\MINGW64
+          cygpath -m `which verilator`
 
