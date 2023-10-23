@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  test:
+  run:
     runs-on: windows-latest
     steps:
       - uses: msys2/setup-msys2@v2
@@ -13,8 +13,7 @@ jobs:
           update: true
           install: mingw-w64-x86_64-verilator
       - name: Run
-        shell: msys2 {0}
+        shell: cmd
         run: |
-          which verilator
-          find /c -name verilator
+          dir c:\*\MINGW64
 
