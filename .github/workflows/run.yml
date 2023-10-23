@@ -15,8 +15,10 @@ jobs:
       - name: Run
         shell: msys2 {0}
         run: |
+          which verilator
+          echo Listing of /c
           ls /c
-          echo Listing of /c/msys64/share
-          ls /c/msys64/share
+          echo Listing of /c/msys64/
+          ls /c/msys64/
           echo Listing of /d
           ls /d
