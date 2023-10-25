@@ -30,7 +30,7 @@ jobs:
           set PATH=%PATH%;D:/a/_temp/msys64/mingw64/bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running directly
-          perl D:/a/_temp/msys64/mingw64/bin/verilator  --Mdir adc_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
+          perl D:/a/_temp/msys64/mingw64/bin/verilator -I/d/a/_temp/msys64 --Mdir adc_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
           dir
           echo Running sogen.sp
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
