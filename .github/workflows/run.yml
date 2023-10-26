@@ -22,15 +22,15 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          dir d::/a/_temp/msys64/mingw64
-          dir d::/a/_temp/msys64/mingw64/share
-          dir d::/a/_temp/msys64/mingw64/share
-          dir d::/a/_temp/msys64/mingw64/share/verilator
-          dir d::/a/_temp/msys64/mingw64/share/verilator\include
+          dir d:\a\_temp\msys64\mingw64
+          dir d:\a\_temp\msys64\mingw64\share
+          dir d:\a\_temp\msys64\mingw64\share
+          dir d:\a\_temp\msys64\mingw64\share\verilator
+          dir d:\a\_temp\msys64\mingw64\share\verilator\include
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
           cd \
           C:
-          set PATH=%PATH%;D:/a/_temp/msys64/mingw64/bin
+          set PATH=%PATH%;D:\a\_temp\msys64\mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running directly
           perl D:/a/_temp/msys64/mingw64/bin/verilator -I/d/a/_temp/msys64 --Mdir adc_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
