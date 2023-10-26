@@ -31,7 +31,7 @@ jobs:
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running directly
-          perl /mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
+          perl c:/mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
           dir
           dir direct_obj_dir
           echo Running sogen.sp
