@@ -26,18 +26,15 @@ jobs:
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
           cd \
           C:
-          set PATH=%PATH%;D:\a\_temp\msys64\mingw64\bin
+          md \mingw64\share\verilator\include
+          copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
+          copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running directly
-          perl D:/a/_temp/msys64/mingw64/bin/verilator -I/d/a/_temp/msys64 --Mdir adc_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
+          perl /mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
           dir
+          dir direct_obj_dir
           echo Running sogen.sp
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
           dir
           type log.txt
-      - name: Look
-        shell: msys2 {0}
-        run: |
-          ls -l /d/a/_temp/msys64//mingw64/share/verilator/include/verilated_std.sv
-          echo One slash
-          ls -l /d/a/_temp/msys64/mingw64/share/verilator/include/verilated_std.sv

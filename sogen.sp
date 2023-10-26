@@ -32,7 +32,7 @@ set noglob
 // the compiler to be used with Verilator.  Edit to change.
 
 if $oscompiled = 8 // VisualC++ - Verilator is a Perl script
-   set vloc="D:/a/_temp/msys64/mingw64/bin/verilator"
+   set vloc="C:/msys64/mingw64/bin/verilator"
    set run_verilator="perl $vloc"
    setcs cflags="--compiler msvc" // PIC is default?
 else
