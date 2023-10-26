@@ -22,10 +22,6 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          dir d:\a\_temp\msys64\mingw64
-          dir d:\a\_temp\msys64\mingw64\share
-          dir d:\a\_temp\msys64\mingw64\share
-          dir d:\a\_temp\msys64\mingw64\share\verilator
           dir d:\a\_temp\msys64\mingw64\share\verilator\include
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
           cd \
@@ -39,3 +35,9 @@ jobs:
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
           dir
           type log.txt
+      - name: Look
+        shell: msys2 {0}
+        run: |
+          ls -l /d/a/_temp/msys64//mingw64/share/verilator/include/verilated_std.sv
+          echo One slash
+          ls -l /d/a/_temp/msys64/mingw64/share/verilator/include/verilated_std.sv
