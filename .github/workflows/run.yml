@@ -22,7 +22,6 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          dir d:\a\_temp\msys64\mingw64\share\verilator\include
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
           cd \
           C:
@@ -36,5 +35,6 @@ jobs:
           dir direct_obj_dir
           echo Running sogen.sp
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
-          dir
           type log.txt
+          dir
+          dir adc_obj_dir
