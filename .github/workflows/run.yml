@@ -31,7 +31,7 @@ jobs:
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\vltstd\*.* \mingw64\share\verilator\include\vltstd
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
-          mklink \mingw64\bin\python3 C:\hostedtoolcache\windows\Python\3.9.13\x64\python3.exe
+          mklink d:\a\_temp\msys64\mingw64\bin\python3 C:\hostedtoolcache\windows\Python\3.9.13\x64\python3.exe
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running sogen.sp
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
@@ -47,5 +47,5 @@ jobs:
           dir direct_obj_dir
           echo Compiling
           cd  direct_obj_dir
-          CL /O2 /LD /EHsc /I..\..\..\include /I\mingw64\share\verilator\include\vltstd /I\mingw64\share\verilator\include Vlng__ALL.cpp ../shim.cpp \mingw64\share\verilator\include\verilated.cpp \mingw64\share\verilator\include\verilated_threads.cpp
+          CL /O2 /LD /EHsc /I. /I..\..\..\include /I\mingw64\share\verilator\include\vltstd /I\mingw64\share\verilator\include Vlng__ALL.cpp ../shim.cpp \mingw64\share\verilator\include\verilated.cpp \mingw64\share\verilator\include\verilated_threads.cpp
           dir
