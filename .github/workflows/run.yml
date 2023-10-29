@@ -20,12 +20,10 @@ jobs:
          path: C:\Spice64_KLU
       - uses: actions/checkout@v3
       - uses: ilammy/msvc-dev-cmd@v1
-      - name: Probe
-        shell: msys2 {0}
-        run: which python3
       - name: Run
         shell: cmd
         run: |
+          where python3
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
           cd \
           C:
