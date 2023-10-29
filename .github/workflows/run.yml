@@ -29,12 +29,19 @@ jobs:
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
-          echo Running directly
-          perl c:/mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
-          dir
-          dir direct_obj_dir
           echo Running sogen.sp
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
           type log.txt
           dir
           dir adc_obj_dir
+          echo Running directly
+          perl c:/mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
+          dir
+          dir direct_obj_dir
+          perl c:/mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng --CFLAGS -I../../include --compiler msvc --cc --build --exe main.cpp shim.cpp  ../../examples/xspice/verilator/adc.v
+          dir
+          dir direct_obj_dir
+          echo Linking
+          LINK /DLL /EXPORT:Cosim_setup direct_obj_dir/shim.obj direct_obj_dir/verilated.obj direct_obj_dir/verilated_threads.obj direct_obj_dir/Vlng__ALL.lib /OUT:adc.DLL
+          dir
+          dir direct_obj_dir

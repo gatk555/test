@@ -203,6 +203,9 @@ fclose $fh
 // Compile the generated C++ code along with shim.cpp.  Verilator only
 // does this when building an executable binary, so include main.cpp.
 
+echo shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
++ --cc --build --exe
++ main.cpp shim.cpp $argv
 shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 + --cc --build --exe
 + main.cpp shim.cpp $argv
@@ -212,14 +215,14 @@ shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 if $oscompiled = 8 // VisualC++
   set   v_objs="$objdir/shim.obj $objdir/verilated.obj $objdir/verilated_threads.obj"
   setcs tail="__ALL.lib"
-  setcs v_lib="$objdir/$prefix$tail"          // Like Vlng___ALL.a
+  setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
 
   echo shell LINK /DLL /EXPORT:Cosim_setup  $v_objs $v_lib /OUT:$soname
   shell LINK /DLL /EXPORT:Cosim_setup  $v_objs $v_lib /OUT:$soname
 else
   set   v_objs="$objdir/shim.o $objdir/verilated.o $objdir/verilated_threads.o"
   setcs tail="__ALL.a"
-  setcs v_lib="$objdir/$prefix$tail"          // Like Vlng___ALL.a
+  setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
 
   shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
 end
