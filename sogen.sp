@@ -112,7 +112,7 @@ setcs prefix="Vlng"
 // Compilation option for C/C++: -fpic is required by GCC for a shared library
 // and path to src/include/ngspice.
 
-setcs include="--CFLAGS -I../../include"
+setcs include="--CFLAGS -I../../../include"
 
 // Run Verilator on the given input files.
 
