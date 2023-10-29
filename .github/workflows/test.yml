@@ -1,3 +1,4 @@
+# Build ngspice with MS Visiual C++ compiler.
 name: Test
 on:
   workflow_dispatch:
@@ -40,6 +41,7 @@ jobs:
           xcopy /i src\xspice\verilog\*.* c:\Spice%suffix%\share\ngspice\verilog\verilator
           md c:\Spice%suffix%\share\ngspice\include\ngspice 
           copy src\include\ngspice\cmtypes.h c:\Spice%suffix%\share\ngspice\include\ngspice
+          copy src\include\ngspice\miftypes.h c:\Spice%suffix%\share\ngspice\include\ngspice
           copy src\include\ngspice\cosim.h c:\Spice%suffix%\share\ngspice\include\ngspice
       - name: Save
         uses: actions/upload-artifact@v3
