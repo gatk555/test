@@ -23,29 +23,13 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          set
           dir d:\a\_temp\msys64\mingw64\bin
-          copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
-          cd \
-          C:
-          md \mingw64\share\verilator\include\vltstd
-          copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
-          copy d:\a\_temp\msys64\mingw64\share\verilator\include\vltstd\*.* \mingw64\share\verilator\include\vltstd
-          copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
-          cd \Spice64_KLU\share\ngspice\verilog\verilator
-          echo Running sogen.sp
-          \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
-          type log.txt
-          dir
-          dir adc_obj_dir
-          echo Running directly
-          perl c:/mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng  --cc ../../examples/xspice/verilator/adc.v
-          dir
-          dir direct_obj_dir
-          perl c:/mingw64/bin/verilator  --Mdir direct_obj_dir --prefix Vlng --CFLAGS -I..\..\..\include --compiler msvc --cc --build --exe main.cpp shim.cpp  ../../examples/xspice/verilator/adc.v
-          dir
-          dir direct_obj_dir
-          echo Compiling
-          cd  direct_obj_dir
-          CL /O2 /LD /EHsc /I. /I..\..\..\include /I\mingw64\share\verilator\include\vltstd /I\mingw64\share\verilator\include Vlng__ALL.cpp ../shim.cpp \mingw64\share\verilator\include\verilated.cpp \mingw64\share\verilator\include\verilated_threads.cpp
-          dir
+	  where python3
+      - name: MSYS
+        shell: msys2 {0}
+        run: |
+          which python3
+          cygpath -w `which python3`
+          which verilog
+          cygpath -w `which verilog`
+          cygpath -w /
