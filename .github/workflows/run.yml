@@ -26,7 +26,6 @@ jobs:
           set
           dir d:\a\_temp\msys64\mingw64\bin
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
-          copy verilated.mk d:\a\_temp\msys64\mingw64\share\verilator\include
           cd \
           C:
           md \mingw64\share\verilator\include\vltstd
@@ -35,7 +34,6 @@ jobs:
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running sogen.sp
-          set PYTHON3=/c/hostedtoolcache/windows/Python/3.9.13/x64/python3.exe
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
           type log.txt
           dir
