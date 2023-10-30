@@ -24,7 +24,7 @@ jobs:
         shell: cmd
         run: |
           dir d:\a\_temp\msys64\mingw64\bin
-	  where python3
+          where python3
       - name: MSYS
         shell: msys2 {0}
         run: |
