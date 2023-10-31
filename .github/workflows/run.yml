@@ -32,7 +32,7 @@ jobs:
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\vltstd\*.* \mingw64\share\verilator\include\vltstd
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
-          copy d:\a\_temp\msys64\usr\bin\*.* \mingw64\bin
+          copy d:\a\_temp\msys64\usr\bin\python3*.* \mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running sogen.sp
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
