@@ -1,0 +1,39 @@
+name: Test Build
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Flex and Bison
+        run: |
+          md ..\flex-bison
+          cd ..\flex-bison
+          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
+          unzip win_flex_bison-2.5.25
+      - uses: actions/checkout@v3
+        with:
+          repository: gatk555/ngspice
+          ref: ga_s_cond
+      - uses: microsoft/setup-msbuild@v1.1
+      - name: Build
+        shell: cmd
+        run: |
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\cmpp\cmpp.vcxproj
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\analog.vcxproj
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\digital.vcxproj
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\spice2poly.vcxproj
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\table.vcxproj
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\xtradev.vcxproj
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\xspice\xtraevt.vcxproj
+          set cms=codemodels\x64\Release
+          md visualc\%cms%
+          move visualc\xspice\%cms%\*.cm visualc\%cms%
+          dir visualc\%cms%
+          msbuild -property:Configuration=Release -property:Platform=x64 visualc\vngspice.vcxproj
+      - name: Save
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ngspice-s_cond, Windows X86-64
+          path: C:\Spice64
