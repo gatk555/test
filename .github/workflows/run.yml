@@ -24,7 +24,7 @@ jobs:
         shell: cmd
         run: |
           copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
-          copy verilate.mk d:\a\_temp\msys64\mingw64\share\verilator\include
+          copy verilated.mk d:\a\_temp\msys64\mingw64\share\verilator\include
           cd \
           C:
           md \mingw64\share\verilator\include\vltstd
