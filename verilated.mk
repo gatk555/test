@@ -40,8 +40,8 @@ CFG_LDLIBS_THREADS =  -pthread -lpthread -latomic
 # Programs
 
 VERILATOR_COVERAGE = $(PERL) $(VERILATOR_ROOT)/bin/verilator_coverage
-VERILATOR_INCLUDER = $(PYTHON3) $(VERILATOR_ROOT)/bin/verilator_includer
-#VERILATOR_INCLUDER =  $(PYTHON3) C:\\\\mingw64\\\\bin\\\\verilator_includer
+#VERILATOR_INCLUDER = $(PYTHON3) $(VERILATOR_ROOT)/bin/verilator_includer
+VERILATOR_INCLUDER =  $(PYTHON3) C:\\\\mingw64\\\\share\\\\verilator\\\\bin\\\\verilator_includer
 VERILATOR_CCACHE_REPORT = $(PYTHON3) $(VERILATOR_ROOT)/bin/verilator_ccache_report
 
 ######################################################################
