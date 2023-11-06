@@ -11,7 +11,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          install: mingw-w64-x86_64-verilator python3
+          install: mingw-w64-x86_64-verilator
       - uses: dawidd6/action-download-artifact@v2
         with:
          workflow: test.yml
@@ -31,7 +31,6 @@ jobs:
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\vltstd\*.* \mingw64\share\verilator\include\vltstd
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
-          copy d:\a\_temp\msys64\usr\bin\python3*.* \mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running sogen.sp
           \Spice64_KLU\bin\ngspice -b -o log.txt sogen.sp ..\..\examples\xspice\verilator\adc.v
@@ -44,4 +43,5 @@ jobs:
           dir direct_obj_dir
           echo Python direct
           cd direct_obj_dir
-          \mingw64\bin\python3.exe \mingw64\share\verilator\bin\verilator_includer -DVL_INCLUDE_OPT=include Vlng.cpp Vlng___024root__DepSet_h9def6047__0.cpp Vlng___024root__DepSet_h26a4896e__0.cpp Vlng___024root__Slow.cpp Vlng___024root__DepSet_h26a4896e__0__Slow.cpp Vlng__Syms.cpp > Vlng__ALL.cpp
+          python3.exe \mingw64\share\verilator\bin\verilator_includer -DVL_INCLUDE_OPT=include Vlng.cpp Vlng___024root__DepSet_h9def6047__0.cpp Vlng___024root__DepSet_h26a4896e__0.cpp Vlng___024root__Slow.cpp Vlng___024root__DepSet_h26a4896e__0__Slow.cpp Vlng__Syms.cpp > Vlng__ALL.cpp
+          dir

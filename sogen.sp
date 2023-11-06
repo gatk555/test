@@ -200,6 +200,11 @@ while 1
 end
 fclose $fh
 
+// Quit here for now.
+quit
+
+
+
 // Compile the generated C++ code along with shim.cpp.  Verilator only
 // does this when building an executable binary, so include main.cpp.
 
