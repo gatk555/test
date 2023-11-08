@@ -49,7 +49,6 @@ else
    set dirsep1="/"
 end
 
-
 // Loop through the arguments to find Verilog source: some_path/xxxx.v
 // The output file will have the same base name.
 
@@ -200,10 +199,6 @@ while 1
 end
 fclose $fh
 
-// Quit here for now.
-quit
-
-
 
 // Compile the generated C++ code along with shim.cpp.  Verilator only
 // does this when building an executable binary, so include main.cpp.
@@ -217,7 +212,14 @@ shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 
 // Make a shared library/DLL.
 
-if $oscompiled = 8 // VisualC++
+set   v_objs="$objdir/shim.o $objdir/verilated.o $objdir/verilated_threads.o"
+setcs tail="__ALL.a"
+setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
+
+echo shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
+shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
+
+if $oscompiled = 888 // VisualC++
   set   v_objs="$objdir/shim.obj $objdir/verilated.obj $objdir/verilated_threads.obj"
   setcs tail="__ALL.lib"
   setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
@@ -225,9 +227,4 @@ if $oscompiled = 8 // VisualC++
   echo shell LINK /DLL /EXPORT:Cosim_setup  $v_objs $v_lib /OUT:$soname
   shell LINK /DLL /EXPORT:Cosim_setup  $v_objs $v_lib /OUT:$soname
 else
-  set   v_objs="$objdir/shim.o $objdir/verilated.o $objdir/verilated_threads.o"
-  setcs tail="__ALL.a"
-  setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
-
-  shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
 end

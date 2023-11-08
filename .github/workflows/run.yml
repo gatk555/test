@@ -30,10 +30,8 @@ jobs:
           md \mingw64\share\verilator\include\vltstd
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
           copy d:\a\_temp\msys64\mingw64\share\verilator\include\vltstd\*.* \mingw64\share\verilator\include\vltstd
-          dir d:\a\_temp\msys64\mingw64\share\verilator\bin
           md \mingw64\share\verilator\bin
           copy d:\a\_temp\msys64\mingw64\share\verilator\bin\*.* \mingw64\share\verilator\bin
-          dir \mingw64\share\verilator\bin
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
           cd \Spice64_KLU\share\ngspice\verilog\verilator
           echo Running sogen.sp
@@ -49,3 +47,5 @@ jobs:
           cd direct_obj_dir
           python3.exe \mingw64\share\verilator\bin\verilator_includer -DVL_INCLUDE_OPT=include Vlng.cpp Vlng___024root__DepSet_h9def6047__0.cpp Vlng___024root__DepSet_h26a4896e__0.cpp Vlng___024root__Slow.cpp Vlng___024root__DepSet_h26a4896e__0__Slow.cpp Vlng__Syms.cpp > Vlng__ALL.cpp
           dir
+          echo Try CL.EXE
+           CL /O2 /LD /EHsc /I. /I..\..\..\include /I\mingw64\share\verilator\include\vltstd /I\mingw64\share\verilator\include Vlng__ALL.cpp ../shim.cpp \mingw64\share\verilator\include\verilated.cpp \mingw64\share\verilator\include\verilated_threads.cpp
