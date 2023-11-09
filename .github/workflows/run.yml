@@ -51,14 +51,16 @@ jobs:
           cd direct_obj_dir
           dir
           echo Try CL.EXE
-          CL /O2 /LD /EHsc /Fe..\adc.DLL /I. /I..\..\..\include /I\mingw64\share\verilator\include\vltstd /I\mingw64\share\verilator\include Vlng__ALL.cpp ..\shim.cpp \mingw64\share\verilator\include\verilated.cpp \mingw64\share\verilator\include\verilated_threads.cpp /LINK /DLL /EXPORT:Cosim_setup
+          CL /O2 /LD /EHsc /Fe..\adc.DLL /I. /I..\..\..\include /I\mingw64\share\verilator\include\vltstd /I\mingw64\share\verilator\include Vlng__ALL.cpp ..\shim.cpp \mingw64\share\verilator\include\verilated.cpp \mingw64\share\verilator\include\verilated_threads.cpp /link /DLL /EXPORT:Cosim_aetup
           dir
           cd ..
           dir
           \Spice64_KLU\bin\ngspice -b -o log.txt -r adc_msvc.raw adc_batch.cir
           type log.txt
+          md results
+          copy *.raw results
       - name: Save
         uses: actions/upload-artifact@v3
         with:
           name: Results
-          path: \Spice64_KLU\share\ngspice\verilog\verilator\*.raw
+          path: \Spice64_KLU\share\ngspice\verilog\verilator\results
