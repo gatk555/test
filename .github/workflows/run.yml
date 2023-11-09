@@ -23,7 +23,8 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          copy sogen.sp adc_batch.cir c:\Spice64_KLU\share\ngspice\verilog\verilator
+          copy sogen.sp c:\Spice64_KLU\share\ngspice\verilog\verilator
+          copy adc_batch.cir c:\Spice64_KLU\share\ngspice\verilog\verilator
           copy verilated.mk d:\a\_temp\msys64\mingw64\share\verilator\include
           cd \
           C:
