@@ -21,6 +21,8 @@ jobs:
       - name: Build
         shell: cmd
         run: |
+          dir
+          copy make-install-vngspice.bat visualc
           set config=Release
           set plat=x64
           set suffix=64_KLU
