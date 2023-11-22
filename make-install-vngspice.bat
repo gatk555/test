@@ -1,5 +1,6 @@
 @echo off
 
+dir
 echo BAT arg is %1
 
 REM copy ngspice.exe, codemodels *.cm to C:\Spice or Spice64
