@@ -15,7 +15,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         with:
          workflow: test.yml
-         run_number: 33
+         run_number: 34
          name: Test, Windows 64-bit
          path: C:\Spice64_KLU
       - uses: actions/checkout@v3
@@ -24,6 +24,7 @@ jobs:
         shell: cmd
         run: |
           copy adc_batch.cir c:\
+          copy vlnggen c:\
           copy verilated.mk d:\a\_temp\msys64\mingw64\share\verilator\include
           cd \
           C:
