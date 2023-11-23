@@ -38,7 +38,9 @@ jobs:
           dir   \Spice64_KLU\share\ngspice\examples\xspice\verilator
           \Spice64_KLU\bin\ngspice -b -o log.txt vlnggen  /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc.v
           type log.txt
+          dir adc_obj_dir
           echo Try direct
+          where perl
           perl c:/mingw64/bin/verilator --Mdir adc_obj_dir --prefix Vlng --CFLAGS -fpic --compiler msvc --cc /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc.v
           dir
           dir adc_obj_dir

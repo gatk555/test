@@ -246,6 +246,9 @@ end
 // Compile the generated C++ code along with shim.cpp.  Verilator only
 // does this when building an executable binary, so include main.cpp.
 
+echo shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
++ --cc --build --exe
++ $fn_main $fn $argv
 shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 + --cc --build --exe
 + $fn_main $fn $argv
