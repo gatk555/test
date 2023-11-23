@@ -34,7 +34,7 @@ jobs:
           copy d:\a\_temp\msys64\mingw64\share\verilator\bin\*.* \mingw64\share\verilator\bin
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
           echo Running vlnggen
-	  dir   \Spice64_KLU\share\ngspice\examples\xspice\verilator
+          dir   \Spice64_KLU\share\ngspice\examples\xspice\verilator
           \Spice64_KLU\bin\ngspice -b -o log.txt vlnggen  \Spice64_KLU\share\ngspice\examples\xspice\verilator\adc.v
           type log.txt
           dir
