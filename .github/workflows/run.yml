@@ -15,7 +15,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v2
         with:
          workflow: test.yml
-         run_number: 34
+         run_number: 35
          name: Test, Windows 64-bit
          path: C:\Spice64_KLU
       - uses: actions/checkout@v3
@@ -34,19 +34,14 @@ jobs:
           md \mingw64\share\verilator\bin
           copy d:\a\_temp\msys64\mingw64\share\verilator\bin\*.* \mingw64\share\verilator\bin
           copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
-          echo Try direct
-          where perl
-          perl c:/mingw64/bin/verilator --Mdir /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc_obj_dir --prefix Vlng --CFLAGS -IC:/Spice64_KLU/bin/../share/ngspice/scripts/src --CFLAGS -fpic --compiler msvc --cc --build --exe C:/Spice64_KLU/bin/../share/ngspice/scripts/src/verilator_main.cpp C:/Spice64_KLU/bin/../share/ngspice/scripts/src/verilator_shim.cpp /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc.v
-          dir
-          dir adc_obj_dir
           echo Running vlnggen
-          cd  \Spice64_KLU\share\ngspice\examples\xspice\verilator
-          \Spice64_KLU\bin\ngspice -b -o log.txt vlnggen  adc.v
+          \Spice64_KLU\bin\ngspice -b -o log.txt vlnggen  /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc.v
           type log.txt
-          dir verilator
-          dir adc_obj_dir
+          dir   \Spice64_KLU\share\ngspice\examples\xspice\verilator
+          dir   \Spice64_KLU\share\ngspice\examples\xspice\verilator\adc_obj_dir
           echo Testing ...
-          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc.raw c:\adc_batch.cir
+          copy \Spice64_KLU\share\ngspice\examples\xspice\verilator\adc.DLL .
+          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc.raw adc_batch.cir
           type log.txt
           dir
           del adc.DLL
@@ -57,7 +52,7 @@ jobs:
           dir
           cd ..
           dir
-          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc_msvc.raw c:\adc_batch.cir
+          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc_msvc.raw adc_batch.cir
           type log.txt
           md results
           copy *.raw results
