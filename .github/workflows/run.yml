@@ -51,14 +51,14 @@ jobs:
           type log.txt
           dir
           del adc.DLL
-          cd direct_obj_dir
+          cd \Spice64_KLU\share\ngspice\examples\xspice\verilator\direct_obj_dir
           dir
           echo Try CL.EXE
           \Spice64_KLU\share\ngspice\scripts\MSVC.COM
           dir
           cd ..
           dir
-          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc_msvc.raw adc_batch.cir
+          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc_msvc.raw \adc_batch.cir
           type log.txt
           md results
           copy *.raw results
