@@ -291,6 +291,6 @@ else
 
    echo Building with MSVC compiler, CL.EXE.
    cd $objdir
-   shell $msvcfile
+   shell $fn
    cd ..
 end
