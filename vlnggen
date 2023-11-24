@@ -8,7 +8,6 @@
 // Try and pick a root name for the output file and build directory.
 // At least one argument is required: $argc may be non-existent or zero.
 
-echo sourecpath is $sourcepath
 set bad=0
 if $?argc = 0
    set bad=1
@@ -77,6 +76,11 @@ repeat $argc
 
     dowhile $off >= 0            // Strip leading directories
         strstr off "$base" "$dirsep1"
+	if $windows
+	   if $off < 0
+	      strstr off "$base" "$dirsep2"
+	   end
+	end
         if $off >= 0
         let off=$off+1
             strslice base "$base" $&off $l
@@ -272,7 +276,7 @@ else
 
    // Look for Verilator_MSVC.com
 
-   set msvcfile=MSVC.COM
+   set msvcfile=MSVC.CMD
    let i=1
    repeat $#sourcepath
      set stem="$sourcepath[$&i]"
