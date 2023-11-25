@@ -250,7 +250,7 @@ if $windows
 
    // Copy verilator_shim.cpp for MSVC.CMD.
 
-   copy "$fn" "$objdir"
+   shell copy "$fn" "$objdir"
 else
    // Some header files are with the source.
 
