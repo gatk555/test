@@ -245,7 +245,7 @@ if $windows
 
    set incdir=ngspice
    echo shell xcopy $stem$dirsep1$incdir $objdir
-   shell xcopy $stem$dirsep1$incdir $objdir
+   shell xcopy "$stem$dirsep1$incdir" $objdir
    set include="."
 else
 // Some header files are with the source.
