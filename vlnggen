@@ -247,18 +247,22 @@ if $windows
    echo shell xcopy /i $stem$dirsep1$incdir $objdir$dirsep1$incdir
    shell xcopy /i "$stem$dirsep1$incdir" "$objdir$dirsep1$incdir"
    setcs include="--CFLAGS -I."
-else
-// Some header files are with the source.
 
-strstr off "$stem" "."
-if $off <> 0
-   setcs include="--CFLAGS -I$stem"
+   // Copy verilator_shim.cpp for MSVC.CMD.
+
+   copy "$fn" "$objdir"
 else
-   setcs include="--CFLAGS -I..$dirsep1$stem" // Relative path
-end
+   // Some header files are with the source.
+
+   strstr off "$stem" "."
+   if $off <> 0
+      setcs include="--CFLAGS -I$stem"
+   else
+      setcs include="--CFLAGS -I..$dirsep1$stem" // Relative path
+   end
 end
 
-// Compile the generated C++ code along with shim.cpp.  Verilator only
+
 // does this when building an executable binary, so include main.cpp.
 
 echo shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
