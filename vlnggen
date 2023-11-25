@@ -243,7 +243,7 @@ if $windows
    // Verilator makes a mess of absolute include paths passed by --CFLAGS.
    // Copy the files instead.
 
-   $incdir=ngspice
+   set incdir=ngspice
    echo shell xcopy $stem$dirsep1$incdir $objdir
    shell xcopy $stem$dirsep1$incdir $objdir
 else
