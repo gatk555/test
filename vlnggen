@@ -239,6 +239,14 @@ else
    quit
 end
 
+if $windows
+   // Verilator makes a mess of absolute include paths passed by --CFLAGS.
+   // Copy the files instead.
+
+   $incdir=ngspice
+   echo shell xcopy $stem$dirsep1$incdir $objdir
+   shell xcopy $stem$dirsep1$incdir $objdir
+else
 // Some header files are with the source.
 
 strstr off "$stem" "."
@@ -246,6 +254,7 @@ if $off <> 0
    setcs include="--CFLAGS -I$stem"
 else
    setcs include="--CFLAGS -I..$dirsep1$stem" // Relative path
+end
 end
 
 // Compile the generated C++ code along with shim.cpp.  Verilator only
