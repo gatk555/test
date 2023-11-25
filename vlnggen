@@ -244,8 +244,8 @@ if $windows
    // Copy the files instead.
 
    set incdir=ngspice
-   echo shell xcopy $stem$dirsep1$incdir $objdir$dirsep1$incdir
-*   shell xcopy "$stem$dirsep1$incdir" $objdir$dirsep1$incdir
+   echo shell xcopy /i $stem$dirsep1$incdir $objdir$dirsep1$incdir
+   shell xcopy /i "$stem$dirsep1$incdir" $objdir$dirsep1$incdir
    set include="."
 else
 // Some header files are with the source.
