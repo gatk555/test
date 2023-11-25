@@ -45,8 +45,8 @@ jobs:
           g++  -I.  -MMD -I/mingw64/share/verilator/include -I/mingw64/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow  -Ic:/Spice64_KLU/share/ngspice/scripts/src   -Os -c -o verilator_main.o C:/Spice64_KLU/bin/../share/ngspice/scripts/src/verilator_main.cpp
           dir
           cd ..
-          echo Run g++ directly
-          perl c:/mingw64/bin/verilator --Mdir adc_obj_dir --prefix Vlng --CFLAGS -I/c/Spice64_KLU/share/ngspice/scripts/src --compiler msvc --cc --build --exe C:/Spice64_KLU/bin/../share/ngspice/scripts/src/verilator_main.cpp C:/Spice64_KLU/bin/../share/ngspice/scripts/src/verilator_shim.cpp /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc.v
+          echo Run directly
+          perl c:/mingw64/bin/verilator --Mdir adc_obj_dir --prefix Vlng --CFLAGS -IC:/Spice64_KLU/share/ngspice/scripts/src --compiler msvc --cc --build --exe C:/Spice64_KLU/bin/../share/ngspice/scripts/src/verilator_main.cpp C:/Spice64_KLU/bin/../share/ngspice/scripts/src/verilator_shim.cpp /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc.v
           dir   \Spice64_KLU\share\ngspice\examples\xspice\verilator
           dir   \Spice64_KLU\share\ngspice\examples\xspice\verilator\adc_obj_dir
           echo Testing ...
