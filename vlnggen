@@ -246,7 +246,7 @@ if $windows
    set incdir=ngspice
    echo shell xcopy /i $stem$dirsep1$incdir $objdir$dirsep1$incdir
    shell xcopy /i "$stem$dirsep1$incdir" "$objdir$dirsep1$incdir"
-   set include="--CFLAGS -I."
+   setcs include="--CFLAGS -I."
 else
 // Some header files are with the source.
 
