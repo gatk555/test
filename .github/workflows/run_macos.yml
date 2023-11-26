@@ -19,7 +19,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run
         run: |
-          cp adc_batch.cir .
           ngspice -b vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           ls  adc_obj_dir
           mv adc.so adc.DLL
