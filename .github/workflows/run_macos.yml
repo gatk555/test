@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install verilator
-          brew install ncurses readline libxaw
+          brew install ncurses readline libxaw libatomic_ops
       - uses: actions/checkout@v3
       - name: Run
         run: |
