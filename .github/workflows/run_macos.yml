@@ -17,14 +17,10 @@ jobs:
         run: |
           brew install verilator
           brew install ncurses readline libxaw libatomic_ops
-      - name: Save bits
-        uses: actions/upload-artifact@v3
-        with:
-          name: Bits
-          path: /usr/local/share/verilator/include
       - uses: actions/checkout@v3
       - name: Run
         run: |
+          cp verilated.mk.macos /usr/local/share/verilator/include/verilated.mk
           chmod a+x /usr/local/bin/ngspice
           ngspice -b vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           ls  adc_obj_dir
