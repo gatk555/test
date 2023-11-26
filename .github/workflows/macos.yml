@@ -1,0 +1,41 @@
+name: Build others
+on:
+  workflow_dispatch:
+
+jobs:
+  build-macos-x86_64:
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: gatk555/ngspice
+          ref: ga_debug
+      - name: Install Dependencies
+        run: |
+          brew install make automake bison
+          brew install ncurses readline libxaw
+          # compile_macos_gcc.sh expects this path.  Kludge it.
+          sudo mkdir -p /opt/X11/include
+          sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
+      - name: Build X86_64
+        run: |
+          PATH='/usr/local/opt/bison/bin:'$PATH
+          ./compile_macos_clang.sh || true # Will fail to install
+          if [ ! -f release/src/ngspice ]; then false; fi
+      - name: Install X86_64
+        run: |
+          cd release
+          sudo make install
+          cd ..
+          mkdir build
+          for i in bin lib share ; do
+            mkdir -p build/$i
+            cp -r /usr/local/$i/ngspice build/$i/
+          done
+          echo Copying the examples.
+          cp -r examples build/share/ngspice
+      - name: Save X86_64
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Macos X86_64
+          path: build

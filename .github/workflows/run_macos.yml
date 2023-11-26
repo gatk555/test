@@ -1,0 +1,36 @@
+name: Run
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  run:
+    runs-on: windows-latest
+    steps:
+      - uses: dawidd6/action-download-artifact@v2
+        with:
+         workflow: macos.yml
+         run_number: 1
+         name: Test Macos X86_64
+         path: /usr/local
+      - name: Install Dependencies
+        run: |
+          brew install verilator
+      - uses: actions/checkout@v3
+      - name: Run
+        run: |
+          copy adc_batch.cir .
+          ngspice -b -o log.txt vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
+          type log.txt
+          ls  adc_obj_dir
+	  mv adc.so adc.DLL
+          echo Testing ...
+          ngspice -b -o log.txt -r adc.raw adc_batch.cir
+          type log.txt
+          mkdir ~/results
+          copy *.raw ~/results
+      - name: Save
+        uses: actions/upload-artifact@v3
+        with:
+          name: Results
+          path: ~/results
