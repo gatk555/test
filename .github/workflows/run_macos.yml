@@ -19,16 +19,14 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run
         run: |
-          copy adc_batch.cir .
-          ngspice -b -o log.txt vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
-          type log.txt
+          cp adc_batch.cir .
+          ngspice -b vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           ls  adc_obj_dir
           mv adc.so adc.DLL
           echo Testing ...
-          ngspice -b -o log.txt -r adc.raw adc_batch.cir
-          type log.txt
+          ngspice -b -r adc.raw adc_batch.cir
           mkdir ~/results
-          copy *.raw ~/results
+          cp *.raw ~/results
       - name: Save
         uses: actions/upload-artifact@v3
         with:
