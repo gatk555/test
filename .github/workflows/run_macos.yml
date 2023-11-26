@@ -1,7 +1,6 @@
 name: Run
 on:
   workflow_dispatch:
-  push:
 
 jobs:
   run:
@@ -23,7 +22,7 @@ jobs:
           ngspice -b -o log.txt vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           type log.txt
           ls  adc_obj_dir
-	  mv adc.so adc.DLL
+          mv adc.so adc.DLL
           echo Testing ...
           ngspice -b -o log.txt -r adc.raw adc_batch.cir
           type log.txt

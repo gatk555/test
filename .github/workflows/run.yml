@@ -1,7 +1,6 @@
 name: Run
 on:
   workflow_dispatch:
-  push:
 
 jobs:
   run:
