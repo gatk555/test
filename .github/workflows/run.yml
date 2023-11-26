@@ -24,8 +24,6 @@ jobs:
         shell: cmd
         run: |
           copy adc_batch.cir c:\
-          copy vlnggen c:\
-          copy MSVC.cmd C:\Spice64_KLU\share\ngspice\scripts
           copy verilated.mk d:\a\_temp\msys64\mingw64\share\verilator\include
           cd \
           C:
