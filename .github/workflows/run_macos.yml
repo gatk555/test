@@ -19,6 +19,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run
         run: |
+          chmod a+x /usr/local/bin/ngspice
+          xattr -d com.apple.quarantine /usr/local/bin/ngspice
+          xattr -d com.apple.quarantine /usr/local/lib/ngspice/*
           ngspice -b vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           ls  adc_obj_dir
           mv adc.so adc.DLL
