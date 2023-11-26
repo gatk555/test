@@ -5,7 +5,7 @@ on:
 
 jobs:
   run:
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
