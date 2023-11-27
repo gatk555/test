@@ -269,9 +269,17 @@ end
 
 // does this when building an executable binary, so include main.cpp.
 
+echo shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
++ --cc --build --exe
++ $fn_main $fn $argv
 shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 + --cc --build --exe
 + $fn_main $fn $argv
+
+shell ls -l $objdir
+if $macos
+   set bad=0 // Fake it.
+end
 
 strcmp bad "$shellstatus" "0"
 if $bad = 0
