@@ -51,6 +51,13 @@ else
    set run_verilator=verilator
 end
 
+if $oscompiled = 7 // MacOS
+   set macos=1
+   setcs cflags="$cflags --compiler clang"
+else
+   set macos=0
+end
+
 // Loop through the arguments to find Verilog source: some_path/xxxx.v
 // The output file will have the same base name.
 
@@ -117,9 +124,7 @@ setcs prefix="Vlng"
 
 // Run Verilator on the given input files.
 
-echo shell $run_verilator --Mdir $objdir --prefix $prefix $cflags --cc $argv
 shell $run_verilator --Mdir $objdir --prefix $prefix $cflags --cc $argv
-echo Initial Verilator status $shellstatus
 
 // Parse the primary interface Class definition for members representing
 // the ports of the top-level Verilog module.
@@ -244,7 +249,6 @@ if $windows
    // Copy the files instead.
 
    set incdir=ngspice
-   echo shell xcopy /i $stem$dirsep1$incdir $objdir$dirsep1$incdir
    shell xcopy /i "$stem$dirsep1$incdir" "$objdir$dirsep1$incdir"
    setcs include="--CFLAGS -I."
 
@@ -265,9 +269,6 @@ end
 
 // does this when building an executable binary, so include main.cpp.
 
-echo shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
-+ --cc --build --exe
-+ $fn_main $fn $argv
 shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 + --cc --build --exe
 + $fn_main $fn $argv
@@ -288,7 +289,7 @@ else
       quit
    end
 
-   // Look for Verilator_MSVC.com
+   // Look for MSVC.CMD
 
    set msvcfile=MSVC.CMD
    let i=1
