@@ -5,9 +5,6 @@
 // Instances of the model are then digital circuit elements whose
 // behaviour is controlled by the Verilog source.
 
-// Try and pick a root name for the output file and build directory.
-// At least one argument is required: $argc may be non-existent or zero.
-
 set bad=0
 if $?argc = 0
    set bad=1
@@ -268,20 +265,13 @@ end
 
 
 // Compile the code. Verilator only does that when building an executable,
-// so include main.cpp.
+// so include verilator_main.cpp.
 
-echo shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
-+ --cc --build --exe
-+ $fn_main $fn $argv
 shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 + --cc --build --exe
 + $fn_main $fn $argv
 
 strcmp bad "$shellstatus" "0"
-if $macos
-   echo VL status $shellstatus
-   set bad=0 // Fake it.
-end
 
 if $bad = 0
    // g++ must be available: make a shared library/DLL.
@@ -290,12 +280,7 @@ if $bad = 0
    setcs tail="__ALL.a"
    setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
 
-   echo shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
-   shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
-   echo Status $shellstatus
-   shell ls -la
-   echo Done
-   quit
+   shell g++ --shared $v_objs $v_lib -pthread -lpthread -o $soname
 else
    // Assume we have CL.EXE and use that.  A script avoids multiple \escapes.
 
