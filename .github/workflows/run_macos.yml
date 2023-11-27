@@ -20,6 +20,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run
         run: |
+          mkdir adc_obj_dir
+          touch adc_obj_dir/inputs.h adc_obj_dir/outputs.h adc_obj_dir/inouts.h 
           verilator --Mdir adc_obj_dir --prefix Vlng --CFLAGS -fpic --compiler clang --cc  --build --exe --CFLAGS -I/usr/local/share/ngspice/scripts/src /usr/local/share/ngspice/scripts/src/*.cpp /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           ls adc_obj_dir
           chmod a+x /usr/local/bin/ngspice
