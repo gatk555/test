@@ -267,7 +267,6 @@ else
 end
 
 
-echo Where `pwd`
 // Compile the code. Verilator only does that when building an executable,
 // so include main.cpp.
 
@@ -280,7 +279,6 @@ shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 
 strcmp bad "$shellstatus" "0"
 if $macos
-   echo Where `pwd`
    echo VL status $shellstatus
    set bad=0 // Fake it.
 end
@@ -295,8 +293,9 @@ if $bad = 0
    echo shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
    shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
    echo Status $shellstatus
-   shell ls
+   shell ls -la
    echo Done
+   quit
 else
    // Assume we have CL.EXE and use that.  A script avoids multiple \escapes.
 
