@@ -291,6 +291,8 @@ if $bad = 0
    shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
    echo Status $shellstatus
    shell ls
+   echo Done
+   quit
 else
    // Assume we have CL.EXE and use that.  A script avoids multiple \escapes.
 
