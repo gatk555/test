@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run
         run: |
-          verilator --Mdir adc_obj_dir --prefix Vlng --CFLAGS -fpic --compiler clang --cc  --build --exe --CFLAGS -I/usr/local/share/ngspice/src /usr/local/share/ngspice/scripts/src/*.cpp /usr/local/share/ngspice/examples/xspice/verilator/adc.v
+          verilator --Mdir adc_obj_dir --prefix Vlng --CFLAGS -fpic --compiler clang --cc  --build --exe --CFLAGS -I/usr/local/share/ngspice/scripts/src /usr/local/share/ngspice/scripts/src/*.cpp /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           ls adc_obj_dir
           chmod a+x /usr/local/bin/ngspice
           ngspice -b vlnggen  /usr/local/share/ngspice/examples/xspice/verilator/adc.v
