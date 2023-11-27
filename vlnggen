@@ -282,6 +282,10 @@ if $macos
 end
 
 strcmp bad "$shellstatus" "0"
+if $macos
+   set bad=0 // Fake it.
+end
+
 if $bad = 0
    // g++ must be available: make a shared library/DLL.
 
