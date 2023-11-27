@@ -25,6 +25,7 @@ jobs:
           chmod a+x /usr/local/bin/ngspice
           ngspice -b vlnggen /usr/local/share/ngspice/examples/xspice/verilator/adc.v
           ls  adc_obj_dir
+          g++ --shared adc_obj_dir/verilator_shim.o adc_obj_dir/verilated.o adc_obj_dir/verilated_threads.o adc_obj_dir/Vlng__ALL.a -pthread -lpthread -o adc.so
           mv adc.so adc.DLL
           echo Testing ...
           ngspice -b -r adc.raw adc_batch.cir
