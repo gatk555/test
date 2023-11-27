@@ -275,12 +275,6 @@ echo shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 shell $run_verilator --Mdir $objdir --prefix $prefix $include $cflags
 + --cc --build --exe
 + $fn_main $fn $argv
-
-shell ls -l $objdir
-if $macos
-   set bad=0 // Fake it.
-end
-
 strcmp bad "$shellstatus" "0"
 if $macos
    set bad=0 // Fake it.
@@ -293,6 +287,7 @@ if $bad = 0
    setcs tail="__ALL.a"
    setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
 
+   echo shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
    shell g++ --shared $v_objs $v_lib -pthread -lpthread -latomic -o $soname
 else
    // Assume we have CL.EXE and use that.  A script avoids multiple \escapes.
