@@ -1,7 +1,6 @@
 name: Run MacOS
 on:
   workflow_dispatch:
-  push:
 
 jobs:
   run:
