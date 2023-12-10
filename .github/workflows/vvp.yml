@@ -1,0 +1,82 @@
+name: test VVP
+
+on:
+  # Every push onto the main branch triggers a retest.
+  workflow_dispatch:
+  push:
+jobs:
+
+  mac:
+    strategy:
+      fail-fast: false
+    runs-on: macos-latest
+    name: 'VVP macOS'
+    steps:
+
+    - uses: actions/checkout@v3
+      repository: gatk555/iverilog
+      ref: libvvp
+    - name: Install dependencies
+      run: |
+        brew install bison
+        pip3 install docopt
+
+    - name: Build, check and install
+      run: |
+        export PATH="/usr/local/opt/bison/bin:$PATH"
+        autoconf
+        ./configure
+        make -j$(nproc) check
+        sudo make install
+
+  win:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: [
+          { msystem: MINGW64, arch: x86_64 },
+          { msystem: MINGW32, arch: i686 }
+        ]
+    name: VVP ${{ matrix.msystem}} · ${{ matrix.arch }}
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      MINGW_ARCH: ${{ matrix.msystem }}
+    steps:
+
+    - run: git config --global core.autocrlf input
+      shell: bash
+
+    - uses: actions/checkout@v3
+      repository: gatk555/iverilog
+      ref: libvvp
+
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.msystem }}
+        update: true
+        install: >
+          git
+          base-devel
+          gperf
+          python-pip
+          mingw-w64-${{ matrix.arch }}-toolchain
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '>=3.5'
+
+    - name: Build and check
+      run: |
+        cd msys2
+        makepkg-mingw --noconfirm --noprogressbar -sCLf
+
+    - name: Install
+      run: pacman -U --noconfirm msys2/*.zst
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.msystem }}-${{ matrix.arch }}
+        path: msys2/*.zst
