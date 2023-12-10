@@ -37,8 +37,9 @@ jobs:
     env:
       MINGW_ARCH: ${{ matrix.msystem }}
     steps:
-      - run: git config --global core.autocrlf input
+      - name: Tweak git
         shell: bash
+        run: git config --global core.autocrlf input
       - uses: actions/checkout@v3
         with:
           repository: gatk555/iverilog
