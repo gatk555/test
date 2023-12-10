@@ -1,9 +1,7 @@
 name: test VVP
-
 on:
-  # Every push onto the main branch triggers a retest.
   workflow_dispatch:
-  push:
+
 jobs:
   mac:
     runs-on: macos-latest
