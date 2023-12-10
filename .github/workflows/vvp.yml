@@ -5,7 +5,6 @@ on:
 jobs:
   mac:
     runs-on: macos-latest
-    name: VVP macOS
     steps:
     - uses: actions/checkout@v3
     with:
