@@ -5,14 +5,12 @@ on:
   workflow_dispatch:
   push:
 jobs:
-
   mac:
     strategy:
       fail-fast: false
     runs-on: macos-latest
     name: 'VVP macOS'
     steps:
-
     - uses: actions/checkout@v3
     with:
       repository: gatk555/iverilog
@@ -21,7 +19,6 @@ jobs:
       run: |
         brew install bison
         pip3 install docopt
-
     - name: Build, check and install
       run: |
         export PATH="/usr/local/opt/bison/bin:$PATH"
@@ -29,7 +26,6 @@ jobs:
         ./configure
         make -j$(nproc) check
         sudo make install
-
   win:
     runs-on: windows-latest
     strategy:
@@ -46,15 +42,12 @@ jobs:
     env:
       MINGW_ARCH: ${{ matrix.msystem }}
     steps:
-
     - run: git config --global core.autocrlf input
       shell: bash
-
     - uses: actions/checkout@v3
-    with:
-      repository: gatk555/iverilog
-      ref: libvvp
-
+      with:
+        repository: gatk555/iverilog
+      	ref: libvvp
     - uses: msys2/setup-msys2@v2
       with:
         msystem: ${{ matrix.msystem }}
@@ -65,19 +58,15 @@ jobs:
           gperf
           python-pip
           mingw-w64-${{ matrix.arch }}-toolchain
-
     - uses: actions/setup-python@v4
       with:
         python-version: '>=3.5'
-
     - name: Build and check
       run: |
         cd msys2
         makepkg-mingw --noconfirm --noprogressbar -sCLf
-
     - name: Install
       run: pacman -U --noconfirm msys2/*.zst
-
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.msystem }}-${{ matrix.arch }}
