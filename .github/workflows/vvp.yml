@@ -6,10 +6,8 @@ on:
   push:
 jobs:
   mac:
-    strategy:
-      fail-fast: false
     runs-on: macos-latest
-    name: 'VVP macOS'
+    name: VVP macOS
     steps:
     - uses: actions/checkout@v3
     with:
