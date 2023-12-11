@@ -3,34 +3,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-mac:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: gatk555/iverilog
-          ref: libvvp
-      - name: Install dependencies
-        run: |
-          brew install bison
-          pip3 install docopt
-      - name: Build, check and install
-        run: |
-          export PATH="/usr/local/opt/bison/bin:$PATH"
-          autoconf
-          ./configure
-          make -j$(nproc) check
-          sudo make install
   win:
     runs-on: windows-latest
     strategy:
       fail-fast: false
-      matrix:
-        include: [
-          { msystem: MINGW64, arch: x86_64 },
-          { msystem: MINGW32, arch: i686 }
-        ]
-    name: VVP ${{ matrix.msystem}} · ${{ matrix.arch }}
+    name: VVP Windows
     defaults:
       run:
         shell: msys2 {0}
@@ -59,11 +36,11 @@ jobs:
           ref: libvvp
       - name: Build and check
         run: |
-          cd msys2
-          makepkg-mingw --noconfirm --noprogressbar -sCLf
+          autoconf
+          ./configure
+          make -j$(nproc) check
+          sudo make install
       - name: Install
-        run: pacman -U --noconfirm msys2/*.zst
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.msystem }}-${{ matrix.arch }}
-          path: msys2/*.zst
+        run: make install
+    - name: Test
+      run: ./.github/test.sh
