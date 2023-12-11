@@ -1,4 +1,4 @@
-name: test VVP
+name: test VVP - Windows
 on:
   workflow_dispatch:
 
@@ -12,21 +12,21 @@ jobs:
       run:
         shell: msys2 {0}
     env:
-      MINGW_ARCH: ${{ matrix.msystem }}
+      MINGW_ARCH: MINGW64
     steps:
       - name: Tweak git
         shell: bash
         run: git config --global core.autocrlf input
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: ${{ matrix.msystem }}
+          msystem: MINGW64
           update: true
           install: >
             git
             base-devel
             gperf
             python-pip
-            mingw-w64-${{ matrix.arch }}-toolchain
+            mingw-w64-MINGW64-toolchain
       - uses: actions/setup-python@v4
         with:
           python-version: '>=3.5'

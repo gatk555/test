@@ -1,4 +1,4 @@
-name: test VVP
+name: test VVP - Mac
 on:
   workflow_dispatch:
 jobs:
@@ -17,7 +17,7 @@ jobs:
         run: |
           export PATH="/usr/local/opt/bison/bin:$PATH"
           sh autoconf.sh
-          ./configure
+          ./configure --enable-libvvp
           make -j$(nproc) check
           sudo make install
       - name: Test
