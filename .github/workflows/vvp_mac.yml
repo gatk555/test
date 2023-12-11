@@ -1,9 +1,8 @@
 name: test VVP
 on:
   workflow_dispatch:
-
 jobs:
-  build-mac:
+  build-mac2:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,9 +16,9 @@ jobs:
       - name: Build, check and install
         run: |
           export PATH="/usr/local/opt/bison/bin:$PATH"
-          autoconf
+          sh autoconf.sh
           ./configure
           make -j$(nproc) check
           sudo make install
-    - name: Test
-      run: ./.github/test.sh
+      - name: Test
+        run: ./.github/test.sh

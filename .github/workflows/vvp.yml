@@ -36,11 +36,11 @@ jobs:
           ref: libvvp
       - name: Build and check
         run: |
-          autoconf
+          sh autoconf.sh
           ./configure
           make -j$(nproc) check
           sudo make install
       - name: Install
         run: make install
-    - name: Test
-      run: ./.github/test.sh
+      - name: Test
+        run: ./.github/test.sh
