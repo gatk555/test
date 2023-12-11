@@ -26,7 +26,7 @@ jobs:
             base-devel
             gperf
             python-pip
-            mingw-w64-MINGW64-toolchain
+            mingw-w64-toolchain
       - uses: actions/setup-python@v4
         with:
           python-version: '>=3.5'
