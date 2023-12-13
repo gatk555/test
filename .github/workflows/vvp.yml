@@ -23,8 +23,10 @@ jobs:
           update: true
           install: >
             autotools
-            git
             base-devel
+            binutils
+            gcc
+            git
             gperf
             python-pip
       - uses: actions/setup-python@v4
