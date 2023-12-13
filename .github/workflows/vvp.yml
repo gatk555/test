@@ -40,7 +40,7 @@ jobs:
         run: |
           sh autoconf.sh
           ./configure --host=x86_64-w64-mingw32
-          mingw64-make -j$(nproc) check
+          mingw32-make -j$(nproc) check
           sudo make install
       - name: Install
         run: make install
