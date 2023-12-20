@@ -52,11 +52,11 @@ jobs:
     - name: Install
       run: pacman -U --noconfirm msys2/*.zst
 
-    - name: Test
-      run: |
-        ./.github/test.sh
-
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.msystem }}-${{ matrix.arch }}
         path: msys2/*.zst
+
+    - name: Test
+      run: |
+        ./.github/test.sh
