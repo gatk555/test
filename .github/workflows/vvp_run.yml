@@ -1,4 +1,4 @@
-name: test
+name: Run VVP on Win64
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
          path: .
       - name: Install
         run: pacman -U --noconfirm *.zst
-      -name Run
+      - name: Run
         run: |
           which vvp
           vvp
