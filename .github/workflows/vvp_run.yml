@@ -37,4 +37,5 @@ jobs:
       - name: Run
         run: |
           which vvp
+          cp /mingw64/lib/libvvp.DLL /mingw64/bin
           vvp
