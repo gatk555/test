@@ -28,6 +28,10 @@ jobs:
          workflow_conclusion: ""
          name: MINGW64-x86_64
          path: .
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{ matrix.msystem }}
+          update: true
       - name: Install
         run: pacman -U --noconfirm *.zst
       - name: Run
