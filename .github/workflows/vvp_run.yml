@@ -34,8 +34,16 @@ jobs:
           update: true
       - name: Install
         run: pacman -U --noconfirm *.zst
-      - name: Run
+      - name: Copy
         run: |
           which vvp
           cp /mingw64/lib/libvvp.DLL /mingw64/bin
-          vvp
+      - uses: actions/checkout@v3
+        with:
+          repository: gatk555/iverilog
+          ref: libvvp
+      - name: Test
+        run: |
+          vvp ./vvp/examples/hello.vvp
+          ./.github/test.sh
+
