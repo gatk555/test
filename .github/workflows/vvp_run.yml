@@ -25,6 +25,7 @@ jobs:
         with:
          workflow: vvp_test.yml
          run_number: 7
+         workflow_conclusion: ""
          name: MINGW64-x86_64
          path: .
       - name: Install
