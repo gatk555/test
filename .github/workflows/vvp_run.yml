@@ -1,0 +1,35 @@
+name: test
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  win:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: [
+          { msystem: MINGW64, arch: x86_64 }
+        ]
+    name: 🟪 ${{ matrix.msystem}} · ${{ matrix.arch }}
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      MINGW_ARCH: ${{ matrix.msystem }}
+    steps:
+
+      - uses: dawidd6/action-download-artifact@v2
+        with:
+         workflow: vvp_test.yml
+         run_number: 7
+         name: MINGW64-x86_64
+         path: .
+      - name: Install
+        run: pacman -U --noconfirm *.zst
+      -name Run
+        run: |
+          which vvp
+          vvp
