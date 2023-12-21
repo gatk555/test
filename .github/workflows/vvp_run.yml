@@ -47,6 +47,6 @@ jobs:
           ref: libvvp
       - name: Test
         run: |
-          vvp -M /mingw64/lib/ivl ./vvp/examples/hello.vvp
+          vvp -m /msys64/mingw64/lib/ivl/system.vpi ./vvp/examples/hello.vvp
           ./.github/test.sh
 
