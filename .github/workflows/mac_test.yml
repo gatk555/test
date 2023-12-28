@@ -15,13 +15,12 @@ jobs:
           brew install avr-gcc@8 avr-binutils
       - name: Test
         run: |
-          set
-          echo _____ Environment ______
-          env
           echo _____ Files ______
-          ls -R /usr/local/opt/avr-gcc@8
-          ls -R /usr/local/opt/avr-binutils
-          echo which avr-gcc
-          export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
+          ls /usr/local/opt/
+          echo _____ Programs ______
+          export PATH="/usr/local/opt/avr-gcc@8/bin:/usr/local/opt/avr-binutils/bin:$PATH"
+          which avr-objcopy
           which avr-gcc
+          echo _____ Find Cellar ______
+          find /usr/local -name Cellar
 
