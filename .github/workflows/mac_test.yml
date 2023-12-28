@@ -13,14 +13,15 @@ jobs:
           brew install make libelf freeglut patchelf 
           brew tap osx-cross/avr
           brew install avr-gcc@8 avr-binutils
-          export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
       - name: Test
         run: |
           set
           echo _____ Environment ______
           env
           echo _____ Files ______
-          ls /usr/local/opt
+          ls -R /usr/local/opt/avr-gcc@8
+          ls -R /usr/local/opt/avr-binutils
           echo which avr-gcc
+          export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
           which avr-gcc
 
