@@ -1,0 +1,23 @@
+name: Test Homebrew env
+on:
+  workflow_dispatch:
+
+jobs:
+  check-darwin-x64:
+    # this is currently macos-11, Big Sur
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: | 
+          brew install make libelf freeglut patchelf 
+          brew tap osx-cross/avr
+          brew install avr-gcc@8 avr-binutils
+          export PATH="/usr/local/opt/avr-gcc@5/bin:$PATH"
+      - name: Test
+        run: |
+          set
+          echo which avr-gcc
+          which avr-gcc
+          env
+
