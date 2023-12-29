@@ -16,11 +16,7 @@ jobs:
       - name: Test
         run: |
           echo _____ Files ______
-          ls /usr/local/opt/
-          echo _____ Programs ______
-          export PATH="/usr/local/opt/avr-gcc@8/bin:/usr/local/opt/avr-binutils/bin:$PATH"
-          which avr-objcopy
-          which avr-gcc
-          echo _____ Find Cellar ______
-          find /usr/local -name Cellar
+          find /usr/local -name iom2560.h
+          echo _____ Cellar ______
+          ls /usr/local/Cellar
 
