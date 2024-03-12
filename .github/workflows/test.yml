@@ -13,11 +13,11 @@ jobs:
           cd ..\flex-bison
           curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
           unzip win_flex_bison-2.5.25
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
           ref: ga_dev
-      - uses: microsoft/setup-msbuild@v1.1
+      - uses: microsoft/setup-msbuild@v2
       - name: Build
         shell: cmd
         run: |
@@ -39,7 +39,7 @@ jobs:
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
       - name: Save
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Test, Windows 64-bit
           path: C:\Spice64_KLU
