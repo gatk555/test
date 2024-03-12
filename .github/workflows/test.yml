@@ -23,7 +23,7 @@ jobs:
         run: |
           set config=Release
           set plat=x64
-          set suffix=64_KLU
+          set suffix=64
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opt% visualc\xspice\analog.vcxproj
@@ -37,9 +37,9 @@ jobs:
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
-          dir C:\Spice64_KLU
+          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
       - name: Save
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Test, Windows 64-bit
-          path: C:\Spice64_KLU
+          path: C:\Spice64
