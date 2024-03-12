@@ -17,7 +17,7 @@ jobs:
         with:
           repository: gatk555/ngspice
           ref: ga_dev
-      - uses: microsoft/setup-msbuild@v1.1
+      - uses: microsoft/setup-msbuild@v2
       - name: Build
         shell: cmd
         run: |
@@ -37,9 +37,10 @@ jobs:
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+#          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+          dir C:\Spice64_KLU
       - name: Save
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: Test, Windows 64-bit
           path: C:\Spice64_KLU
