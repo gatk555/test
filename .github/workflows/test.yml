@@ -43,3 +43,7 @@ jobs:
         with:
           name: Test, Windows 64-bit
           path: C:\Spice64
+      - name: Probe
+        shell: cmd
+        run: |
+          dir "C:\Program Files (x86)\Microsoft Visual Studio*"
