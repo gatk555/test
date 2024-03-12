@@ -37,7 +37,6 @@ jobs:
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
-#          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
           dir C:\Spice64_KLU
       - name: Save
         uses: actions/upload-artifact@v3
