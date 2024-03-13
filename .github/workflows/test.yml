@@ -46,4 +46,4 @@ jobs:
       - name: Probe
         shell: cmd
         run: |
-          dir "C:\Program Files (x86)\Microsoft Visual Studio 14\VC\redist\x64"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio 14*"
