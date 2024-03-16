@@ -14,6 +14,7 @@ jobs:
           curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
           unzip win_flex_bison-2.5.25
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
           ref: ga_dev
@@ -45,5 +46,5 @@ jobs:
       - name: Probe
         shell: cmd
         run: |
-          dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio 14"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper\Packages"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio*"
