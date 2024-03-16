@@ -3,6 +3,8 @@ rem    .\aux-cfunc.bat analog
 
 set sub=%1
 
+echo Script in %sub%
+
 set CMPP_IDIR=../../src/xspice/icm/%sub%
 set CMPP_ODIR=icm/%sub%
 if not exist icm\%sub% mkdir icm\%sub%

@@ -27,7 +27,9 @@ jobs:
       - name: Build
         shell: cmd
         run: |
+          dir visualc\xspice
           cp ..\aux_cfunc.bat visualc\xspice
+          dir visualc\xspice
           set config=Release
           set plat=x64
           set suffix=64
@@ -52,4 +54,4 @@ jobs:
         shell: cmd
         run: |
           dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper\Packages"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio*"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio"
