@@ -36,6 +36,7 @@ jobs:
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opt% visualc\xspice\analog.vcxproj
+          type visualc\xspice\log.txt
           msbuild %opt% visualc\xspice\digital.vcxproj
           msbuild %opt% visualc\xspice\spice2poly.vcxproj
           msbuild %opt% visualc\xspice\table.vcxproj
@@ -44,12 +45,6 @@ jobs:
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Test, Windows 64-bit
-          path: C:\Spice64
       - name: Probe
         shell: cmd
         run: |
