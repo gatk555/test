@@ -21,6 +21,7 @@ jobs:
       - name: Build
         shell: cmd
         run: |
+          cp aux_cfunc.bat visualc\xspice
           set config=Release
           set plat=x64
           set suffix=64
@@ -35,8 +36,6 @@ jobs:
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
-          msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
-          msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
       - name: Save
         uses: actions/upload-artifact@v4
@@ -46,4 +45,5 @@ jobs:
       - name: Probe
         shell: cmd
         run: |
-          dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio 14"
