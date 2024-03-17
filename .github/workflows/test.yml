@@ -28,8 +28,7 @@ jobs:
         shell: cmd
         run: |
           dir visualc\xspice
-          del visualc\xspice\aux_cfunc.bat
-          cp ..\aux_cfunc.bat visualc\xspice
+          cp ..\aux-cfunc.bat visualc\xspice
           dir visualc\xspice
           set config=Release
           set plat=x64
@@ -51,4 +50,4 @@ jobs:
         shell: cmd
         run: |
           dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper\Packages"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared"
