@@ -15,7 +15,7 @@ for /F %%n in (..\..\src\xspice\icm\%sub%\modpath.lst) do (
   set CMPP_IDIR=../../src/xspice/icm/%sub%/%%n
   set CMPP_ODIR=icm/%sub%/%%n
   if not exist icm\%sub%\%%n mkdir icm\%sub%\%%n
-  .\bin\cmpp -ifs
+  .\bin\cmpp -ifs  >> log.txt
   echo Done ifs >> log.txt
   .\bin\cmpp -mod
   echo Done mod >> log.txt
