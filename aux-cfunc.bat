@@ -13,7 +13,6 @@ if not exist icm\%sub% mkdir icm\%sub%
 for /F %%n in (..\..\src\xspice\icm\%sub%\modpath.lst) do (
   echo Starting %%n >> log.txt
   set CMPP_IDIR=../../src/xspice/icm/%sub%/%%n
-  dir %CMPP_IDIR% >> log.txt
   set CMPP_ODIR=icm/%sub%/%%n
   if not exist icm\%sub%\%%n mkdir icm\%sub%\%%n
   .\bin\cmpp -ifs
