@@ -28,6 +28,7 @@ jobs:
         shell: cmd
         run: |
           dir visualc\xspice
+          del visualc\xspice\aux_cfunc.bat
           cp ..\aux_cfunc.bat visualc\xspice
           dir visualc\xspice
           set config=Release
@@ -45,6 +46,7 @@ jobs:
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
+          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
       - name: Probe
         shell: cmd
         run: |
