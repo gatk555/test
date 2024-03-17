@@ -50,4 +50,6 @@ jobs:
         shell: cmd
         run: |
           dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper\Packages"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared\SDKs"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Packages"
