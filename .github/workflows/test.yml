@@ -18,7 +18,7 @@ jobs:
         shell: cmd
         run: |
           dir ..
-          cp aux_cfunc.bat ..
+          cp aux-cfunc.bat ..
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
