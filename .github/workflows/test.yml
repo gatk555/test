@@ -17,7 +17,6 @@ jobs:
       - name: Save script
         shell: cmd
         run: |
-          dir ..
           cp aux-cfunc.bat ..
       - uses: actions/checkout@v4
         with:
@@ -27,9 +26,7 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          dir visualc\xspice
           cp ..\aux-cfunc.bat visualc\xspice
-          dir visualc\xspice
           set config=Release
           set plat=x64
           set suffix=64
@@ -46,10 +43,3 @@ jobs:
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
-      - name: Probe
-        shell: cmd
-        run: |
-          dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper\Packages"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared\SDKs"
-          dir "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Packages"
