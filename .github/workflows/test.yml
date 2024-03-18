@@ -37,5 +37,7 @@ jobs:
           mkdir cmpp_out
           set CMPP_ODIR=./cmpp_out
           visualc\xspice\bin\cmpp.exe -mod
+          echo mod: %errorlevel%
           visualc\xspice\bin\cmpp.exe -ifs
+          echo ifs: %errorlevel%
           dir cmpp_out
