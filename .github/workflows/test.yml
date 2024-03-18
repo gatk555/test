@@ -32,14 +32,8 @@ jobs:
           set suffix=64
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opt% visualc\xspice\analog.vcxproj
-          type visualc\xspice\log.txt
-          msbuild %opt% visualc\xspice\digital.vcxproj
-          msbuild %opt% visualc\xspice\spice2poly.vcxproj
-          msbuild %opt% visualc\xspice\table.vcxproj
-          msbuild %opt% visualc\xspice\xtradev.vcxproj
-          msbuild %opt% visualc\xspice\xtraevt.vcxproj
-          set cms=codemodels\%plat%\%config%
-          md visualc\%cms%
-          move visualc\xspice\%cms%\*.cm visualc\%cms%
+          set CMPP_IDIR=src/xspice/icm/analog/divide
+          set CMPP_ODIR=.
+          echo Rinning cmpp
+          visualc\xspice\bin\cmpp.exe -ifs
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
