@@ -32,8 +32,10 @@ jobs:
           set suffix=64
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
+          echo Running cmpp
           set CMPP_IDIR=src/xspice/icm/analog/divide
-          set CMPP_ODIR=.
-          echo Rinning cmpp
+          mkdir cmpp_out
+          set CMPP_ODIR=./cmpp_out
+          visualc\xspice\bin\cmpp.exe -mod
           visualc\xspice\bin\cmpp.exe -ifs
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+          dir cmpp_out
