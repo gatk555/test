@@ -32,12 +32,10 @@ jobs:
           set suffix=64
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
-          echo Running cmpp
-          set CMPP_IDIR=src/xspice/icm/analog/divide
-          mkdir cmpp_out
-          set CMPP_ODIR=./cmpp_out
-          visualc\xspice\bin\cmpp.exe -mod
-          echo mod: %errorlevel%
-          visualc\xspice\bin\cmpp.exe -ifs
-          echo ifs: %errorlevel%
-          dir cmpp_out
+          msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
+          msbuild %opt% visualc\xspice\analog.vcxproj
+          msbuild %opt% visualc\xspice\digital.vcxproj
+          msbuild %opt% visualc\xspice\spice2poly.vcxproj
+          msbuild %opt% visualc\xspice\table.vcxproj
+          msbuild %opt% visualc\xspice\xtradev.vcxproj
+          msbuild %opt% visualc\xspice\xtraevt.vcxproj
