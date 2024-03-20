@@ -14,11 +14,6 @@ jobs:
           curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
           unzip win_flex_bison-2.5.25
       - uses: actions/checkout@v4
-      - name: Save script
-        shell: cmd
-        run: |
-          cp aux-cfunc.bat ..
-      - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
           ref: ga_dev
@@ -39,3 +34,14 @@ jobs:
           msbuild %opt% visualc\xspice\table.vcxproj
           msbuild %opt% visualc\xspice\xtradev.vcxproj
           msbuild %opt% visualc\xspice\xtraevt.vcxproj
+          set cms=codemodels\%plat%\%config%
+          md visualc\%cms%
+          move visualc\xspice\%cms%\*.cm visualc\%cms%
+          msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
+          msbuild %opt% visualc\vngspice.vcxproj
+          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test, Windows 64-bit
+          path: C:\Spice64
