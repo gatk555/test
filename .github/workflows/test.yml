@@ -21,7 +21,6 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          cp ..\aux-cfunc.bat visualc\xspice
           set config=Release
           set plat=x64
           set suffix=64
@@ -40,6 +39,12 @@ jobs:
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+      - uses: actions/checkout@v4
+      - name: Probe
+        shell: cmd
+        run: |
+          C:\Spice64\bin\ngspice -r  C:\Spice64\sine.raw -b sine.cir
+          where /r "C:\Microsoft Visual Studio 14" vcomp140.dll
       - name: Save
         uses: actions/upload-artifact@v4
         with:

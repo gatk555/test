@@ -1,0 +1,7 @@
+Sine code model with defaults
+
+aosc 0 out sine
+.model sine sine
+.tran 10u 5m
+
+.end
