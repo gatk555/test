@@ -41,6 +41,7 @@ jobs:
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
           dir c:\spice64
           copy c:\spice64\bin\ngspice.exe ..
+          dir ..
       - uses: actions/checkout@v4
       - name: Probe
         shell: cmd
