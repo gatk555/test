@@ -44,6 +44,7 @@ jobs:
       - name: Probe
         shell: cmd
         run: |
+          dir
           dir c:\spice64
           C:\Spice64\bin\ngspice -r  C:\Spice64\sine.raw -b sine.cir
           where /r "C:\Microsoft Visual Studio 14" vcomp140.dll
