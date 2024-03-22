@@ -1,56 +1,27 @@
-# Build ngspice with MS Visiual C++ compiler.
-name: Test
+# Test ngspice.exe
+name: Test ngspice.exe
 on:
   workflow_dispatch:
 
 jobs:
-  test:
+  run:
     runs-on: windows-latest
     steps:
-      - name: Flex and Bison
-        run: |
-          md ..\flex-bison
-          cd ..\flex-bison
-          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
-          unzip win_flex_bison-2.5.25
-      - uses: actions/checkout@v4
+      - uses: dawidd6/action-download-artifact@v2
         with:
-          repository: gatk555/ngspice
-          ref: ga_dev
-      - uses: microsoft/setup-msbuild@v2
-      - name: Build
+         workflow: test.yml
+         run_number: 40
+         name: Dev, Windows 64-bit
+         path: C:\Spice64
+      - uses: actions/checkout@v3
+      - name: Run
         shell: cmd
         run: |
-          set config=Release
-          set plat=x64
-          set suffix=64
-          set opt=-property:Configuration=%config% -property:Platform=%plat%
-          msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opt% visualc\xspice\analog.vcxproj
-          msbuild %opt% visualc\xspice\digital.vcxproj
-          msbuild %opt% visualc\xspice\spice2poly.vcxproj
-          msbuild %opt% visualc\xspice\table.vcxproj
-          msbuild %opt% visualc\xspice\xtradev.vcxproj
-          msbuild %opt% visualc\xspice\xtraevt.vcxproj
-          set cms=codemodels\%plat%\%config%
-          md visualc\%cms%
-          move visualc\xspice\%cms%\*.cm visualc\%cms%
-          msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
-          msbuild %opt% visualc\vngspice.vcxproj
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
-          dir c:\spice64
-          copy c:\spice64\bin\ngspice.exe ..
-          dir ..
-      - uses: actions/checkout@v4
-      - name: Probe
-        shell: cmd
-        run: |
-          dir ..
-          ..\ngspice -r  C:\Spice64\sine.raw -b sine.cir
+          md Results
+          C:\Spice64\bin\ngspice -r Results\sine.raw -b sine.cir
           where /r "C:\Microsoft Visual Studio 14" vcomp140.dll
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Test, Windows 64-bit
-          path: C:\Spice64
+          name: Results
+          path: Results
