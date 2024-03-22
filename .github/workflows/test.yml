@@ -9,8 +9,8 @@ jobs:
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
-         workflow: test.yml
-         run_number: 40
+         workflow: win_dev.yml
+         run_number: 1
          name: Dev, Windows 64-bit
          path: C:\Spice64
       - uses: actions/checkout@v3
