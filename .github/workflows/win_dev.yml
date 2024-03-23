@@ -39,7 +39,7 @@ jobs:
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Add DLL
         shell: cmd
         run: |

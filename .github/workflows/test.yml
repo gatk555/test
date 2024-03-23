@@ -7,19 +7,16 @@ jobs:
   run:
     runs-on: windows-latest
     steps:
-      - uses: dawidd6/action-download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
          workflow: win_dev.yml
-         run_number: 1
+         run_number: 2
          name: Dev, Windows 64-bit
          path: C:\Spice64
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Run
         shell: cmd
         run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-          md Results
           dir C:\Spice64\bin
           C:\Spice64\bin\ngspice.exe -r Results\sine.raw -b sine.cir
       - name: Save
