@@ -1,0 +1,15 @@
+# Probe VM
+name: Test ngspice.exe
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: windows-latest
+    steps:
+      - name: Run
+        shell: cmd
+        run: |
+          dir C:\Program Files\Microsoft Visual Studio*"
+          where /r "C:\Program Files (x86)\Microsoft Visual Studio 14" vcomp140.dll
+          where /r "C:\Program Files (x86)\Microsoft Visual Studio" vcomp140.dll
