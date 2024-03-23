@@ -10,4 +10,6 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          where /r "C:\Program Files (x86)\Microsoft Visual Studio" vcomp140.dll
+          curl.exe -L -O https://aka.ms/vs/17/release/vc_redist.x64.exe
+          ./vc_redist.x64.exe
+          dir
