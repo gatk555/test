@@ -7,7 +7,7 @@ jobs:
   run:
     runs-on: windows-latest
     steps:
-      - uses: dawidd6/download-artifact@v3
+      - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: win_dev.yml
          run_number: 2
