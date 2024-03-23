@@ -10,5 +10,4 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          where /r "C:\Program Files (x86)\Microsoft Visual Studio 14" vcomp140.dll
           where /r "C:\Program Files (x86)\Microsoft Visual Studio" vcomp140.dll
