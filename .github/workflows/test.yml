@@ -17,8 +17,8 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-	  unzip libomp.zip
-	  copy *.dll C:\Spice64\bin
+          unzip libomp.zip
+          copy *.dll C:\Spice64\bin
           md Results
           C:\Spice64\bin\ngspice -r Results\sine.raw -b sine.cir
           where /r "C:\Microsoft Visual Studio 14" vcomp140.dll
