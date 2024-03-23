@@ -20,8 +20,8 @@ jobs:
           unzip libomp.zip
           copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
           md Results
-          C:\Spice64\bin\ngspice -r Results\sine.raw -b sine.cir
-          where /r "C:\Microsoft Visual Studio 14" vcomp140.dll
+          dir C:\Spice64\bin
+          C:\Spice64\bin\ngspice.exe -r Results\sine.raw -b sine.cir
       - name: Save
         uses: actions/upload-artifact@v4
         with:
