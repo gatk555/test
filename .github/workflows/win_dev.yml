@@ -39,6 +39,12 @@ jobs:
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+      - uses: actions/checkout@v3
+      - name: Add DLL
+        shell: cmd
+        run: |
+          unzip libomp.zip
+          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
       - name: Save
         uses: actions/upload-artifact@v4
         with:
