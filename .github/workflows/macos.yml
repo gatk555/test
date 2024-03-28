@@ -6,10 +6,10 @@ jobs:
   build-macos-x86_64:
     runs-on: macos-11
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: ga_script_dev
+          ref: ga_dev
       - name: Install Dependencies
         run: |
           brew install make automake bison
@@ -35,7 +35,21 @@ jobs:
           echo Copying the examples.
           cp -r examples build/share/ngspice
       - name: Save X86_64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Test Macos X86_64
           path: build
+      - name: Make check
+        run: |
+          cd release
+          make check
+      - uses: actions/checkout@v4
+      - name: Vector default test
+        run: |
+          mkdir Results
+          /usr/local/bin/ngspice -r Results/sine.raw -b sine.cir
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Results
+          path: Results
