@@ -17,7 +17,7 @@ jobs:
       - name: Run
         shell: cmd
         run: |
-          dir C:\Spice64\bin
+          md Results
           C:\Spice64\bin\ngspice.exe -r Results\sine.raw -b sine.cir
       - name: Save
         uses: actions/upload-artifact@v4
