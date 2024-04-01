@@ -29,7 +29,7 @@ jobs:
             git
             gperf
             python-pip
-	    mingw-w64-x86_64-make
+            mingw-w64-x86_64-make
       - uses: actions/setup-python@v4
         with:
           python-version: '>=3.5'
