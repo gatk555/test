@@ -32,17 +32,22 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '>=3.5'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          repository: gatk555/iverilog
-          ref: libvvp
+          repository: steveicarus/iverilog
+          ref: master
       - name: Build and check
         run: |
           sh autoconf.sh
-          ./configure --host=x86_64-w64-mingw32
+          ./configure --host=x86_64-w64-mingw32 --enable-libvvp --prefix=C:\ivl
           mingw32-make -j$(nproc) check
           sudo make install
       - name: Install
         run: make install
       - name: Test
         run: ./.github/test.sh
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Iverilog with libvvp, Windows 64-bit
+          path: C:\ivl
