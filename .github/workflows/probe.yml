@@ -13,9 +13,10 @@ jobs:
         shell: cmd
         run: |
           cd vlog
-          CL /O2 /LD /EHsc /Fe ivlng.DLL /I. icarus_shim.c /link /EXPORT:Cosim_setup /EXPORT:Get_ng_vvp
+          CL.EXE /O2 /LD /EHsc /Fe ivlng.DLL /I. icarus_shim.c /link /EXPORT:Cosim_setup /EXPORT:Get_ng_vvp
           dir
-          lib /def:libvvp.def
+          lib.exe /def:libvvp.def
           dir
-          CL /O2 /LD /EHsc /Fe ivlng.DLL /I. vpi.c libvvp.lib /link /DLL
+          CL.EXE /O2 /LD /EHsc /Fe ivlng.DLL /I. vpi.c libvvp.lib /link /DLL
+          dir
 
