@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
       - name: Build
         shell: cmd
         run: |
