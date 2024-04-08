@@ -1,5 +1,5 @@
 # Probe VM
-name: Test ngspice.exe
+name: Link IVL DLLs
 on:
   workflow_dispatch:
 
@@ -7,9 +7,15 @@ jobs:
   run:
     runs-on: windows-latest
     steps:
-      - name: Run
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
+      - name: Build
         shell: cmd
         run: |
-          curl.exe -L -O https://aka.ms/vs/17/release/vc_redist.x64.exe
-          .\vc_redist.x64.exe
+          cd vlog
+          CL /O2 /LD /EHsc /Fe ivlng.DLL /I. icarus_shim.c /link /EXPORT:Cosim_setup /EXPORT:Get_ng_vvp
           dir
+          lib /def:libvvp.def
+          dir
+          CL /O2 /LD /EHsc /Fe ivlng.DLL /I. vpi.c libvvp.lib /link /DLL
+
