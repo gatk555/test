@@ -21,14 +21,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <libgen.h>
 #include <math.h>
 #include <stdint.h>
 //#include <vpi_user.h>
 #include "vpi_user.fake"
 
 #if defined(__MINGW32__) || defined(_MSC_VER)
-#include <winbase.h> // Windows has a simple co-routine library - "Fibers"
+#include <windows.h> // Windows has a simple co-routine library - "Fibers"
 #else
 #include <pthread.h>
 #endif

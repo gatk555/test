@@ -15,7 +15,8 @@
 #include <stdbool.h>
 
 #if defined(__MINGW32__) || defined(_MSC_VER)
-#include <winbase.h> // Windows has a simple co-routine library - "Fibers"
+#include <windows.h> // Windows has a simple co-routine library - "Fibers"
+
 #define dlopen(name, type) LoadLibrary(name)
 #define dlsym(handle, name) (void *)GetProcAddress(handle, name)
 #define dlclose(handle) FreeLibrary(handle)
