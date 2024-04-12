@@ -17,6 +17,6 @@ jobs:
           dir
           lib.exe /def:libvvp.def /machine:X64
           dir
-          CL.EXE /O2 /LD /EHsc /Feivlng.vpi /I. vpi.c libvvp.lib /link /DLL /FORCE
+          CL.EXE /O2 /LD /EHsc /Feivlng.vpi /I. vpi.c libvvp.lib ivlng.lib /link /DLL
           dir
 
