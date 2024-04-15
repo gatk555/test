@@ -56,7 +56,8 @@ char *dlerror(void) // Lifted from dev.c.
 #include "ngspice/cmtypes.h" // For Digital_t
 #include "ngspice/cosim.h"
 
-#define NGSPICELIBDIR "/usr/local/lib/ngspice"
+//#define NGSPICELIBDIR "/usr/local/lib/ngspice"
+#define NGSPICELIBDIR "."
 
 /* This header file defines the external interface. It also contains an initial
  * comment that describes how this shared library is used.

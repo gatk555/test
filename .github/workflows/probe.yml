@@ -9,9 +9,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: msystem: MINGW64
+          update: true
+      - uses: dawidd6/action-download-artifact@v3
+        with:
+         repo: gatk555/iverilog
+         workflow: win_dev.yml
+         run_number: 2
+         name: MINGW64-x86_64
+         path: .
       - name: Build
         shell: cmd
         run: |
+          pacman -U --noconfirm msys2/*.zst
+          which vvp
           cd vlog
           CL.EXE /O2 /LD /EHsc /Feivlng.DLL /I. icarus_shim.c /link /EXPORT:Cosim_setup /EXPORT:Get_ng_vvp
           dir
@@ -19,4 +32,6 @@ jobs:
           dir
           CL.EXE /O2 /LD /EHsc /Feivlng.vpi /I. vpi.c libvvp.lib ivlng.lib /link /DLL
           dir
-
+          CL.EXE /O2 /Fetetst.exe  /I. test.c libvvp.lib ivlng.lib
+          copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
+          test.exe

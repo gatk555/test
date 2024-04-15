@@ -357,18 +357,14 @@ static void start(void)
                                      .time = &now, .cb_rtn = start_cb };
 #ifdef DEBUG
     struct t_vpi_vlog_info   info;
-    char                     tbuf[1024];
 
     /* Get the program name. */
 
     if (vpi_get_vlog_info(&info)) {
-        snprintf(tbuf, sizeof tbuf, "%s", info.argv[0]);
-        vpi_printf("Starting icarus_shim.vpi in %s\n", basename(tbuf));
-#if 1
+        vpi_printf("Starting icarus_shim.vpi in %s\n", info.argv[0]);
         for (int i = 0; i < info.argc; ++i)
             vpi_printf("%d: %s\n", i, info.argv[i]);
         vpi_printf("P: %s V: %s\n", info.product, info.version);
-#endif
     } else {
         vpi_printf("Failed to get invocation information.\n");
     }
@@ -382,8 +378,8 @@ static void start(void)
     vpi_register_cb(&cbd);
 }
 
-/* This is a table of registration functions. This table is the external
- * symbol that the VVP simulator looks for when loading this .vpi module.
+/* This is a table of registration functions. It is the external symbol
+ * that the VVP simulator looks for when loading this .vpi module.
  */
 
 void (*vlog_startup_routines[])(void) = {
