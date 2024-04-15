@@ -17,6 +17,7 @@ jobs:
         with:
          repo: gatk555/iverilog
          workflow: win_dev.yml
+         workflow_conclusion: ""
          run_number: 2
          name: MINGW64-x86_64
          path: .
