@@ -11,7 +11,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: msystem: MINGW64
+          msystem: MINGW64
           update: true
       - uses: dawidd6/action-download-artifact@v3
         with:
