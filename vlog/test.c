@@ -16,7 +16,7 @@ static void output(struct co_info *pinfo, unsigned int bit, Digital_t *vp)
 int main(int argc, char **argv)
 {
     static Digital_t      val;
-    static struct co_info info = {};
+    static struct co_info info;
     int                   i, err, scale = 0, prev, bit, diff;
 
     info.sim_argc = argc;
