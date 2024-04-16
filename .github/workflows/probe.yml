@@ -21,11 +21,13 @@ jobs:
          run_number: 2
          name: MINGW64-x86_64
          path: .
+      - name: Install
+        run: |
+          pacman -U --noconfirm *.zst
+          which vvp
       - name: Build
         shell: cmd
         run: |
-          pacman -U --noconfirm msys2/*.zst
-          which vvp
           cd vlog
           CL.EXE /O2 /LD /EHsc /Feivlng.DLL /I. icarus_shim.c /link /EXPORT:Cosim_setup /EXPORT:Get_ng_vvp
           dir
