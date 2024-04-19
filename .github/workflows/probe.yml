@@ -40,4 +40,9 @@ jobs:
           copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
           dir
           dumpbin /dependents libvvp.dll
-          test.exe
+      - name: Run in MSYS
+        shell: msys2 {0}
+        run: |
+          cd vlog
+          ldd  libvvp.dll
+          ./test.exe
