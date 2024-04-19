@@ -320,7 +320,7 @@ void Cosim_setup(struct co_info *pinfo)
     if (pinfo->lib_argc > 0 && pinfo->lib_argv[0][0]) // Explicit path to VVP?
         file = (char *)pinfo->lib_argv[0];
     else
-        file = "libvvp.dll";
+        file = ".\\libvvp.dll";
     context->vvp_handle = dlopen(file, RTLD_GLOBAL | RTLD_NOW);
     if (!context->vvp_handle) {
         fprintf(stderr, "Icarus shim failed to load VVP library: %s.\n",
