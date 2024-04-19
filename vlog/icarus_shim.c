@@ -43,7 +43,8 @@ char *dlerror(void) // Lifted from dev.c.
     if (rc == 0) { /* FormatMessage failed */
         (void) sprintf(errstr, errstr_fmt, (unsigned long) GetLastError());
     } else {
-        snprintf(errstr, sizeof errstr, "%s", (char *)lpMsgBuf);
+        snprintf(errstr, sizeof errstr, errstr_fmt, lpMsgBuf);
+//        snprintf(errstr, sizeof errstr, "%s", (char *)lpMsgBuf);
         LocalFree(lpMsgBuf);
     }
     return errstr;
