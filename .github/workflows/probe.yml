@@ -39,11 +39,11 @@ jobs:
           CL.EXE /O2 /Fetest.exe  /I. test.c libvvp.lib ivlng.lib
           copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
           dir
-          dumpbin /dependents ivlng.vpi
+          dumpbin /dependents shim.vpi
       - name: Run in MSYS
         shell: msys2 {0}
         run: |
           cd vlog
-          cp shim.vpi ivlng.vpi
+          mv shim.vpi ivlng.vpi
           ldd  libvvp.dll
           ./test.exe
