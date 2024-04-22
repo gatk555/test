@@ -34,7 +34,7 @@ jobs:
           dir
           lib.exe /def:libvvp.def /machine:X64
           dir
-          CL.EXE /O2 /LD /EHsc /Feivlng.vpi /I. vpi.c libvvp.lib ivlng.lib /link /DLL /EXPORT:vlog_startup_routines
+          CL.EXE /O2 /LD /EHsc /Feshim.vpi /I. vpi.c libvvp.lib ivlng.lib /link /DLL /EXPORT:vlog_startup_routines
           dir
           CL.EXE /O2 /Fetest.exe  /I. test.c libvvp.lib ivlng.lib
           copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
@@ -44,5 +44,6 @@ jobs:
         shell: msys2 {0}
         run: |
           cd vlog
+          cp shim.vpi ivlng.vpi
           ldd  libvvp.dll
           ./test.exe
