@@ -284,6 +284,20 @@ printf("In run_vvp\n");
 #else
         file = NGSPICELIBDIR "/ivlng";
 #endif
+
+/* Try to load it directly. */
+{
+    void *handle;
+
+    handle = dlopen("./ivlng.vpi", RTLD_GLOBAL | RTLD_NOW);
+    if (handle) {
+        printf("Opened VPI file\n");
+        dlclose(handle);
+    } else {
+        printf("Failed to open VPI: %s\n", dlerror());
+        fflush(stdout); // ???
+    }
+ }
     fns.load_module(file);
 printf("VVP starting\n");
 fflush(stdout); // ???
