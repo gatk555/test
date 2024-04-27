@@ -252,7 +252,6 @@ void *run_vvp(void *arg)
 
     /* Find the functions to be called in libvvp. */
 
-printf("In run_vvp\n");
     fptr = (void **)&fns;
     for (i = 0; ; ++i, ++fptr) {
         if (!fn_names[i])
@@ -285,22 +284,7 @@ printf("In run_vvp\n");
         file = NGSPICELIBDIR "/ivlng";
 #endif
 
-/* Try to load it directly. */
-{
-    void *handle;
-
-    handle = dlopen("./ivlng.vpi", RTLD_GLOBAL | RTLD_NOW);
-    if (handle) {
-        printf("Opened VPI file\n");
-        dlclose(handle);
-    } else {
-        printf("Failed to open VPI: %s\n", dlerror());
-        fflush(stdout); // ???
-    }
- }
     fns.load_module(file);
-printf("VVP starting\n");
-fflush(stdout); // ???
     fns.run(pinfo->sim_argv[0]);
 
     /* The simulation has finished.  Do nothing until destroyed. */
@@ -325,8 +309,6 @@ void Cosim_setup(struct co_info *pinfo)
      * as ngspice initialisation is single-threaded.
      */
 
-printf("Loading libvvp.DLL\n");
-fflush(stdout); // ???
     context = calloc(1, sizeof (struct ng_vvp));
     if (!context)
         fail("malloc", errno);
@@ -349,11 +331,7 @@ fflush(stdout); // ???
 
     /* Set-up the execution stack for libvvp. */
 
-printf("Calling cr_init()\n");
-fflush(stdout); // ???
     cr_init(context);
-printf("cr_init() done\n");
-fflush(stdout); // ???
 
     /* Return required values in *pinfo. */
 
@@ -379,18 +357,12 @@ static void cr_yield_to_vvp(struct ng_vvp *ctx) {
 
 static void cr_init(struct ng_vvp *ctx) {
     ctx->spice_fiber = ConvertThreadToFiber(NULL);
-printf("cr_init() 1\n");
-fflush(stdout); // ???
 
     /* Start the VVP fiber and wait for it to be ready. */
 
     ctx->vvp_fiber = CreateFiber(1024*1024, (void (*)(void *))run_vvp,
                                  ctx->cosim_context);
-printf("cr_init() 2\n");
-fflush(stdout); // ???
     cr_yield_to_vvp(ctx);
-printf("cr_init() 3\n");
-fflush(stdout); // ???
 }
 
 static void cr_cleanup(struct ng_vvp *ctx) {

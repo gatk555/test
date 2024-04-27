@@ -16,7 +16,8 @@ static void output(struct co_info *pinfo, unsigned int bit, Digital_t *vp)
 int main(int argc, char **argv)
 {
     static Digital_t      val;
-    static struct co_info info;
+    static struct co_info info = {};
+    double                ttime = 0;
     int                   i, err, scale = 0, prev, bit, diff;
 
     info.sim_argc = argc;
@@ -24,10 +25,8 @@ int main(int argc, char **argv)
     info.out_fn = output;
     *(char ***)&info.sim_argv = argv + 1;
     info.sim_argc = argc - 1;
-printf("Calling Cosim_setup()\n");
-fflush(stdout); // ???
     Cosim_setup(&info);
-printf("In main()\n");
+    printf("In main()\n");
 
     /* Now wait for the simulation to tick.  Count ticks and change the
      * input as simulation proceeds.
@@ -35,7 +34,7 @@ printf("In main()\n");
 
 #ifdef SCALE
     for (i = 0; i < 1000; ++i) {
-        info.vtime += 2e-6;
+        ttime += 2e-6;
 
         /* Assume a single 6-bit input. */
 
@@ -79,15 +78,18 @@ printf("In main()\n");
 
         if (i & 1) {
             for (j = 0; j < 3; j++) {
-                val.state = data[i][j];
+                val.state = data[i / 2][j];
                 info.in_fn(&info, j, &val);
             }
         }
-        info.vtime += 1e-4;
+        ttime += 1e-4;
 #endif
-        /* Release GHDL and wait for it to stall. */
+        /* Release VVP and wait for it to stall. */
 
-        info.step(&info);
+        do {
+            info.vtime = ttime;
+            info.step(&info);
+        } while (info.vtime != ttime);
     }
     info.cleanup(&info);
     return 0;
