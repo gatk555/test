@@ -50,11 +50,13 @@ jobs:
         run: |
           cd vlog
           mv shim.vpi ivlng.vpi
+          ls -l
           echo ============ libvvp.dll ===============
           ldd  libvvp.dll
           echo ============ ivlng.dll ===============
           ldd ivlng.dll
           echo ============ ivlng.vpi ===============
+          file ivlng.vpi
           ldd ivlng.vpi
           echo ============ test.exe ===============
           ldd test.exe
