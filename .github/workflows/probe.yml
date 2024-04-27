@@ -46,4 +46,7 @@ jobs:
           cd vlog
           mv shim.vpi ivlng.vpi
           ldd  libvvp.dll
+          echo ============ test.exe ===============
+          ldd test.exe
+          dumpbin /dependents test.exe
           ./test.exe
