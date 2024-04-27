@@ -379,12 +379,18 @@ static void cr_yield_to_vvp(struct ng_vvp *ctx) {
 
 static void cr_init(struct ng_vvp *ctx) {
     ctx->spice_fiber = ConvertThreadToFiber(NULL);
+printf("cr_init() 1\n");
+fflush(stdout); // ???
 
     /* Start the VVP fiber and wait for it to be ready. */
 
     ctx->vvp_fiber = CreateFiber(1024*1024, (void (*)(void *))run_vvp,
                                  ctx->cosim_context);
+printf("cr_init() 2\n");
+fflush(stdout); // ???
     cr_yield_to_vvp(ctx);
+printf("cr_init() 3\n");
+fflush(stdout); // ???
 }
 
 static void cr_cleanup(struct ng_vvp *ctx) {
