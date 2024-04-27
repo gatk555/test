@@ -286,6 +286,7 @@ printf("In run_vvp\n");
 #endif
     fns.load_module(file);
 printf("VVP starting\n");
+fflush(stdout); // ???
     fns.run(pinfo->sim_argv[0]);
 
     /* The simulation has finished.  Do nothing until destroyed. */
@@ -310,6 +311,8 @@ void Cosim_setup(struct co_info *pinfo)
      * as ngspice initialisation is single-threaded.
      */
 
+printf("Loading libvvp.DLL\n");
+fflush(stdout); // ???
     context = calloc(1, sizeof (struct ng_vvp));
     if (!context)
         fail("malloc", errno);
@@ -333,8 +336,10 @@ void Cosim_setup(struct co_info *pinfo)
     /* Set-up the execution stack for libvvp. */
 
 printf("Calling cr_init()\n");
+fflush(stdout); // ???
     cr_init(context);
 printf("cr_init() done\n");
+fflush(stdout); // ???
 
     /* Return required values in *pinfo. */
 
