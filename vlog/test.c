@@ -24,6 +24,7 @@ int main(int argc, char **argv)
     info.out_fn = output;
     *(char ***)&info.sim_argv = argv + 1;
     info.sim_argc = argc - 1;
+    printf("Calling Cosim_setup()\n");
     Cosim_setup(&info);
     printf("In main()\n");
 

@@ -252,6 +252,7 @@ void *run_vvp(void *arg)
 
     /* Find the functions to be called in libvvp. */
 
+printf("In run_vvp\n");
     fptr = (void **)&fns;
     for (i = 0; ; ++i, ++fptr) {
         if (!fn_names[i])
@@ -284,6 +285,7 @@ void *run_vvp(void *arg)
         file = NGSPICELIBDIR "/ivlng";
 #endif
     fns.load_module(file);
+printf("VVP starting\n");
     fns.run(pinfo->sim_argv[0]);
 
     /* The simulation has finished.  Do nothing until destroyed. */
@@ -330,7 +332,9 @@ void Cosim_setup(struct co_info *pinfo)
 
     /* Set-up the execution stack for libvvp. */
 
+printf("Calling cr_init()\n");
     cr_init(context);
+printf("cr_init() done\n");
 
     /* Return required values in *pinfo. */
 
