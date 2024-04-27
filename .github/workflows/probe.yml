@@ -57,7 +57,6 @@ jobs:
           ldd ivlng.dll
           echo ============ ivlng.vpi ===============
           file ivlng.vpi
-          ldd ivlng.vpi
           echo ============ test.exe ===============
           ldd test.exe
           echo ============ Run.exe ===============

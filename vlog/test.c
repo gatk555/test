@@ -24,9 +24,10 @@ int main(int argc, char **argv)
     info.out_fn = output;
     *(char ***)&info.sim_argv = argv + 1;
     info.sim_argc = argc - 1;
-    printf("Calling Cosim_setup()\n");
+printf("Calling Cosim_setup()\n");
+fflush(stdout); // ???
     Cosim_setup(&info);
-    printf("In main()\n");
+printf("In main()\n");
 
     /* Now wait for the simulation to tick.  Count ticks and change the
      * input as simulation proceeds.
