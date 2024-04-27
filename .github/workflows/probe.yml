@@ -39,6 +39,9 @@ jobs:
           CL.EXE /O2 /Fetest.exe  /I. test.c libvvp.lib ivlng.lib
           copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
           dir
+          echo ============ ivlng.dll ===============
+          dumpbin /dependents ivlng.dll
+          echo ============ shim.vpi ===============
           dumpbin /dependents shim.vpi
           echo ============ test.exe ===============
           dumpbin /dependents test.exe
@@ -47,7 +50,13 @@ jobs:
         run: |
           cd vlog
           mv shim.vpi ivlng.vpi
+          echo ============ libvvp.dll ===============
           ldd  libvvp.dll
+          echo ============ ivlng.dll ===============
+          ldd ivlng.dll
+          echo ============ ivlng.vpi ===============
+          ldd ivlng.vpi
           echo ============ test.exe ===============
           ldd test.exe
+          echo ============ Run.exe ===============
           ./test.exe
