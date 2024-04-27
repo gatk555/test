@@ -60,4 +60,4 @@ jobs:
           echo ============ test.exe ===============
           ldd test.exe
           echo ============ Run.exe ===============
-          ./test.exe
+          ./test.exe 555
