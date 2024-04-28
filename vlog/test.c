@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <windows.h>
+
+#if defined(__MINGW32__) || defined(_MSC_VER)
+#include <windows.h> // Windows has a simple co-routine library - "Fibers"
+#else
+#include <pthread.h>
+#endif
 
 #include "ngspice/cmtypes.h" // For Digital_t
 #include "ngspice/cosim.h"
@@ -20,11 +25,9 @@ int main(int argc, char **argv)
     double                ttime = 0;
     int                   i, err, scale = 0, prev, bit, diff;
 
-    info.sim_argc = argc;
-    *(char ***)&info.sim_argv = argv;
-    info.out_fn = output;
     *(char ***)&info.sim_argv = argv + 1;
     info.sim_argc = argc - 1;
+    info.out_fn = output;
     Cosim_setup(&info);
     printf("In main()\n");
 
