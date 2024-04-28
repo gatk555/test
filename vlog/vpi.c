@@ -80,11 +80,14 @@ static double get_time(struct ng_vvp *ctx)
 static vpiHandle set_stop(uint64_t length, struct ng_vvp *ctx)
 {
     static struct t_vpi_time now = { .type = vpiSimTime };
-    static struct t_cb_data  cbd =
-        { .reason = cbAfterDelay, .cb_rtn = next_advance_cb, .time = &now };
+    static struct t_cb_data  cbd = { .cb_rtn = next_advance_cb, .time = &now };
 
     now.low = length;
     now.high = length >> 32;
+    if (length == 0)
+        cbd.reason = cbReadWriteSynch;
+    else
+        cbd.reason = cbAfterDelay;
 
     /* Callback after delay. */
 
@@ -185,14 +188,14 @@ static PLI_INT32 output_cb(struct t_cb_data *cb)
 
     if (ctx->stop_cb) {
         /* First call in the current VVP cycle: cancel the current
-         * stop CB and request a new one at the next VVP time point.
+         * stop CB and request a new one before the next VVP time point.
          * That allows all output events in the current timestep
          * to be gathered before stopping.
          */
 
         vpi_remove_cb(ctx->stop_cb);
         ctx->stop_cb = NULL;
-        set_stop(1, ctx);
+        set_stop(0, ctx);
 
         /* Set the output time in SPICE format.
          * It must not be earlier than entry time.
@@ -227,7 +230,7 @@ static void init(vpiHandle handle)
 
 static void watch(vpiHandle handle, void *pp)
 {
-    static struct t_vpi_time  time = { .type = vpiScaledRealTime };
+    static struct t_vpi_time  time = { .type = vpiSuppressTime };
     static struct t_vpi_value val = { .format = vpiVectorVal };
     static struct t_cb_data   cb = {
         .reason = cbValueChange, .cb_rtn = output_cb,
@@ -361,7 +364,7 @@ static void start(void)
     /* Get the program name. */
 
     if (vpi_get_vlog_info(&info)) {
-        vpi_printf("Starting icarus_shim.vpi in %s\n", info.argv[0]);
+        vpi_printf("Starting ivlng.vpi in %s\n", info.argv[0]);
         for (int i = 0; i < info.argc; ++i)
             vpi_printf("%d: %s\n", i, info.argv[i]);
         vpi_printf("P: %s V: %s\n", info.product, info.version);
