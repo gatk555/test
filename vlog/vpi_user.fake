@@ -52,10 +52,22 @@ struct t_cb_data {
 };
 
 #define cbValueChange        1
+#define cbReadWriteSynch     6
+#define cbReadOnlySynch      7
+#define cbNextSimTime        8
 #define cbAfterDelay         9
 #define cbStartOfSimulation 11
 
+struct t_vpi_vlog_info
+{
+    PLI_INT32   argc;
+    char      **argv;
+    char       *product;
+    char       *version;
+};
+
 extern PLI_INT32 vpi_printf(const char *, ...);
+extern PLI_INT32 vpi_get_vlog_info(struct t_vpi_vlog_info *);
 extern void      vpi_get_time(vpiHandle, struct t_vpi_time *);
 extern vpiHandle vpi_register_cb(struct t_cb_data *);
 extern PLI_INT32 vpi_remove_cb(vpiHandle);
