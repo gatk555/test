@@ -50,7 +50,6 @@ jobs:
         shell: msys2 {0}
         run: |
           cd vlog
-          mv shim.vpi ivlng.vpi
           ls -l
           echo ============ libvvp.dll ===============
           ldd  libvvp.dll

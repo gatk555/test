@@ -54,7 +54,7 @@ static void cr_init(struct cr_ctx *ctx, void *(*fn)(void *), void *data) {
 
     /* Start the cosimulator fiber and wait for it to be ready. */
 
-    ctx->cosim_fiber = CreateFiber(1024*1024, (void (*)(void *))fn, data)
+    ctx->cosim_fiber = CreateFiber(1024*1024, (void (*)(void *))fn, data);
     cr_yield_to_sim(ctx);
 }
 
