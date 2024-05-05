@@ -39,7 +39,7 @@ jobs:
           copy ..\btest\a\b\verilog\libvvp.lib .
           copy ..\btest\a\b\verilog\ivlng.lib .
           copy ..\btest\a\b\verilog\ivlng.dll .
-          copy ..\btest\a\b\verilog\shim.vp ivlng.vpi
+          copy ..\btest\a\b\verilog\shim.vpi ivlng.vpi
           CL.EXE /O2 /Fetest.exe  /I. test.c libvvp.lib ivlng.lib
           copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
           dir
