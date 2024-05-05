@@ -23,7 +23,8 @@
 
 
 #ifndef NGSPICELIBDIR
-#define NGSPICELIBDIR "/usr/local/lib/ngspice"
+//#define NGSPICELIBDIR "/usr/local/lib/ngspice"
+#define NGSPICELIBDIR "."
 #endif
 
 /* This header file defines the external interface. It also contains an initial
