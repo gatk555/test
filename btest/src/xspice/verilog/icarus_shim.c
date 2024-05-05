@@ -204,7 +204,7 @@ void *run_vvp(void *arg)
                                               VVP_FN_3, VVP_FN_4, 0 };
     struct co_info            *pinfo = (struct co_info *)arg;
     struct vvp_ptrs            fns;
-    void                     **fptr;
+    void                     **fpptr;
     const char                *file;
     struct ng_vvp             *ctx;
     int                        i;
@@ -213,12 +213,12 @@ void *run_vvp(void *arg)
 
     /* Find the functions to be called in libvvp. */
 
-    fptr = (void **)&fns;
-    for (i = 0; ; ++i, ++fptr) {
+    fpptr = (void **)&fns;
+    for (i = 0; ; ++i, ++fpptr) {
         if (!fn_names[i])
             break;
-        *fptr = dlsym(context->vvp_handle, fn_names[i]);
-        if (!*fptr) {
+        *fpptr = dlsym(context->vvp_handle, fn_names[i]);
+        if (!*fpptr) {
             fprintf(stderr, "Icarus shim failed to find VVP function: %s.\n",
                     dlerror());
             abort();
