@@ -13,7 +13,6 @@ static void cr_yield_to_spice(struct cr_ctx *ctx) {
 }
 
 #define cr_init(X) /* All initialisation was done in the primary fiber. */
-}
 #else
 /* On a Unix-like OS pthreads are used to give libvvp its own stack. */
 
