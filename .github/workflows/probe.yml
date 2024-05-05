@@ -29,13 +29,14 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          cd vlog
-          CL.EXE /O2 /LD /EHsc /Feivlng.DLL /I. icarus_shim.c /link /EXPORT:Cosim_setup /EXPORT:Get_ng_vvp
-          dir
-          lib.exe /def:libvvp.def /machine:X64
-          dir
-          CL.EXE /O2 /LD /EHsc /Feshim.vpi /I. vpi.c libvvp.lib ivlng.lib /link /DLL /EXPORT:vlog_startup_routines
-          dir
+          cd btest\a\b
+          aux-ivl.bat
+          cd ..\..\..\vlog
+          echo Testing components
+          copy ..\btest\a\b\verilog\libvvp.lib .
+          copy ..\btest\a\b\verilog\ivlng.lib .
+          copy ..\btest\a\b\verilog\ivlng.dll .
+          copy ..\btest\a\b\verilog\shim.vp ivlng.vpi
           CL.EXE /O2 /Fetest.exe  /I. test.c libvvp.lib ivlng.lib
           copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
           dir
