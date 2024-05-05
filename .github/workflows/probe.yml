@@ -31,7 +31,10 @@ jobs:
         run: |
           cd btest\a\b
           aux-ivl.bat
-          cd ..\..\..\vlog
+      - name: Build test.exe
+        shell: cmd
+        run: |
+          cd vlog
           echo Testing components
           copy ..\btest\a\b\verilog\libvvp.lib .
           copy ..\btest\a\b\verilog\ivlng.lib .
