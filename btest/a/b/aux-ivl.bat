@@ -11,5 +11,5 @@ rem Make a dummy libvvp.obj, needed for shim.vpi (to be renamed ivlng.vpi).
 
 lib.exe /def:%src%\libvvp.def /machine:X64
 dir
-CL.EXE /O2 /LD /EHsc /Feshim.vpi /I. %src%\vpi.c libvvp.lib ivlng.lib /link /DLL /EXPORT:vlog_startup_routines
+CL.EXE /O2 /LD /EHsc /Feshim.vpi /I. /I%inc% %src%\vpi.c libvvp.lib ivlng.lib /link /DLL /EXPORT:vlog_startup_routines
 dir

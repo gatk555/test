@@ -15,7 +15,7 @@ static void fail(const char *what, int why);
 #define dlopen(name, type) LoadLibrary(name)
 #define dlsym(handle, name) (void *)GetProcAddress(handle, name)
 #define dlclose(handle) FreeLibrary(handle)
-#define cr_safety(void) do while (0)     // Not needed with Fibers.
+#define cr_safety() do while (0)     // Not needed with Fibers.
 
 static char *dlerror(void) // Lifted from dev.c.
 {
