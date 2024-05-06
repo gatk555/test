@@ -27,26 +27,7 @@ jobs:
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
           msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opt% visualc\xspice\analog.vcxproj
           msbuild %opt% visualc\xspice\digital.vcxproj
-          msbuild %opt% visualc\xspice\spice2poly.vcxproj
-          msbuild %opt% visualc\xspice\table.vcxproj
-          msbuild %opt% visualc\xspice\xtradev.vcxproj
-          msbuild %opt% visualc\xspice\xtraevt.vcxproj
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
-          msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
-          msbuild %opt% visualc\vngspice.vcxproj
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
-      - uses: actions/checkout@v4
-      - name: Add DLL
-        shell: cmd
-        run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Dev, Windows 64-bit
-          path: C:\Spice64
