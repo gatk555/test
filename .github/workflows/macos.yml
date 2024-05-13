@@ -13,14 +13,14 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install make automake bison
-          brew install ncurses readline libxaw
+          brew install ncurses readline libxaw libomp
           # compile_macos_gcc.sh expects this path.  Kludge it.
           sudo mkdir -p /opt/X11/include
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
       - name: Build X86_64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
-          ./compile_macos_clang.sh || true # Will fail to install
+          ./compile_macos_gcc.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install X86_64
         run: |
@@ -33,7 +33,7 @@ jobs:
             cp -r /usr/local/$i/ngspice build/$i/
           done
           echo Copying the examples.
-          cp -r examples build/share/ngspice
+          cp -r examples/xspice build/share/ngspice
       - name: Save X86_64
         uses: actions/upload-artifact@v4
         with:
