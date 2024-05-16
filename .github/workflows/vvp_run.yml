@@ -52,7 +52,7 @@ jobs:
           mv /mingw64/lib/ivl /msys64/mingw64/lib
       - name: Test
         run: |
-          ldd `which iverilog`
+          ls -l C:/Spice64/share/ngspice/examples/xspice/verilator/adc.v
           iverilog -o adc C:/Spice64/share/ngspice/examples/xspice/verilator/adc.v
           C:\Spice64\bin\ngspice -b -r adc.raw adc_batch.cir
           mkdir ~/results
