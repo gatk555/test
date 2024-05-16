@@ -27,7 +27,8 @@ acomp [%vd(test_v vref)] [comp] comparator
 * and produce the correct numerical output value.
 
 adut [ Clk Comp Start] [Sample Valid ~d5 ~d4 ~d3 ~d2 ~d1 ~d0] null dut
-.model dut d_cosim simulation="./adc.DLL"
+*.model dut d_cosim simulation="./adc.DLL"
+.model dut d_cosim simulation="ivlng" sim_args=[ "adc" ]
 .ends // SUBCKT sar_adc
 
 * Some MOS transistors complete the circuit.
