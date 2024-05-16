@@ -40,17 +40,6 @@ jobs:
         with:
           msystem: ${{ matrix.msystem }}
           update: true
-          install: >
-            git
-            base-devel
-            gperf
-            python-pip
-            mingw-w64-${{ matrix.arch }}-toolchain
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '>=3.5'
-
       - name: Install
         run: pacman -U --noconfirm *.zst
       - name: Copy
@@ -61,9 +50,11 @@ jobs:
           cp /mingw64/lib/libvvp.DLL /mingw64/bin
           mkdir -p /msys64/mingw64/lib
           mv /mingw64/lib/ivl /msys64/mingw64/lib
+      - uses: actions/checkout@v3
       - name: Test
         run: |
           iverilog -o adc C:/Spice64/share/ngspice/examples/xspice/verilator/adc.v
+          ls
           C:\Spice64\bin\ngspice -b -r adc.raw adc_batch.cir
           mkdir ~/results
           cp *.raw ~/results
