@@ -42,15 +42,16 @@ jobs:
           update: true
       - name: Install
         run: pacman -U --noconfirm *.zst
+      - uses: actions/checkout@v3
       - name: Copy
         run: |
           which vvp
           ls /mingw64/bin
           which iverilog
           cp /mingw64/lib/libvvp.DLL /mingw64/bin
+          cp /mingw64/lib/libvvp.DLL .
           mkdir -p /msys64/mingw64/lib
           mv /mingw64/lib/ivl /msys64/mingw64/lib
-      - uses: actions/checkout@v3
       - name: Test
         run: |
           C:/Spice64/bin/ngspice -b -r adc.raw adc_batch.cir
