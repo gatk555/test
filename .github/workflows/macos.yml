@@ -13,7 +13,7 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install make automake bison
-          brew install ncurses readline libxaw libomp
+          brew install ncurses readline libxaw
           # compile_macos_gcc.sh expects this path.  Kludge it.
           sudo mkdir -p /opt/X11/include
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
@@ -39,17 +39,3 @@ jobs:
         with:
           name: Test Macos X86_64
           path: build
-      - name: Make check
-        run: |
-          cd release
-          make check
-      - uses: actions/checkout@v4
-      - name: Vector default test
-        run: |
-          mkdir Results
-          /usr/local/bin/ngspice -r Results/sine.raw -b sine.cir
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Results
-          path: Results

@@ -13,7 +13,7 @@ jobs:
         include: [
           { msystem: MINGW64, arch: x86_64 }
         ]
-    name: 🟪 ${{ matrix.msystem}} · ${{ matrix.arch }}
+    name: ${{ matrix.msystem}} · ${{ matrix.arch }}
     defaults:
       run:
         shell: msys2 {0}
@@ -21,13 +21,21 @@ jobs:
       MINGW_ARCH: ${{ matrix.msystem }}
     steps:
 
-      - uses: dawidd6/action-download-artifact@v2
+      - uses: dawidd6/action-download-artifact@v3
         with:
-         workflow: vvp_test.yml
-         run_number: 7
+         workflow: win_dev.yml
+         run_number: 40
+         name: Dev, Windows 64-bit
+         path: C:\Spice64
+      - uses: dawidd6/action-download-artifact@v3
+        with:
+         repo: gatk555/iverilog
+         workflow: win.yml
+         run_number: 3
          workflow_conclusion: ""
          name: MINGW64-x86_64
          path: .
+         github_token: ${{secrets.GITHUB_TOKEN}}
       - uses: msys2/setup-msys2@v2
         with:
           msystem: ${{ matrix.msystem }}
@@ -41,12 +49,9 @@ jobs:
           cp /mingw64/lib/libvvp.DLL /mingw64/bin
           mkdir -p /msys64/mingw64/lib
           mv /mingw64/lib/ivl /msys64/mingw64/lib
-      - uses: actions/checkout@v3
-        with:
-          repository: gatk555/iverilog
-          ref: libvvp
       - name: Test
         run: |
-          vvp -m /mingw64/lib/ivl/system.vpi ./vvp/examples/hello.vvp
-          ./.github/test.sh
+          cd 
+          iverilog -o adc C:\Spice64\share\ngspice\examples\xspice\verilator\adc.v
+          C:\Spice64\bin\ngspice adc_batch.cir
 
