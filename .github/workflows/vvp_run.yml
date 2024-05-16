@@ -51,7 +51,13 @@ jobs:
           mv /mingw64/lib/ivl /msys64/mingw64/lib
       - name: Test
         run: |
-          cd 
           iverilog -o adc C:\Spice64\share\ngspice\examples\xspice\verilator\adc.v
-          C:\Spice64\bin\ngspice adc_batch.cir
+          C:\Spice64\bin\ngspice -b -r adc.raw adc_batch.cir
+          mkdir ~/results
+          cp *.raw ~/results
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Results
+          path: ~/results
 
