@@ -27,7 +27,7 @@ jobs:
             base-devel
             mingw-w64-x86_64-toolchain
             autotools
-            mingw-w64-ncurses
+            mingw-w64-x86_64-ncurses
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
