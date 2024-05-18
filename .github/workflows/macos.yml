@@ -22,6 +22,8 @@ jobs:
           PATH='/usr/local/opt/bison/bin:'$PATH
           ./compile_macos_gcc.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
+          ls -l release/src/xspice/verilog
+          ls -l release/src/xspice/verilog/.libs
       - name: Install X86_64
         run: |
           cd release

@@ -1,0 +1,50 @@
+# Build ngspice with MINGW64
+name: Win_Dev_Msys
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      MINGW_ARCH: MINGW64
+    steps:
+      - name: Flex and Bison
+        run: |
+          md ..\flex-bison
+          cd ..\flex-bison
+          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
+          unzip win_flex_bison-2.5.25
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >
+            base-devel
+            mingw-w64-x86_64-toolchain
+      - uses: actions/checkout@v4
+        with:
+          repository: gatk555/ngspice
+          ref: ga_dev
+      - name: Build
+        run: |
+          mkdir release
+          cd release
+          ../configure--enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
+          make
+          make install
+          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+      - uses: actions/checkout@v4
+      - name: Add DLL
+        shell: cmd
+        run: |
+          unzip libomp.zip
+          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dev, Windows 64-bit
+          path: C:\Spice64
