@@ -34,7 +34,7 @@ jobs:
         run: |
           mkdir release
           cd release
-          ../configure--enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
+          ../configure --enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
           make
           make install
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
