@@ -13,6 +13,7 @@ jobs:
       MINGW_ARCH: MINGW64
     steps:
       - name: Flex and Bison
+        shell: cmd
         run: |
           md ..\flex-bison
           cd ..\flex-bison
