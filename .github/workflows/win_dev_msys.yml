@@ -26,12 +26,14 @@ jobs:
           install: >
             base-devel
             mingw-w64-x86_64-toolchain
+            autotools
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
           ref: ga_dev
       - name: Build
         run: |
+          ./autogen.sh
           ls -l
           mkdir release
           cd release
