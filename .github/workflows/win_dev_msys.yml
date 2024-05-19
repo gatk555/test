@@ -27,7 +27,6 @@ jobs:
             base-devel
             mingw-w64-x86_64-toolchain
             autotools
-            mingw-w64-x86_64-ncurses
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
@@ -38,7 +37,7 @@ jobs:
           ls -l
           mkdir release
           cd release
-          ../configure --enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
+          ../configure --enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --with-readline=no --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
           make
           make install
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
