@@ -12,13 +12,6 @@ jobs:
     env:
       MINGW_ARCH: MINGW64
     steps:
-      - name: Flex and Bison
-        shell: cmd
-        run: |
-          md ..\flex-bison
-          cd ..\flex-bison
-          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
-          unzip win_flex_bison-2.5.25
       - uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
@@ -27,10 +20,21 @@ jobs:
             base-devel
             mingw-w64-x86_64-toolchain
             autotools
+      - uses: dawidd6/action-download-artifact@v3
+        with:
+         repo: gatk555/iverilog
+         workflow: win.yml
+         run_number: 3
+         workflow_conclusion: ""
+         name: MINGW64-x86_64
+         path: .
+         github_token: ${{secrets.GITHUB_TOKEN}}
+      - name: Install
+        run: pacman -U --noconfirm *.zst
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: ga_dev
+          ref: hack
       - name: Build
         run: |
           ./autogen.sh
@@ -39,16 +43,5 @@ jobs:
           cd release
           ../configure --enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --with-readline=no --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
           make
-          make install
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
-      - uses: actions/checkout@v4
-      - name: Add DLL
-        shell: cmd
-        run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Dev, Windows 64-bit
-          path: C:\Spice64
+          ls -l src/xspice/verilog
+          ls -l src/xspice/verilog/.libs
