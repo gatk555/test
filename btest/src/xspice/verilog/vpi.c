@@ -24,7 +24,7 @@
 #include <math.h>
 #include <stdint.h>
 //#include <vpi_user.h>
-#include "vpi_user.fake"
+#include "vpi_user_dummy.h"
 
 #include "ngspice/cmtypes.h" // For Digital_t
 #include "ngspice/cosim.h"
