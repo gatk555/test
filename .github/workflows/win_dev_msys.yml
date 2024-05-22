@@ -45,9 +45,7 @@ jobs:
           make || echo Failed!
           ls -l src/xspice/verilog
           ls -l src/xspice/verilog/.libs
-      - name: Look
-        shell: cmd
-        run: dir
+          file  src/xspice/verilog/.libs/*
       - name: Save
         uses: actions/upload-artifact@v4
         with:
