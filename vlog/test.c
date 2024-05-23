@@ -1,15 +1,66 @@
 #include <stdio.h>
 #include <stdint.h>
-
-#if defined(__MINGW32__) || defined(_MSC_VER)
-#include <windows.h> // Windows has a simple co-routine library - "Fibers"
-#else
-#include <pthread.h>
-#endif
+#include <string.h>
 
 #include "ngspice/cmtypes.h" // For Digital_t
 #include "ngspice/cosim.h"
+#include "coroutine.h"
 #include "icarus_shim.h"
+
+/* A utility function used to open static libraries, trying an installation
+ * directory and different file extenstions.
+ */
+
+#if defined (__MINGW32__) || defined (__CYGWIN__) || defined (_MSC_VER)
+static const char *exts[] = { "", ".so", ".DLL", NULL};
+#define CMPFN strcasecmp
+#define TESTFN(f) (_access(f, 4) == 0) // Checks for read access.
+#define SLIBFILE "DLL"
+#define NGSPICELIBDIR "C:\\Spice64\\lib\\ngspice" // Defined by configure.
+
+#else
+
+#include <dlfcn.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+static const char *exts[] = { "", ".so", NULL};
+#define CMPFN strcmp
+#define TESTFN(f) (access(f, R_OK) == 0)
+#define SLIBFILE "shared library"
+#define NGSPICELIBDIR "." // Usually defined by configure.
+#endif
+
+#define FLAGS  (RTLD_GLOBAL | RTLD_NOW)
+
+static void *cosim_dlopen(const char *fn)
+{
+    const char **xp;
+    int          l1 = strlen(fn), l2;
+    void        *handle;
+    char         path[l1 + sizeof NGSPICELIBDIR + 20];
+
+    for (xp = exts; *xp; xp++) {
+        l2 = strlen(*xp);
+        if (l2 && l1 > l2 && !CMPFN(*xp, fn + l1 - l2))
+            continue; // Extension already present
+        snprintf(path, sizeof path, "%s%s", fn, *xp);
+        handle = dlopen(path, FLAGS);
+        if (handle)
+            return handle;
+        if (TESTFN(path))       // File exists.
+            break;
+        snprintf(path, sizeof path,  NGSPICELIBDIR "/%s%s", fn, *xp);
+        handle = dlopen(path, FLAGS);
+        if (handle)
+            return handle;
+        if (TESTFN(path))
+            break;
+    }
+
+    fprintf(stderr, "Cannot open " SLIBFILE " %s: %s\n", path, dlerror());
+    return NULL;
+}
 
 /* Dummy output function. */
 
@@ -28,6 +79,7 @@ int main(int argc, char **argv)
     *(char ***)&info.sim_argv = argv + 1;
     info.sim_argc = argc - 1;
     info.out_fn = output;
+    info.dlopen_fn = cosim_dlopen;
     Cosim_setup(&info);
     printf("In main()\n");
 
