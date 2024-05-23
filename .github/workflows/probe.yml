@@ -47,8 +47,8 @@ jobs:
           dir
           echo ============ ivlng.dll ===============
           dumpbin /dependents ivlng.dll
-          echo ============ shim.vpi ===============
-          dumpbin /dependents shim.vpi
+          echo ============ ivlng.vpi ===============
+          dumpbin /dependents ivlng.vpi
           echo ============ test.exe ===============
           dumpbin /dependents test.exe
       - name: Run in MSYS

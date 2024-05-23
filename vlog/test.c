@@ -17,6 +17,7 @@ static const char *exts[] = { "", ".so", ".DLL", NULL};
 #define TESTFN(f) (_access(f, 4) == 0) // Checks for read access.
 #define SLIBFILE "DLL"
 #define NGSPICELIBDIR "C:\\Spice64\\lib\\ngspice" // Defined by configure.
+#define FLAGS 0
 
 #else
 
@@ -29,16 +30,16 @@ static const char *exts[] = { "", ".so", NULL};
 #define TESTFN(f) (access(f, R_OK) == 0)
 #define SLIBFILE "shared library"
 #define NGSPICELIBDIR "." // Usually defined by configure.
+#define FLAGS  (RTLD_GLOBAL | RTLD_NOW)
 #endif
 
-#define FLAGS  (RTLD_GLOBAL | RTLD_NOW)
 
 static void *cosim_dlopen(const char *fn)
 {
     const char **xp;
     int          l1 = strlen(fn), l2;
     void        *handle;
-    char         path[l1 + sizeof NGSPICELIBDIR + 20];
+    char         path[1024];
 
     for (xp = exts; *xp; xp++) {
         l2 = strlen(*xp);
