@@ -12,6 +12,8 @@
  */
 
 #if defined (__MINGW32__) || defined (__CYGWIN__) || defined (_MSC_VER)
+#include "coroutine_shim.h"
+
 static const char *exts[] = { "", ".so", ".DLL", NULL};
 #define CMPFN strcasecmp
 #define TESTFN(f) (_access(f, 4) == 0) // Checks for read access.
