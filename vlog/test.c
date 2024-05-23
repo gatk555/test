@@ -15,7 +15,7 @@
 #include "coroutine_shim.h"
 
 static const char *exts[] = { "", ".so", ".DLL", NULL};
-#define CMPFN strcasecmp
+#define CMPFN _stricmp // Ignores case.
 #define TESTFN(f) (_access(f, 4) == 0) // Checks for read access.
 #define SLIBFILE "DLL"
 #define NGSPICELIBDIR "C:\\Spice64\\lib\\ngspice" // Defined by configure.
