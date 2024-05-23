@@ -122,6 +122,7 @@ static void step(struct co_info *pinfo)
      * (pinfo->vtime) or produced output.
      */
 
+printf("In step at %g\n", pinfo->vtime);
     cr_yield_to_sim(&ctx->cr_ctx);
 
     /* Check for output. */
