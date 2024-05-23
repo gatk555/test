@@ -47,7 +47,7 @@
 
 /* Debugging printfs(). */
 
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 #define DBG(...) vpi_printf(__VA_ARGS__)
 #else
