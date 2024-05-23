@@ -244,6 +244,7 @@ void *run_vvp(void *arg)
     if (pinfo->lib_argc >= 2 && pinfo->lib_argv[1][0]) // Explicit VPI file.
         file = pinfo->lib_argv[1];
     else
+#define STAND_ALONE
 #ifdef STAND_ALONE
         file = "./ivlng";
 #else
