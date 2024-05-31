@@ -21,7 +21,7 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          set config=Release
+          set config=console_release
           set plat=x64
           set suffix=64
           set opt=-property:Configuration=%config% -property:Platform=%plat%
