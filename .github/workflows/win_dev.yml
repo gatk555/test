@@ -21,7 +21,7 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          set config=console_release
+          set config=Release
           set plat=x64
           set suffix=64
           set opt=-property:Configuration=%config% -property:Platform=%plat%
@@ -36,6 +36,8 @@ jobs:
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
+          set config=console_release
+          set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
