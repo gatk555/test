@@ -42,7 +42,7 @@ jobs:
           update: true
       - name: Install
         run: pacman -U --noconfirm *.zst
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Copy
         run: |
           which vvp
@@ -58,13 +58,11 @@ jobs:
           ls C:/Spice64/lib/ngspice
           C:/Spice64/bin/ngspice -b -r adc.raw adc_batch.cir 2>&1
           ls
-          echo Running vvp adc
-          vvp adc 2>&1
-          mkdir ~/results
-          cp *.raw ~/results
+          mkdir results
+          cp *.raw results
       - name: Save
         uses: actions/upload-artifact@v4
         with:
           name: Results
-          path: ~/results
+          path: results
 
