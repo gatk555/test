@@ -24,7 +24,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: win_dev.yml
-         run_number: 24
+         run_number: 28
          name: Dev, Windows 64-bit
          path: C:\Spice64
       - uses: dawidd6/action-download-artifact@v3
@@ -56,7 +56,7 @@ jobs:
         run: |
           ls
           ls C:/Spice64/lib/ngspice
-          C:/Spice64/bin/ngspice -o con -b -r adc.raw adc_batch.cir
+          C:/Spice64/bin/ngspice b -r adc.raw adc_batch.cir
           mkdir ~/results
           cp *.raw ~/results
       - name: Save
