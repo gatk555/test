@@ -74,16 +74,26 @@ static void output(struct co_info *pinfo, unsigned int bit, Digital_t *vp)
 
 int main(int argc, char **argv)
 {
-    static Digital_t      val;
-    static struct co_info info;
-    double                ttime = 0;
-    int                   i, err, scale = 0, prev, bit, diff;
+    static Digital_t        val;
+    static struct co_info   info;
+    void                   *handle;
+    void                  (*setup_fn)(struct co_info *);
+    double                  ttime = 0;
+    int                     i, err, scale = 0, prev, bit, diff;
 
     *(char ***)&info.sim_argv = argv + 1;
     info.sim_argc = argc - 1;
     info.out_fn = output;
     info.dlopen_fn = cosim_dlopen;
-    Cosim_setup(&info);
+    handle = cosim_dlopen("ivlng");
+    if (handle == NULL)
+        return 1;
+    setup_fn = (void (*)(struct co_info *))dlsym(handle, "Cosim_setup");
+    if (handle == NULL) {
+        fprintf(stderr, "No symbol Cosim_setup: %s\n", dlerror());
+        return 1;
+    }        
+    (*setup_fn)(&info);
     printf("In main()\n");
 
     /* Now wait for the simulation to tick.  Count ticks and change the
