@@ -56,7 +56,7 @@ jobs:
         run: |
           ls
           ls C:/Spice64/lib/ngspice
-          C:/Spice64/bin/ngspice b -r adc.raw adc_batch.cir
+          C:/Spice64/bin/ngspice -b -r adc.raw adc_batch.cir
           mkdir ~/results
           cp *.raw ~/results
       - name: Save
