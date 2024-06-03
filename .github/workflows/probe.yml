@@ -41,8 +41,8 @@ jobs:
           copy ..\btest\a\b\verilog\ivlng.dll .
           copy ..\btest\a\b\verilog\shim.vpi ivlng.vpi
           dir ..\btest\src\xspice\verilog
-          echo Compiling CL.EXE /O2 /Fetest.exe  /I..\btest\src\xspice\verilog /I..\btest\src\include test.c libvvp.lib ivlng.lib
-          CL.EXE /O2 /Fetest.exe  /I..\btest\src\xspice\verilog /I..\btest\src\include test.c libvvp.lib ivlng.lib
+          echo Compiling CL.EXE /O2 /Fetest.exe  /I..\btest\src\xspice\verilog /I..\btest\src\include test.c ivlng.lib
+          CL.EXE /O2 /Fetest.exe  /I..\btest\src\xspice\verilog /I..\btest\src\include test.c ivlng.lib
           copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
           dir
           echo ============ ivlng.dll ===============
