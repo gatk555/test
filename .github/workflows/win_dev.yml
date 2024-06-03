@@ -36,9 +36,9 @@ jobs:
           set cms=codemodels\%plat%\%config%
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
+          msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           set config=console_release
           set opt=-property:Configuration=%config% -property:Platform=%plat%
-          msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
       - uses: actions/checkout@v4
