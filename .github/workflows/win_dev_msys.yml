@@ -34,20 +34,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: hack
+          ref: ga_dev
       - name: Build
         run: |
-          ./autogen.sh
-          ls -l
-          mkdir release
-          cd release
-          ../configure --enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --with-readline=no --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
-          make || echo Failed!
-          ls -l src/xspice/verilog
-          ls -l src/xspice/verilog/.libs
-          file  src/xspice/verilog/.libs/*
+          ./compile_min.sh
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Debris
-          path: D:\a\test\test\release\src\xspice\verilog
+          name: Dev, Windows 64-bit, Mingw64
+          path: C:\Spice64
