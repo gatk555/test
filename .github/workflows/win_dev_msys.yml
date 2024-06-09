@@ -20,17 +20,6 @@ jobs:
             base-devel
             mingw-w64-x86_64-toolchain
             autotools
-      - uses: dawidd6/action-download-artifact@v3
-        with:
-         repo: gatk555/iverilog
-         workflow: win.yml
-         run_number: 3
-         workflow_conclusion: ""
-         name: MINGW64-x86_64
-         path: .
-         github_token: ${{secrets.GITHUB_TOKEN}}
-      - name: Install
-        run: pacman -U --noconfirm *.zst
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
@@ -48,8 +37,3 @@ jobs:
           file  src/xspice/verilog/.libs/*
           make install || echo Install failed!
           ls -l /c/spice64/lib/ngspice
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Debris
-          path: D:\a\test\test\release\src\xspice\verilog
