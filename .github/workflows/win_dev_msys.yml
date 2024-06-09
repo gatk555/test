@@ -42,11 +42,11 @@ jobs:
           mkdir release
           cd release
           ../configure --enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --with-readline=no --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
-          make || echo Failed!
+          make || echo Build failed!
           ls -l src/xspice/verilog
           ls -l src/xspice/verilog/.libs
           file  src/xspice/verilog/.libs/*
-          make install
+          make install || echo Install failed!
           ls -l /c/spice64/lib/ngspice
       - name: Save
         uses: actions/upload-artifact@v4
