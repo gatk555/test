@@ -8,6 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          repository: gatk555/ngspice
           ref: gh_pm43
       - name: Install Dependencies
         run: |
@@ -32,7 +33,7 @@ jobs:
             cp -r /usr/local/$i/ngspice build/$i/
           done
           echo Copying the examples.
-          cp -r examples build/share/ngspice
+          cp -r examples/xspice build/share/ngspice
           echo Create README.ngspice
           echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > build/README.ngspice
           echo 'The source code came from the pre-master-43 branch with head revision:' >> build/README.ngspice
@@ -54,6 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          repository: gatk555/ngspice
           ref: gh_pm43
       - name: Install Dependencies
         run: |
@@ -88,7 +90,8 @@ jobs:
             cp -r /usr/local/$i/ngspice build/$i/
           done
           echo Moving the examples.
-          mv examples build/share/ngspice
+          mkdir build/share/ngspice/examples
+          mv examples/share build/share/ngspice/examples
           echo Create README.ngspice
           echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > build/README.ngspice
           echo 'The source code came from the pre-master-43 branch with head revision:' >> build/README.ngspice
