@@ -40,7 +40,6 @@ jobs:
           ../configure --enable-xspice --enable-klu --enable-openmp --enable-osdi --enable-predictor --with-readline=no --disable-debug prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
           make
           make install
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
       - uses: actions/checkout@v4
       - name: Add DLL
         shell: cmd
