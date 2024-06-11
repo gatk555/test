@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: gh_pm43
+          ref: ga_dev
       - name: Install Dependencies
         run: |
           brew install make automake bison
@@ -72,11 +72,9 @@ jobs:
       - name: Build arm64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
-          ./autogen.sh
-          ls -l
           mkdir release
           cd release
-          ../configure --host arm64 --with-x --enable-xspice --enable-cider --enable-predictor --enable-osdi --enable-klu --with-readline=/usr/local/opt/readline CFLAGS="--arch arm64 -m64 -O0 -g -Wall -I/opt/X11/include/freetype2 -I/usr/local/opt/readline/include" CXXFLAGS="-m64 -O2 --arch arm64" LDFLAGS="-m64 -g -L/usr/local/opt/readline/lib -L/opt/X11/lib"
+          ../configure --host arm64 --disable-openmp --with-x --enable-xspice --enable-cider --enable-predictor --enable-osdi --enable-klu --with-readline=/usr/local/opt/readline CFLAGS="--arch arm64 -m64 -O0 -g -Wall -I/opt/X11/include/freetype2 -I/usr/local/opt/readline/include" CXXFLAGS="-m64 -O2 --arch arm64" LDFLAGS="-m64 -g -L/usr/local/opt/readline/lib -L/opt/X11/lib"
           make
           if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install arm64
