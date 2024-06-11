@@ -24,7 +24,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: win_dev_msys.yml
-         run_number: 38
+         run_number: 39
          name: Dev, Windows 64-bit, MINGW64
          path: C:\Spice64
       - uses: dawidd6/action-download-artifact@v3
