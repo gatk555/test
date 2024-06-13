@@ -4,25 +4,25 @@ on:
 
 jobs:
   run:
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
-      - uses: dawidd6/action-download-artifact@v2
+      - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: macos.yml
-         run_number: 2
+         run_number: 8
          name: Test Macos X86_64
          path: /usr/local
-      - name: Install Dependencies
-        run: |
-          brew install verilator
-          brew install ncurses readline libxaw libatomic_ops
-      - uses: actions/checkout@v3
+      - uses: dawidd6/action-download-artifact@v3
+        with:
+         repo: gatk555/iverilog
+         workflow: macos.yml
+         run_number: 8
+         name: Icarus Verilog with libvvp, Mac OS
+         path: /usr/local
+      - uses: actions/checkout@v4
       - name: Run
         run: |
           chmod a+x /usr/local/bin/ngspice
-          ngspice -b vlnggen /usr/local/share/ngspice/examples/xspice/verilator/adc.v
-          ls  adc_obj_dir
-          mv adc.so adc.DLL
           echo Testing ...
           ngspice -b -r adc.raw adc_batch.cir
           mkdir ~/results
