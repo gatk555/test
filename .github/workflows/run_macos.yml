@@ -6,6 +6,9 @@ jobs:
   run:
     runs-on: macos-12
     steps:
+      - name: Install Dependencies
+        run: |
+          brew install ncurses readline libxaw libatomic_ops
       - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: macos.yml
