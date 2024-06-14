@@ -50,6 +50,7 @@ jobs:
           for i in bin lib share ; do
             sudo rm -rf /usr/local/$i/ngspice
           done
+
   build-win-X64:
     runs-on: windows-latest
     steps:
@@ -92,6 +93,7 @@ jobs:
           echo >> C:\Spice64\README.ngspice
           git log -1 --skip=1 >> C:\Spice64\README.ngspice
       - uses: actions/checkout@v4
+        with:
           repository: gatk555/test
       - name: Add DLL
         shell: cmd
