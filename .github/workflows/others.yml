@@ -3,26 +3,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-macos-x86_64:
+  build-macos-arm64:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: ga_dev
+          ref: gh_pm43
       - name: Install Dependencies
         run: |
-          brew install make automake bison
-          brew install libxaw
+          brew install automake bison
+          brew uninstall --ignore-dependencies ncurses readline
+          for i in libxaw ncurses readline ; do
+            brew fetch --force --bottle-tag=arm64_monterey $i
+            where=`brew --cache --bottle-tag=arm64_monterey $i`
+            brew install $where
+          done
           # compile_macos_gcc.sh expects this path.  Kludge it.
           sudo mkdir -p /opt/X11/include
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
-      - name: Build X86_64
+      - name: Build arm64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
-          ./compile_macos_gcc.sh || true # Will fail to install
+          mkdir release
+          ./autogen.sh
+          cd release
+          ../configure -v  --host arm64 --disable-openmp --with-x --enable-xspice --enable-cider --enable-predictor --enable-osdi --enable-klu --with-readline=/usr/local/opt/readline CFLAGS="--arch arm64 -m64 -O0 -g -Wall -I/opt/X11/include/freetype2 -I/usr/local/opt/readline/include" CXXFLAGS="-m64 -O2 --arch arm64" LDFLAGS="-m64 -g -L/usr/local/opt/readline/lib -L/opt/X11/lib"
+          make
           if [ ! -f release/src/ngspice ]; then false; fi
-      - name: Install X86_64
+      - name: Install arm64
         run: |
           cd release
           sudo make install
@@ -34,70 +43,10 @@ jobs:
           done
           echo Create README.ngspice
           echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > build/README.ngspice
-          echo 'The source code came from the pre-master-43 branch.' > build/README.ngspice
-          echo 'Install to /usr/local.' > build/README.ngspice
-      - name: Save X86_64
+          echo 'The source code came from the pre-master-43 branch.' >> build/README.ngspice
+          echo 'Install to /usr/local.' >> build/README.ngspice
+      - name: Save arm64
         uses: actions/upload-artifact@v4
         with:
-          name: Ngspice pre-master-43, Macos X86_64
+          name: Ngspice pre-master-43, Macos arm64
           path: build
-      - name: Clean
-        run: |
-          rm -rf release build
-          for i in bin lib share ; do
-            sudo rm -rf /usr/local/$i/ngspice
-          done
-
-  build-win-X64:
-    runs-on: windows-latest
-    steps:
-      - name: Flex and Bison
-        run: |
-          md ..\flex-bison
-          cd ..\flex-bison
-          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
-          unzip win_flex_bison-2.5.25
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/ngspice
-          ref: gh_pm43
-      - uses: microsoft/setup-msbuild@v2
-      - name: Build
-        shell: cmd
-        run: |
-          set config=Release
-          set plat=x64
-          set suffix=64
-          set opt=-property:Configuration=%config% -property:Platform=%plat%
-          msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opt% visualc\xspice\cmpp\cmpp.vcxproj
-          msbuild %opt% visualc\xspice\analog.vcxproj
-          msbuild %opt% visualc\xspice\digital.vcxproj
-          msbuild %opt% visualc\xspice\spice2poly.vcxproj
-          msbuild %opt% visualc\xspice\table.vcxproj
-          msbuild %opt% visualc\xspice\xtradev.vcxproj
-          msbuild %opt% visualc\xspice\xtraevt.vcxproj
-          set cms=codemodels\%plat%\%config%
-          md visualc\%cms%
-          move visualc\xspice\%cms%\*.cm visualc\%cms%
-          msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
-          set config=console_release
-          set opt=-property:Configuration=%config% -property:Platform=%plat%
-          msbuild %opt% visualc\vngspice.vcxproj
-          echo Create README.ngspice
-          echo This binary build ngspice was built at https://github.com/gatk555/ngspice. > C:\Spice64\README.ngspice
-          echo The source code came from the pre-master-43 branch. >> C:\Spice64\README.ngspice
-          echo Install to C:\Spice64\. >> C:\Spice64\README.ngspice
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/test
-      - name: Add DLL
-        shell: cmd
-        run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ngspice pre-master-43, Windows X86-64
-          path: C:\Spice64
