@@ -32,13 +32,10 @@ jobs:
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice build/$i/
           done
-          echo Copying the examples.
-          cp -r examples/xspice build/share/ngspice
           echo Create README.ngspice
           echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > build/README.ngspice
-          echo 'The source code came from the pre-master-43 branch with head revision:' >> build/README.ngspice
-          echo >> build/README.ngspice
-          git log -1 --skip=1 >> build/README.ngspice
+          echo 'The source code came from the pre-master-43 branch. > build/README.ngspice
+          echo 'Install to /usr/local.' > build/README.ngspice
       - name: Save X86_64
         uses: actions/upload-artifact@v4
         with:
@@ -88,10 +85,9 @@ jobs:
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\vngspice.vcxproj
           echo Create README.ngspice
-          echo 'This binary build ngspice was built at https://github.com/gatk555/ngspice.' > C:\Spice64\README.ngspice
-          echo 'The source code came from the pre-master-43 branch with head revision:' >> C:\Spice64\README.ngspice
-          echo >> C:\Spice64\README.ngspice
-          git log -1 --skip=1 >> C:\Spice64\README.ngspice
+          echo This binary build ngspice was built at https://github.com/gatk555/ngspice. > C:\Spice64\README.ngspice
+          echo The source code came from the pre-master-43 branch. >> C:\Spice64\README.ngspice
+          echo Install to C:\Spice64\. >> C:\Spice64\README.ngspice
       - uses: actions/checkout@v4
         with:
           repository: gatk555/test
@@ -103,25 +99,5 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Dev, Windows 64-bit
+          name: Ngspice pre-master-43, Windows X86-64
           path: C:\Spice64
-
-  build-macos-arm64:
-    runs-on: macos-12
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/ngspice
-          ref: gh_pm43
-      - name: Install Dependencies
-        run: |
-          brew install automake bison
-          brew uninstall --ignore-dependencies ncurses readline
-          for i in libxaw ncurses readline ; do
-            brew fetch --force --bottle-tag=arm64_monterey $i
-            where=`brew --cache --bottle-tag=arm64_monterey $i`
-            brew install $where
-          done
-          # compile_macos_gcc.sh expects this path.  Kludge it.
-          sudo mkdir -p /opt/X11/include
-          sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
