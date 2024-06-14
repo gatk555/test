@@ -29,8 +29,8 @@ jobs:
           ./autogen.sh
           cd release
           ../configure --host arm64 --disable-openmp --with-x --enable-xspice --enable-cider --enable-predictor --enable-osdi --enable-klu --with-readline=/usr/local/opt/readline CFLAGS="-arch arm64 -m64 -O0 -g -Wall -I/opt/X11/include/freetype2 -I/usr/local/opt/readline/include" CXXFLAGS="-m64 -O2 -arch arm64" LDFLAGS="-m64 -g -L/usr/local/opt/readline/lib"
-          make || true
-          if [ ! -f release/src/ngspice ]; then false; fi
+          make
+          if [ ! -f src/ngspice ]; then false; fi
       - name: Install arm64
         run: |
           cd release
