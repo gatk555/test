@@ -34,7 +34,7 @@ jobs:
           done
           echo Create README.ngspice
           echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > build/README.ngspice
-          echo 'The source code came from the pre-master-43 branch. > build/README.ngspice
+          echo 'The source code came from the pre-master-43 branch.' > build/README.ngspice
           echo 'Install to /usr/local.' > build/README.ngspice
       - name: Save X86_64
         uses: actions/upload-artifact@v4
