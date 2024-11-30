@@ -79,15 +79,10 @@ jobs:
           ref: ga_test
       - name: Build
         run: |
-          ./autogen.sh
-          mkdir release
-          cd release
-          ../configure --disable-readline --enable-cider prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
-          make
-          cd ..
+          ./compile_min.sh
           echo Create README.ngspice
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > C:\Spice64\README.ngspice
-          echo The source code came from the pre-master-44 branch. >> C:\Spice64\README.ngspice
+          echo The source code came from the ga_test branch. >> C:\Spice64\README.ngspice
           echo Install to C:\Spice64\. >> C:\Spice64\README.ngspice
           xcopy /i examples\xspice\ghdl C:\Spice64\examples
       - uses: actions/checkout@v4
