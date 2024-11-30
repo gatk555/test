@@ -42,11 +42,12 @@ jobs:
           msbuild %opt% visualc\vngspice.vcxproj
           xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
       - uses: actions/checkout@v4
-      - name: Add DLL
+      - name: Add DLL end examples
         shell: cmd
         run: |
           unzip libomp.zip
           copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
+          xcopy /i examples\xspice\ghdl C:\Spice64\examples
       - name: Save
         uses: actions/upload-artifact@v4
         with:
@@ -79,6 +80,7 @@ jobs:
           ref: ga_test
       - name: Build
         run: |
+          ./autogen.sh
           mkdir release
           cd release
           ../configure --enable-cider prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
@@ -91,11 +93,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/test
-      - name: Add DLL
+      - name: Add DLL and examples
         shell: cmd
         run: |
           unzip libomp.zip
           copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
+          xcopy /i examples\xspice\ghdl C:\Spice64\examples
       - name: Save
         uses: actions/upload-artifact@v4
         with:
