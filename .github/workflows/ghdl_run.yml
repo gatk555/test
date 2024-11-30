@@ -1,4 +1,4 @@
-name: Run VVP on Win64
+name: Run GHDL on Win64
 
 on:
   workflow_dispatch:
@@ -20,6 +20,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: win_dev.yml
+         workflow_conclusion: ""
          run_number: 33
          name: Dev, Windows 64-bit
          path: C:\Spice64
