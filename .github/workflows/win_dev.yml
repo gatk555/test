@@ -40,14 +40,13 @@ jobs:
           set config=console_release
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\vngspice.vcxproj
-          xcopy /s /i examples\xspice c:\Spice%suffix%\share\ngspice\examples\xspice
+          xcopy /i examples\xspice\ghdl C:\Spice64\examples
       - uses: actions/checkout@v4
-      - name: Add DLL end examples
+      - name: Add DLL
         shell: cmd
         run: |
           unzip libomp.zip
           copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-          xcopy /i examples\xspice\ghdl C:\Spice64\examples
       - name: Save
         uses: actions/upload-artifact@v4
         with:
@@ -90,15 +89,15 @@ jobs:
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > C:\Spice64\README.ngspice
           echo The source code came from the pre-master-44 branch. >> C:\Spice64\README.ngspice
           echo Install to C:\Spice64\. >> C:\Spice64\README.ngspice
+          xcopy /i examples\xspice\ghdl C:\Spice64\examples
       - uses: actions/checkout@v4
         with:
           repository: gatk555/test
-      - name: Add DLL and examples
+      - name: Add DLL
         shell: cmd
         run: |
           unzip libomp.zip
           copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-          xcopy /i examples\xspice\ghdl C:\Spice64\examples
       - name: Save
         uses: actions/upload-artifact@v4
         with:
