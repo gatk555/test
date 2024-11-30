@@ -82,7 +82,7 @@ jobs:
           ./autogen.sh
           mkdir release
           cd release
-          ../configure --enable-cider prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
+          ../configure --disable-readline --enable-cider prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
           make
           cd ..
           echo Create README.ngspice
