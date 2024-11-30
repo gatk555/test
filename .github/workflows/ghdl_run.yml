@@ -1,0 +1,45 @@
+name: Run VVP on Win64
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  win:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+      - uses: dawidd6/action-download-artifact@v3
+        with:
+         workflow: win_dev.yml
+         run_number: 33
+         name: Dev, Windows 64-bit
+         path: C:\Spice64
+      - uses: ghdl/setup-ghdl-ci@nightly
+        with:
+          backend: llvm
+      - name: Test
+        run: |
+          cd C:/Spice64//examples
+          ls
+          C:/Spice64/bin/ngspice_con -- ghnggen -top wrapper div3.vhd
+          C:/Spice64/bin/ngspice_con -b -r div3.raw div3.cir
+          C:/Spice64/bin/ngspice_con -- ghnggen -top timer_core 555.vhd
+          C:/Spice64/bin/ngspice_con -b -r 555.raw 555.cir
+          ls
+          mkdir results
+          mv *.raw results
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Results
+          path: C:/Spice64\examples\results
+
