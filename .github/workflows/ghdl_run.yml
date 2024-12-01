@@ -38,7 +38,7 @@ jobs:
           ls
           mkdir results
           mv *.raw results
-          ls /usr/bin/l^
+          ls /usr/bin/l*
           which clang
       - name: Save
         uses: actions/upload-artifact@v4
