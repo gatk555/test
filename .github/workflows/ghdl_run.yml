@@ -17,9 +17,6 @@ jobs:
         with:
           msystem: UCRT64
           update: true
-          install: >
-            base-devel
-            mingw-w64-x86_64-clang
       - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: win_dev.yml
@@ -41,6 +38,8 @@ jobs:
           ls
           mkdir results
           mv *.raw results
+          ls /usr/bin/l^
+          which clang
       - name: Save
         uses: actions/upload-artifact@v4
         with:
