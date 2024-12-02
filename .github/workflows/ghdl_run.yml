@@ -24,7 +24,7 @@ jobs:
         with:
          workflow: win_dev.yml
          workflow_conclusion: ""
-         run_number: 37
+         run_number: 38
          name: Dev, Windows 64-bit
          path: C:\Spice64
       - uses: ghdl/setup-ghdl-ci@nightly
