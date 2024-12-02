@@ -32,7 +32,7 @@ jobs:
           backend: llvm
       - name: Test
         run: |
-          ln -s /mingw64/bin/clang.exe /usr/bin/clang.exe
+          export PATH=$PATH:/mingw64/bin
           cd C:/Spice64//examples
           ls
           C:/Spice64/bin/ngspice -- ghnggen -top wrapper div3.vhd
@@ -42,7 +42,6 @@ jobs:
           ls
           mkdir results
           mv *.raw results
-          ls /mingw64/bin
       - name: Save
         uses: actions/upload-artifact@v4
         with:
