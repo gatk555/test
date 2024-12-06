@@ -177,6 +177,7 @@ fopen fh ghdlng.vpi
 if $fh < 0
     shell ghdl --vpi-compile clang -g -c $include $stem/ghdl_vpi.c -o ghdl_vpi.o
     if $windows
+        shell copy $base.dll $base.so
         shell ghdl --vpi-link clang ghdl_vpi.o -o ghdlng.vpi -lm -l$base
     else
         shell ghdl --vpi-link clang ghdl_vpi.o -o ghdlng.vpi -lm -lpthread
