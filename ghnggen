@@ -179,7 +179,7 @@ if $fh < 0
     if $windows
         set dll=".dll" so=".so"
         shell copy $base$dll $base$so
-        shell ghdl --vpi-link clang ghdl_vpi.o -o ghdlng.vpi -lm -l$base
+        shell ghdl --vpi-link clang ghdl_vpi.o -o ghdlng.vpi -lm -L. -l$base
     else
         shell ghdl --vpi-link clang ghdl_vpi.o -o ghdlng.vpi -lm -lpthread
     end
