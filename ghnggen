@@ -165,8 +165,7 @@ unset silent_fileio
 shell ghdl -a $argv
 strcmp bad "$shellstatus" "0"
 if $bad = 0
-   shell echo ghdl -e -shared "-Wl,ghdl_shim.o" $base
-   shell ghdl -e -shared "-Wl,$export_option" "-Wl,ghdl_shim.o" $base
+   shell ghdl -e -shared "-Wl,ghdl_shim.o" $base
 else
    quit
 end
