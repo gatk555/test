@@ -32,6 +32,7 @@ jobs:
           backend: llvm
       - name: Test
         run: |
+          cp ghnggen C:/Spice64/share/ngspice/scripts
           export PATH=$PATH:/mingw64/bin
           cd C:/Spice64//examples
           ls
@@ -46,5 +47,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Results
-          path: C:/Spice64\examples\results
+          path: C:\Spice64\examples\results
 
