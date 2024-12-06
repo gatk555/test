@@ -38,6 +38,7 @@ jobs:
           cd C:/Spice64//examples
           ls
           C:/Spice64/bin/ngspice -- ghnggen -top wrapper div3.vhd
+          ls
           C:/Spice64/bin/ngspice -b -r div3.raw div3.cir
           C:/Spice64/bin/ngspice -- ghnggen -top timer_core 555.vhd
           C:/Spice64/bin/ngspice -b -r 555.raw 555.cir
