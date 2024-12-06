@@ -30,6 +30,7 @@ jobs:
       - uses: ghdl/setup-ghdl-ci@nightly
         with:
           backend: llvm
+      - uses: actions/checkout@v4
       - name: Test
         run: |
           cp ghnggen C:/Spice64/share/ngspice/scripts
