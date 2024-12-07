@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
     defaults:
       run:
-        shell: cmd
+        shell: msys {}
     steps:
       - uses: msys2/setup-msys2@v2
         with:
@@ -31,15 +31,21 @@ jobs:
         with:
           backend: llvm
       - uses: actions/checkout@v4
-      - name: Test
+      - name: Test 1
         run: |
           copy ghnggen C:\Spice64\share\ngspice\scripts
+          export PATH=$PATH:/mingw64/bin
+          cd C:/Spice64/examples
+          ls
+          C:/Spice64/bin/ngspice -- ghnggen -top timer_core 555.vhd
+          ls
+      - name: Test 2
+        shell: cmd
+        run: |
           C:
-          cd \Spice64\examples
+          cd \Spice64/examples
           dir
-          C:\Spice64\bin\ngspice -- ghnggen -top timer_core 555.vhd
-          dir
-          C:\Spice64\bin\ngspice -b -r 555.raw 555.cir
+          ..\bin\ngspice -b -r 555.raw 555.cir
           dir
           md results
           copy *.raw results
