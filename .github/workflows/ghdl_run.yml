@@ -13,6 +13,7 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
+      - uses: ilammy/msvc-dev-cmd@v1
       - uses: msys2/setup-msys2@v2
         with:
           msystem: UCRT64
@@ -44,6 +45,10 @@ jobs:
         run: |
           C:
           cd \Spice64/examples
+          echo ============ timer_core.dll ===============
+          dumpbin /dependents timer_core.dll
+          echo ============ ghdlng.vpi ===============
+          dumpbin /dependents ghdlng.vpi
           dir
           ..\bin\ngspice -b -r 555.raw 555.cir
           dir
