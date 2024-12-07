@@ -47,6 +47,8 @@ jobs:
         shell: cmd
         run: |
           echo %GHDL%
+          dir D:\a\_temp\msys64\UCRT64
+          dir D:\a\_temp\msys64\UCRT64\lib
           C:
           cd \Spice64/examples
           echo ============ timer_core.dll ===============
