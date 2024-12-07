@@ -35,12 +35,12 @@ jobs:
         run: |
           cp ghnggen C:/Spice64/share/ngspice/scripts
           cp ghdl_shim.c C:/Spice64/share/ngspice/scripts/src
-          ls -l  C:/Spice64/share/ngspice/scripts/src
           cp 555.cir C:/Spice64/examples
           export PATH=$PATH:/mingw64/bin
           cd C:/Spice64/examples
           ls
           C:/Spice64/bin/ngspice -- ghnggen -top timer_core 555.vhd
+          ls
           C:/Spice64/bin/ngspice -b -r 555.raw 555.cir
           ls
           mkdir results

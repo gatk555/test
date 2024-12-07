@@ -221,11 +221,12 @@ void *run_ghdl(void *arg)
     if (pinfo->lib_argc >= 2 && pinfo->lib_argv[1][0]) // Explicit VPI file.
         file = pinfo->lib_argv[1];
     else
-        file = "./ghdlng.vpi";
+        file = "C:\\Spice64\\exaples\\ghdlng.vpi";
 
     /* The GHDL code is passed the VPI module name in a command argument. */
 
     snprintf(vpi_buf, sizeof vpi_buf, "--vpi=%s", file);
+printf("Request: %s\n", vpi_buf);
     new_argv[new_argc++] = vpi_buf;
     new_argv[new_argc] = NULL;
     ghdl_main(new_argc, (char **)new_argv);
