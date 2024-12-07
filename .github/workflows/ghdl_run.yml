@@ -34,6 +34,7 @@ jobs:
       - name: Test
         run: |
           cp ghnggen C:/Spice64/share/ngspice/scripts
+          cp ghdl_shim.c C:/Spice64/share/ngspice/scripts/src
           cp 555.cir C:/Spice64/examples
           export PATH=$PATH:/mingw64/bin
           cd C:/Spice64/examples
