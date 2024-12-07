@@ -34,12 +34,10 @@ jobs:
       - name: Test
         run: |
           cp ghnggen C:/Spice64/share/ngspice/scripts
+          cp 555.cir C:/Spice64/examples
           export PATH=$PATH:/mingw64/bin
-          cd C:/Spice64//examples
+          cd C:/Spice64/examples
           ls
-          C:/Spice64/bin/ngspice -- ghnggen -top wrapper div3.vhd
-          ls
-          C:/Spice64/bin/ngspice -b -r div3.raw div3.cir
           C:/Spice64/bin/ngspice -- ghnggen -top timer_core 555.vhd
           C:/Spice64/bin/ngspice -b -r 555.raw 555.cir
           ls
