@@ -43,7 +43,6 @@ jobs:
           echo ============ timer_core.dll ===============
           ldd timer_core.dll
           echo ============ ghdlng.vpi ===============
-          ldd ghdlng.vpi
       - name: Test 2
         shell: cmd
         run: |
