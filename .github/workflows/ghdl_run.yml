@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
     defaults:
       run:
-        shell: msys2 {0}
+        shell: cmd
     steps:
       - uses: msys2/setup-msys2@v2
         with:
@@ -33,18 +33,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test
         run: |
-          cp ghnggen C:/Spice64/share/ngspice/scripts
-          cp ghdl_shim.c C:/Spice64/share/ngspice/scripts/src
-          cp 555.cir C:/Spice64/examples
-          export PATH=$PATH:/mingw64/bin
-          cd C:/Spice64/examples
-          ls
-          C:/Spice64/bin/ngspice -- ghnggen -top timer_core 555.vhd
-          ls
-          C:/Spice64/bin/ngspice -b -r 555.raw 555.cir
-          ls
-          mkdir results
-          mv *.raw results
+          copy ghnggen C:\Spice64\share\ngspice\scripts
+          C:
+          cd \Spice64\examples
+          dir
+          C:\Spice64\bin\ngspice -- ghnggen -top timer_core 555.vhd
+          dir
+          C:\Spice64\bin\ngspice -b -r 555.raw 555.cir
+          dir
+          md results
+          copy *.raw results
       - name: Save
         uses: actions/upload-artifact@v4
         with:
