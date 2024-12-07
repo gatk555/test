@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
     defaults:
       run:
-        shell: msys {}
+        shell: msys2 {}
     steps:
       - uses: msys2/setup-msys2@v2
         with:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test 1
         run: |
-          copy ghnggen C:\Spice64\share\ngspice\scripts
+          cp ghnggen C:\Spice64\share\ngspice\scripts
           export PATH=$PATH:/mingw64/bin
           cd C:/Spice64/examples
           ls
