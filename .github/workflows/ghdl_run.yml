@@ -40,9 +40,14 @@ jobs:
           ls
           C:/Spice64/bin/ngspice -- ghnggen -top timer_core 555.vhd
           ls
+          echo ============ timer_core.dll ===============
+          ldd timer_core.dll
+          echo ============ ghdlng.vpi ===============
+          ldd ghdlng.vpi
       - name: Test 2
         shell: cmd
         run: |
+          echo %GHDL%
           C:
           cd \Spice64/examples
           echo ============ timer_core.dll ===============
