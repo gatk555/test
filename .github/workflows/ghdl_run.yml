@@ -39,10 +39,8 @@ jobs:
           cd C:/Spice64/examples
           ls
           C:/Spice64/bin/ngspice -- ghnggen -top timer_core 555.vhd
-          ls
-          echo ============ timer_core.dll ===============
-          ldd timer_core.dll
-          echo ============ ghdlng.vpi ===============
+          C:/Spice64/bin/ngspice -- ghnggen -top wrapper div3.vhd
+          ..\bin\ngspice -b -r div3.raw div3.cir
       - name: Test 2
         shell: cmd
         run: |
@@ -50,10 +48,6 @@ jobs:
           C:
           cd \Spice64/examples
           copy D:\a\_temp\msys64\UCRT64\lib\libghdlvpi.dll .
-          echo ============ timer_core.dll ===============
-          dumpbin /dependents timer_core.dll
-          echo ============ ghdlng.vpi ===============
-          dumpbin /dependents ghdlng.vpi
           dir
           ..\bin\ngspice -b -r 555.raw 555.cir
           dir
