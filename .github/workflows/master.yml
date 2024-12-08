@@ -28,7 +28,7 @@ jobs:
           echo Create README.ngspice
           echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > /usr/local/README.ngspice
           echo 'The source code came from the master branch.' >> /usr/local/README.ngspice
-          echo 'Install to /usr/local.' > build/README.ngspice
+          echo 'Install to /usr/local.' > /usr/local/README.ngspice
       - name: Save
         uses: actions/upload-artifact@v4
         with:
