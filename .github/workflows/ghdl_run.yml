@@ -49,7 +49,7 @@ jobs:
           cd \Spice64/examples
           copy D:\a\_temp\msys64\UCRT64\lib\libghdlvpi.dll .
           dir
-          ..\bin\ngspice -b -r 555.raw 555.cir
+          ../bin/ngspice -b -r 555.raw 555.cir
           dir
           md results
           copy *.raw results
