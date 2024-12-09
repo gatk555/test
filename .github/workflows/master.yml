@@ -1,77 +1,8 @@
 name: Build master branch
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '41 7 9 1,4,7,10 *'
 
 jobs:
-  build-lin64:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/ngspice
-          ref: master
-          fetch-depth: 0
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential git make bison flex libtool autoconf automake libx11-dev libxaw7-dev libreadline-dev libxmu6 libxft2 libxrender1 libfreetype6 libfontconfig
-      - name: Clean /usr/local
-        run: |
-          cd /usr
-          sudo mv local l
-          sudo mkdir -m777 local
-      - name: Build
-        run: |
-          ./compile_linux.sh
-          echo Create README.ngspice
-          echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > /usr/local/README.ngspice
-          echo 'The source code came from the master branch.' >> /usr/local/README.ngspice
-          echo 'Install to /usr/local.' > /usr/local/README.ngspice
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ngspice-43, Linux X86-64
-          path: /usr/local
-  build-macos-x86_64:
-    runs-on: macos-13
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/ngspice
-          ref: master
-      - name: Install Dependencies
-        run: |
-          brew install make automake bison
-          brew install libxaw
-          # compile_macos_gcc.sh expects this path.  Kludge it.
-          sudo mkdir -p /opt/X11/include
-          sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
-      - name: Build X86_64
-        run: |
-          PATH='/usr/local/opt/bison/bin:'$PATH
-          ./compile_macos_clang.sh || true # Will fail to install
-          if [ ! -f release/src/ngspice ]; then false; fi
-      - name: Install X86_64
-        run: |
-          cd release
-          sudo make install
-          cd ..
-          mkdir build
-          for i in bin lib share ; do
-            mkdir -p build/$i
-            cp -r /usr/local/$i/ngspice build/$i/
-          done
-          echo Create README.ngspice
-          echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > build/README.ngspice
-          echo 'The source code came from the master branch.' > build/README.ngspice
-          echo 'Install to /usr/local.' > build/README.ngspice
-      - name: Save X86_64
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ngspice-43, Macos X86_64
-          path: build
   build-win_msys:
     runs-on: windows-latest
     defaults:
@@ -80,11 +11,11 @@ jobs:
     steps:
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: ucrt64
+          msystem: MINGW64
           update: true
           install: >
             base-devel
-            mingw-w64-ucrt-x86_64-toolchain
+            mingw-w64-x86_64-toolchain
             autotools
       - name: Flex and Bison
         shell: cmd
@@ -115,6 +46,6 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Ngspice-43, Windows 64-bit with MSYS and UCRT64
+          name: Ngspice-43, Windows 64-bit with MSYS and MINGW64
           path: C:\Spice64
 
