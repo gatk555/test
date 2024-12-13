@@ -22,6 +22,7 @@ jobs:
       - name: Build Arm64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
+          chmod a+x compile_macos_clang_M2.sh
           ./compile_macos_clang_M2.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install Arm64
