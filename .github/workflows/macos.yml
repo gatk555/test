@@ -17,6 +17,8 @@ jobs:
           # compile_macos_clang.sh expects this path.  Kludge it.
           sudo mkdir -p /opt/X11/include
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
+          find /usr/local -name readline.h
+          false
       - name: Build Arm64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
