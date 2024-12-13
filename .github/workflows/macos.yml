@@ -32,15 +32,13 @@ jobs:
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice build/$i/
           done
-          echo Copying the examples.
-          cp -r examples/xspice build/share/ngspice
       - name: Save X86_64
         uses: actions/upload-artifact@v4
         with:
           name: Test Macos X86_64
           path: build
   build-macos-arm64:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
         with:
@@ -68,8 +66,6 @@ jobs:
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice build/$i/
           done
-          echo Copying the examples.
-          cp -r examples/xspice build/share/ngspice
       - name: Save Arm64
         uses: actions/upload-artifact@v4
         with:
