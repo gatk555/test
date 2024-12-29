@@ -1,0 +1,42 @@
+name: Run GHDL on MacOS X64
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  mac:
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: dawidd6/action-download-artifact@v3
+        with:
+         workflow: macos.yml
+         workflow_conclusion: ""
+         run_number: 14
+         name: build-macos-x86_64
+         path: /usr/local
+      - uses: ghdl/setup-ghdl-ci@nightly
+        with:
+          backend: llvm
+      - uses: actions/checkout@v4
+      - name: Test 1
+        run: |
+          ls
+          ngspice -- ghnggen -top timer_core 555.vhd
+          ngspice -- ghnggen -top wrapper div3.vhd
+          ngspice -b -r div3.raw div3.cir
+      - name: Test 2
+        run: |
+          echo $GHDL
+          ngspice -b -r 555.raw 555.cir
+          ls
+          md results
+          copy *.raw results
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Results
+          path: results
+
