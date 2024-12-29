@@ -15,7 +15,7 @@ jobs:
          workflow: macos.yml
          workflow_conclusion: ""
          run_number: 14
-         name: build-macos-x86_64
+         name: Test Macos X86_64
          path: /usr/local
       - uses: ghdl/setup-ghdl-ci@nightly
         with:
