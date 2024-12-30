@@ -31,21 +31,13 @@ jobs:
       - name: Build
         run: |
           ./compile_min.sh
+          ldd release/src/ngspice.exe || true
           echo Create README.ngspice
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > C:\Spice64\README.ngspice
           echo The source code came from the master branch. >> C:\Spice64\README.ngspice
           echo Install to C:\Spice64\. >> C:\Spice64\README.ngspice
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/test
-      - name: Add DLL
+      - name: Probe requirements
         shell: cmd
         run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ngspice-43, Windows 64-bit with MSYS and MINGW64
-          path: C:\Spice64
+          dumpbin /dependents c:\spice64\bin\ngspice.exe
 
