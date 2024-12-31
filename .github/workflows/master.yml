@@ -32,10 +32,10 @@ jobs:
         run: |
           ./compile_min.sh
           ldd release/src/ngspice.exe || true
-          cp /mingw64/bin/libgomp-1.dll /C/Spice64/bin
-          cp /mingw64/bin/libstdc++-6.dll /C/Spice64/bin
-          cp /mingw64/bin/libgcc_s_seh-1.dll /C/Spice64/bin
-          cp /mingw64/bin/libwinpthread-1.dll /C/Spice64/bin
+          cp /ucrt64/bin/libgomp-1.dll /C/Spice64/bin
+          cp /ucrt64/bin/libstdc++-6.dll /C/Spice64/bin
+          cp /ucrt64/bin/libgcc_s_seh-1.dll /C/Spice64/bin
+          cp /ucrt64/bin/libwinpthread-1.dll /C/Spice64/bin
           echo Create README.ngspice
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > /C/Spice64/README.ngspice
           echo The source code came from the master branch. >> /C/Spice64/README.ngspice
@@ -43,6 +43,6 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Ngspice-44, Windows 64-bit with MSYS and MINGW64
+          name: Ngspice-44, Windows 64-bit with MSYS and UCRT64
           path: C:\Spice64
 
