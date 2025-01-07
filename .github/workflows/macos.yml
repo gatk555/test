@@ -3,13 +3,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-macos-arm64:
-    runs-on: macos-14
+  build-macos-X86_64:
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: ga_test
+          ref: ga_dev
       - name: Install Dependencies
         run: |
           brew install make automake bison
@@ -19,13 +19,13 @@ jobs:
           sudo mkdir -p /opt/X11/include
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
           ls /opt/homebrew/Cellar/readline/8.2.13
-      - name: Build Arm64
+      - name: Build X86_64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
-          chmod a+x compile_macos_clang_M2.sh
-          ./compile_macos_clang_M2.sh || true # Will fail to install
+          chmod a+x compile_macos_clang.sh
+          ./compile_macos_clang.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
-      - name: Install Arm64
+      - name: Install X86_64
         run: |
           cd release
           sudo make install
@@ -35,8 +35,8 @@ jobs:
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice build/$i/
           done
-      - name: Save Arm64
+      - name: Save X86_64
         uses: actions/upload-artifact@v4
         with:
-          name: Test Macos Arm64
+          name: Test Macos X86_64
           path: build
