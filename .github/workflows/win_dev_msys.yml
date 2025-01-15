@@ -33,7 +33,12 @@ jobs:
           ref: ga_dev
       - name: Build
         run: |
-          ./compile_min.sh
+          ./autogen.sh
+          mkdir release
+          cd release
+          ../configure --with-wingui=no  prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
+          make
+          make install
           ldd release/src/ngspice.exe || true
       - uses: actions/checkout@v4
       - name: Add DLL
