@@ -13,7 +13,7 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install libxaw libatomic_ops
-      - uses: dawidd6/action-download-artifact@v3
+      - uses: dawidd6/action-download-artifact@v7
         with:
          workflow: macos.yml
          run_number: 28
@@ -22,7 +22,7 @@ jobs:
       - name: Test 0
         run: |
           otool -L /usr/local/bin/ngspice
-      - uses: dawidd6/action-download-artifact@v3
+      - uses: dawidd6/action-download-artifact@v7
         with:
          repo: ghdl/ghdl
          workflow: Pipeline.yml
