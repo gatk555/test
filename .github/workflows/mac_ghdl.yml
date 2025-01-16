@@ -26,11 +26,12 @@ jobs:
         with:
          repo: ghdl/ghdl
          workflow: Pipeline.yml
-         run_number: 8
+         run_number: 468
          name: ghdl-macos-13-x86_64-llvm
          path: /usr/local
       - name: Untar GHDL
         run: |
+          cd /usr/local
           tar xvf __pyTooling_upload_artifact__.tar
           ghdl help
       - uses: actions/checkout@v4
