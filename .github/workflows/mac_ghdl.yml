@@ -21,7 +21,7 @@ jobs:
          path: /usr/local
       - name: Test 0
         run: |
-          etool -L /usr/local/bin/ngspice
+          otool -L /usr/local/bin/ngspice
       - uses: dawidd6/action-download-artifact@v3
         with:
          repo: ghdl/ghdl
