@@ -10,16 +10,29 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - name: Install Dependencies
+        run: |
+          brew install libxaw libatomic_ops
       - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: macos.yml
-         workflow_conclusion: ""
-         run_number: 14
+         run_number: 28
          name: Test Macos X86_64
          path: /usr/local
-      - uses: ghdl/setup-ghdl-ci@nightly
+      - name: Test 0
+        run: |
+          etool -L /usr/local/bin/ngspice
+      - uses: dawidd6/action-download-artifact@v3
         with:
-          backend: llvm
+         repo: ghdl/ghdl
+         workflow: Pipeline.yml
+         run_number: 8
+         name: ghdl-macos-13-x86_64-llvm
+         path: /usr/local
+      - name: Untar GHDL
+        run: |
+          tar xvf __pyTooling_upload_artifact__.tar
+          ghdl help
       - uses: actions/checkout@v4
       - name: Test 1
         run: |
