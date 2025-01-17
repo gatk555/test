@@ -19,9 +19,6 @@ jobs:
          run_number: 28
          name: Test Macos X86_64
          path: /usr/local
-      - name: Test 0
-        run: |
-          otool -L /usr/local/bin/ngspice
       - uses: dawidd6/action-download-artifact@v7
         with:
          repo: ghdl/ghdl
@@ -29,9 +26,12 @@ jobs:
          run_number: 468
          name: ghdl-macos-13-x86_64-llvm
          path: /usr/local
+         skip_unpack: true
       - name: Untar GHDL
         run: |
           cd /usr/local
+          ls
+          unzip ghdl-macos-13-x86_64-llvm.zip
           tar xvf __pyTooling_upload_artifact__.tar
           ghdl help
       - uses: actions/checkout@v4
