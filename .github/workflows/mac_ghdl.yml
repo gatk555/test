@@ -35,6 +35,7 @@ jobs:
           cd /usr/local
           tar xvf $t/__pyTooling_upload_artifact__.tar
           ghdl help
+          chmod a+x bin/ngspice
       - uses: actions/checkout@v4
       - name: Test 1
         run: |
