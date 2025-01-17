@@ -25,14 +25,15 @@ jobs:
          workflow: Pipeline.yml
          run_number: 468
          name: ghdl-macos-13-x86_64-llvm
-         path: /usr/local
+         path: .
          skip_unpack: true
       - name: Untar GHDL
         run: |
-          cd /usr/local
           ls
           unzip ghdl-macos-13-x86_64-llvm.zip
-          tar xvf __pyTooling_upload_artifact__.tar
+          t=`pwd`
+          cd /usr/local
+          tar xvf $t/__pyTooling_upload_artifact__.tar
           ghdl help
       - uses: actions/checkout@v4
       - name: Test 1
