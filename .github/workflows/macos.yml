@@ -33,6 +33,9 @@ jobs:
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice build/$i/
           done
+          mkdir build/share/ngspice/examples  
+          cp -r examples/xspice/ghdl build/share/ngspice/examples
+          ls build/share/ngspice/examples
       - name: Save X86_64
         uses: actions/upload-artifact@v4
         with:
