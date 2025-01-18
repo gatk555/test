@@ -43,7 +43,7 @@ jobs:
           sh autoconf.sh
           ./configure --host=x86_64-w64-mingw32 --enable-libvvp --prefix=C:\\ivl
           mingw32-make -j$(nproc) check
-          sudo make install
+          make install
       - name: Install
         run: make install
       - name: Test
