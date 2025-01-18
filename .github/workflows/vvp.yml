@@ -46,10 +46,12 @@ jobs:
           make install
       - name: Install
         run: make install
-      - name: Test
-        run: ./.github/test.sh
       - name: Save
         uses: actions/upload-artifact@v4
         with:
           name: Iverilog with libvvp, Windows 64-bit
           path: C:\ivl
+      - name: Test
+        run: |
+          export PATH=$PATH:/c/ivl:/c/ivl/bin
+          ./.github/test.sh
