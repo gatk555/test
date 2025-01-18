@@ -12,14 +12,14 @@ jobs:
       run:
         shell: msys2 {0}
     env:
-      MINGW_ARCH: MINGW64
+      MINGW_ARCH: CRTL64
     steps:
       - name: Tweak git
         shell: bash
         run: git config --global core.autocrlf input
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: MINGW64
+          msystem: UCRT64
           update: true
           install: >
             autotools
@@ -29,8 +29,8 @@ jobs:
             git
             gperf
             python-pip
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-make
+            mingw-ucrt64-x86_64-toolchain
+            mingw-ucrt64-x86_64-make
       - uses: actions/setup-python@v4
         with:
           python-version: '>=3.5'
@@ -47,15 +47,15 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Iverilog with libvvp, Windows 64-bit
+          name: Iverilog with libvvp, Windows 64-bit (UCRT64)
           path: C:\ivl
       - name: Package
         run: |
           cd msys2
           makepkg-mingw --noconfirm --noprogressbar -sCLf
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
-          name: Iverilog with libvvp, MSYS package for Windows 64-bit
+          name: Iverilog with libvvp, MSYS/UCRT64 package for Windows 64-bit
           path: msys2/*.zst
       - name: Test
         run: |
