@@ -54,7 +54,7 @@ jobs:
           makepkg-mingw --noconfirm --noprogressbar -sCLf
       - uses: actions/upload-artifact@v4
         with:
-          name: Iverilog with libvvp, MSYS/UCRT64 package for Windows 64-bit
+          name: Iverilog with libvvp, MSYS (UCRT64) package for Windows 64-bit
           path: msys2/*.zst
       - name: Test
         run: |
