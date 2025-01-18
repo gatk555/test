@@ -49,16 +49,16 @@ jobs:
         with:
           name: Iverilog with libvvp, Windows 64-bit
           path: C:\ivl
-    - name: Package
-      run: |
-        cd msys2
-        makepkg-mingw --noconfirm --noprogressbar -sCLf
-    - uses: actions/upload-artifact@v3
-      with:
-        name: Iverilog with libvvp, MSYS package for Windows 64-bit
-        path: msys2/*.zst
+      - name: Package
+        run: |
+          cd msys2
+          makepkg-mingw --noconfirm --noprogressbar -sCLf
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Iverilog with libvvp, MSYS package for Windows 64-bit
+          path: msys2/*.zst
       - name: Test
         run: |
           export PATH=$PATH:/c/ivl/bin
           cp /c/ivl/lib/libvvp.DLL /c/ivl/bin
-          #./.github/test.sh
+          echo Do not run./.github/test.sh
