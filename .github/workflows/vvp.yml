@@ -12,7 +12,7 @@ jobs:
       run:
         shell: msys2 {0}
     env:
-      MINGW_ARCH: CRTL64
+      MINGW_ARCH: UCRT64
     steps:
       - name: Tweak git
         shell: bash
