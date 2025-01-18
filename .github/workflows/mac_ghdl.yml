@@ -49,7 +49,7 @@ jobs:
           cd /usr/local/share/ngspice/examples
           ngspice -b -r 555.raw 555.cir
           ls
-          md results
+          mkdir results
           copy *.raw results
       - name: Save
         uses: actions/upload-artifact@v4
