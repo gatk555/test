@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test 1
         run: |
-          cp div3.cir /usr/local/share/ngspice/examples
+          cp ghnggen /usr/local/share/ngspice/scripts
           cd /usr/local/share/ngspice/examples
           ls
           ngspice -- ghnggen -top timer_core 555.vhd
