@@ -41,7 +41,9 @@ jobs:
           cd /usr/local/share/ngspice/examples
           ls
           ngspice -- ghnggen -top timer_core 555.vhd
+          mv timer_core.dylib timer_core.so
           ngspice -- ghnggen -top wrapper div3.vhd
+          mv wrapper.dylib wrapper.so
           ngspice -b -r div3.raw div3.cir
       - name: Test 2
         run: |
@@ -50,7 +52,7 @@ jobs:
           ngspice -b -r 555.raw 555.cir
           ls
           mkdir results
-          copy *.raw results
+          cp *.raw results
       - name: Save
         uses: actions/upload-artifact@v4
         with:
