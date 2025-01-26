@@ -37,8 +37,7 @@ jobs:
           export PATH=$PATH:/mingw64/bin
           cd C:/Spice64/examples
           ls
-          C:/Spice64/bin/ngspice ghnggen adc.vhd
-          C:/Spice64/bin/ngspice -- ghnggen mc.vhd
+          .\build
           ../bin/ngspice -b -r adc.raw adc.cir
       - name: Test 2
         shell: cmd

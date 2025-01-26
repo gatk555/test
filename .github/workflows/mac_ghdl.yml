@@ -39,8 +39,7 @@ jobs:
         run: |
           cd /usr/local/share/ngspice/examples
           ls
-          ngspice ghnggen adc.vhd
-          ngspice ghnggen mc.vhd
+          ./build
           ngspice -b -r adc.raw adc.cir
       - name: Test 2
         run: |
