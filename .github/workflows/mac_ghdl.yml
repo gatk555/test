@@ -38,7 +38,8 @@ jobs:
       - name: Test 1
         run: |
           cd /usr/local/share/ngspice/examples
-          ls
+          ls -l
+          chamod a_x clean build
           ./build
           ngspice -b -r adc.raw adc.cir
       - name: Test 2
@@ -49,6 +50,8 @@ jobs:
           ls
           mkdir results
           cp *.raw results
+          ./clean
+          ls
       - name: Save
         uses: actions/upload-artifact@v4
         with:
