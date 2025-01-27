@@ -56,14 +56,15 @@ jobs:
           cd /C/Spice64/examples/ghdl
           ls
           ./build
+          ls
           ngspice -b -r adc.raw adc.cir
       - name: Test 2
         shell: cmd
         run: |
           echo %GHDL%
           C:
-          set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
           cd \Spice64/examples\ghdl
+          set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
           copy D:\a\_temp\msys64\UCRT64\lib\libghdlvpi.dll .
           dir
           ngspice -b -r mc.raw mc.cir
