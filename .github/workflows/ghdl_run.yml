@@ -43,7 +43,7 @@ jobs:
         run: |
           ls
           t=`pwd`
-          md /c/ghdl
+          mkdir /c/ghdl
           cd /c/ghdl
           tar xvf $t/__pyTooling_upload_artifact__.tar
           bin/ghdl help
