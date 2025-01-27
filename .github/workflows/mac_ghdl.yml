@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test 1
         run: |
-          cd /usr/local/share/ngspice/examples
+          cd /usr/local/share/ngspice/examples/ghdl
           ls -l
           chmod a+x clean build
           ./build
@@ -45,7 +45,7 @@ jobs:
       - name: Test 2
         run: |
           echo $GHDL
-          cd /usr/local/share/ngspice/examples
+          cd /usr/local/share/ngspice/examples/ghdl
           ngspice -b -r mc.raw mc.cir
           ls
           mkdir results
@@ -56,4 +56,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Results
-          path: /usr/local/share/ngspice/examples/results
+          path: /usr/local/share/ngspice/examples/ghdl/results

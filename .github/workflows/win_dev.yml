@@ -40,7 +40,10 @@ jobs:
           set config=console_release
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\vngspice.vcxproj
-          xcopy /i examples\xspice\ghdl C:\Spice64\examples
+          md C:\Spice64\examples\ghdl
+          xcopy /i examples\xspice\ghdl C:\Spice64\examples\ghdl
+          md C:\Spice64\examples\verilator
+          xcopy /i examples\xspice\verilator C:\Spice64\examples\verilator
       - uses: actions/checkout@v4
       - name: Add DLL
         shell: cmd
@@ -84,7 +87,8 @@ jobs:
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > C:/Spice64/README.ngspice
           echo The source code came from the ga_test branch. >> C:/Spice64/README.ngspice
           echo Install to C:/Spice64\. >> C:/Spice64/README.ngspice
-          cp -r examples/xspice/ghdl C:/Spice64/examples
+          cp -r examples/xspice/ghdl /c/Spice64/examples
+          cp -r examples/xspice/verilator/ /c/Spice64/examples
       - uses: actions/checkout@v4
         with:
           repository: gatk555/test
