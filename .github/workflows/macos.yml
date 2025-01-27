@@ -33,9 +33,10 @@ jobs:
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice build/$i/
           done
-          mkdir build/share/ngspice/examples  
-          cp -r examples/xspice/ghdl/ build/share/ngspice/examples
-          cp -r examples/xspice/verilator/ build/share/ngspice/examples
+          mkdir -p build/share/ngspice/examples/ghdl
+          cp examples/xspice/ghdl/* build/share/ngspice/examples/ghdl
+          mkdir -p build/share/ngspice/examples/verilator
+          cp examples/xspice/verilator/* build/share/ngspice/examples/verilator
           ls -R build/share/ngspice/examples
       - name: Save X86_64
         uses: actions/upload-artifact@v4
