@@ -37,7 +37,7 @@ jobs:
       - name: Untar GHDL
         run: |
           ls
-          unzip ghdl-MSYS2-ucrt64-llvm.zip
+          pkunzip ghdl-MSYS2-ucrt64-llvm.zip
           t=`pwd`
           md /c/ghdl
           cd /c/ghdl
