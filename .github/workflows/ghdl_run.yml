@@ -34,10 +34,14 @@ jobs:
          name: ghdl-MSYS2-ucrt64-llvm
          path: .
          skip_unpack: true
+      - name: Unzip GHDL
+        shell: cmd
+        run: |
+          7z x ghdl-MSYS2-ucrt64-llvm.zip
+          dir
       - name: Untar GHDL
         run: |
           ls
-          7z x ghdl-MSYS2-ucrt64-llvm.zip
           t=`pwd`
           md /c/ghdl
           cd /c/ghdl
