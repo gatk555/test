@@ -49,14 +49,15 @@ jobs:
           cd /c/ghdl
           tar xvf $t/__pyTooling_upload_artifact__.tar
           bin/ghdl help
-      - uses: actions/checkout@v4
+      - name: COPY libghdlvpi.dll
+        run: |
+          copy D:\a\_temp\msys64\UCRT64\lib\libghdlvpi.dll .
       - name: Test 1
         run: |
           export PATH=$PATH:/mingw64/bin:/c/spice64/bin:/c/ghdl/bin
           cd /C/Spice64/examples/ghdl
           ls
           ./build
-          cp /d/a/_temp/msys64/UCRT64/lib/libghdlvpi.dll .
           ls
           ngspice -b -r adc.raw adc.cir
       - name: Test 2
