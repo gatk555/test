@@ -50,6 +50,7 @@ jobs:
           tar xvf $t/__pyTooling_upload_artifact__.tar
           bin/ghdl help
       - name: COPY libghdlvpi.dll
+        shell: cmd
         run: |
           copy D:\a\_temp\msys64\UCRT64\lib\libghdlvpi.dll .
       - name: Test 1
