@@ -21,6 +21,8 @@ jobs:
           install: >
             base-devel
             mingw-w64-x86_64-clang
+            mingw-w64-ucrt-x86_64-gcc-ada
+            mingw-w64-ucrt-x86_64-llvm-libs
       - uses: dawidd6/action-download-artifact@v3
         with:
          workflow: win_dev.yml
@@ -60,7 +62,7 @@ jobs:
         run: |
           echo %GHDL%
           C:
-          set PATH=%PATH%:c:\spice64\bin:c:\ghdl\bin
+          set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
           cd \Spice64/examples\ghdl
           copy D:\a\_temp\msys64\UCRT64\lib\libghdlvpi.dll .
           dir
