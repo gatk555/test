@@ -60,7 +60,7 @@ jobs:
         run: |
           echo %GHDL%
           C:
-          export PATH=%PATH%:c:\spice64\bin:c:\ghdl\bin
+          set PATH=%PATH%:c:\spice64\bin:c:\ghdl\bin
           cd \Spice64/examples\ghdl
           copy D:\a\_temp\msys64\UCRT64\lib\libghdlvpi.dll .
           dir
@@ -74,5 +74,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Results
-          path: C:\Spice64\examples\results\ghdl
+          path: C:\Spice64\examples\ghdl\results
 
