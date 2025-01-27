@@ -18,23 +18,12 @@ jobs:
          workflow: macos.yml
          name: Test Macos X86_64
          path: /usr/local
-      - uses: dawidd6/action-download-artifact@v7
+      - uses: dawidd6/action-download-artifact@v8
         with:
          repo: ghdl/ghdl
          workflow: Pipeline.yml
          name: ghdl-macos-13-x86_64-llvm
-         path: .
-         skip_unpack: true
-      - name: Untar GHDL
-        run: |
-          ls
-          unzip ghdl-macos-13-x86_64-llvm.zip
-          t=`pwd`
-          cd /usr/local
-          tar xvf $t/__pyTooling_upload_artifact__.tar
-          ghdl help
-          chmod a+x bin/ngspice
-      - uses: actions/checkout@v4
+         path: /usr/local
       - name: Test 1
         run: |
           cd /usr/local/share/ngspice/examples/ghdl
