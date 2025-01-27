@@ -53,7 +53,7 @@ jobs:
           export PATH=$PATH:/mingw64/bin:/c/spice64/bin:/c/ghdl/bin
           cd /C/Spice64/examples/ghdl
           ls
-          .\build
+          ./build
           ngspice -b -r adc.raw adc.cir
       - name: Test 2
         shell: cmd
@@ -68,7 +68,7 @@ jobs:
           dir
           md results
           copy *.raw results
-          ./clean
+          .\clean
           dir
       - name: Save
         uses: actions/upload-artifact@v4
