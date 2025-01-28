@@ -23,7 +23,7 @@ jobs:
          repo: ghdl/ghdl
          workflow: Pipeline.yml
          name: ghdl-macos-13-x86_64-llvm
-         path: /usr/local
+         path: .
          use_unzip: true
       - name: Test 1
         run: |
