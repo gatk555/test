@@ -54,7 +54,7 @@ jobs:
           export PATH=$PATH:/mingw64/bin:/c/spice64/bin:/c/ghdl/bin
           cd /C/Spice64/examples/ghdl
           ls
-          ./build
+          ngspice ghnggen adc.vhd
           ls
           cp /c/ghdl/lib/libghdlvpi.dll .
           ngspice -b -r adc.raw adc.cir
@@ -65,9 +65,9 @@ jobs:
           C:
           cd \Spice64/examples\ghdl
           set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
+          ngspice ghnggen adc.vhd
           dir
           ngspice -b -r mc.raw mc.cir
-          dir
           md results
           copy *.raw results
           .\clean
