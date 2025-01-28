@@ -34,7 +34,7 @@ jobs:
         run: |
           cd /usr/local/share/ngspice/examples/ghdl
           ls -l
-          chmod a+x clean build
+          chmod a+x clean build /usr/local/bin/ngspice
           ./build
           ngspice -b -r adc.raw adc.cir
       - name: Test 2
