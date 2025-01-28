@@ -59,18 +59,13 @@ jobs:
           ls
           cp /c/ghdl/lib/libghdlvpi.dll .
           ngspice -b -r adc.raw adc.cir
+          ngspice -b -r mc.raw mc.cir
+          mkdir results
+          cp *.raw results
       - name: Test 2
         shell: cmd
         run: |
-          C:
-          cd \Spice64\examples\ghdl
-          set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
-          dir
-          ngspice -b -r mc.raw mc.cir
-          md results
-          copy *.raw results
-          .\clean
-          dir
+          dir c:\spice64\share\ngspice\scripts
       - name: Save
         uses: actions/upload-artifact@v4
         with:

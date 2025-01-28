@@ -13,7 +13,7 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install libxaw libatomic_ops
-      - uses: dawidd6/action-download-artifact@v7
+      - uses: dawidd6/action-download-artifact@v8
         with:
          workflow: macos.yml
          name: Test Macos X86_64
@@ -25,6 +25,11 @@ jobs:
          name: ghdl-macos-13-x86_64-llvm
          path: .
          use_unzip: true
+      - name: Expand tar
+        run: |
+          h=`pwd`
+          cd /usr/local
+          tar xvf $h/*.tar
       - name: Test 1
         run: |
           cd /usr/local/share/ngspice/examples/ghdl
@@ -34,7 +39,6 @@ jobs:
           ngspice -b -r adc.raw adc.cir
       - name: Test 2
         run: |
-          echo $GHDL
           cd /usr/local/share/ngspice/examples/ghdl
           ngspice -b -r mc.raw mc.cir
           ls
