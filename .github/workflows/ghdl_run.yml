@@ -55,6 +55,7 @@ jobs:
           cd /C/Spice64/examples/ghdl
           ls
           ngspice ghnggen adc.vhd
+          ngspice ghnggen mc.vhd
           ls
           cp /c/ghdl/lib/libghdlvpi.dll .
           ngspice -b -r adc.raw adc.cir
@@ -64,7 +65,6 @@ jobs:
           C:
           cd \Spice64\examples\ghdl
           set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
-          ngspice ghnggen mc.vhd
           dir
           ngspice -b -r mc.raw mc.cir
           md results
