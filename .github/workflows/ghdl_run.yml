@@ -61,9 +61,8 @@ jobs:
       - name: Test 2
         shell: cmd
         run: |
-          echo %GHDL%
           C:
-          cd \Spice64/examples\ghdl
+          cd \Spice64\examples\ghdl
           set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
           ngspice ghnggen mc.vhd
           dir
