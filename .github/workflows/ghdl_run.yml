@@ -65,7 +65,7 @@ jobs:
           C:
           cd \Spice64/examples\ghdl
           set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
-          ngspice ghnggen adc.vhd
+          ngspice ghnggen mc.vhd
           dir
           ngspice -b -r mc.raw mc.cir
           md results
