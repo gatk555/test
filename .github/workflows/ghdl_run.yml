@@ -58,8 +58,8 @@ jobs:
           ngspice ghnggen mc.vhd
           ls
           cp /c/ghdl/lib/libghdlvpi.dll .
-          ngspice -b -r adc.raw adc.cir
           ngspice -b -r mc.raw mc.cir
+          ngspice -b -r adc.raw adc.cir
           mkdir results
           cp *.raw results
       - name: Test 2
