@@ -68,7 +68,7 @@ jobs:
         run: |
           c:
           cd \spice64\examples\ghdl
-          set PATH=%PATH%;c:spice64\bin;c:ghdl\bin
+          set PATH=%PATH%;c:\spice64\bin;c:\ghdl\bin
           ./build
           dir
           ngspice -b -r adc.raw adc.cir
