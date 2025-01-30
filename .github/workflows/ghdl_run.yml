@@ -66,6 +66,7 @@ jobs:
       - name: Test 2
         shell: cmd
         run: |
+          c:
           cd \spice64\examples\ghdl
           set PATH=%PATH%;c:spice64\bin;c:ghdl\bin
           ./build
