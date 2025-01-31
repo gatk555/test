@@ -11,6 +11,7 @@ jobs:
           ref: master
       - name: Install dependencies
         run: |
+          brew update
           brew install bison
           pip3 install docopt
       - name: Build, check and install
