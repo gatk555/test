@@ -22,8 +22,9 @@ jobs:
           mkdir release
           chmod a+x ./compile_macos_clang_M2.sh
           ./compile_macos_clang_M2.sh || true
+          ls
           mkdir build
-          cp config.log configure build
+          cp configure build
       - name: Save arm64
         uses: actions/upload-artifact@v4
         with:
