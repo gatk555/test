@@ -17,7 +17,8 @@ jobs:
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
           sh autoconf.sh
           ./configure --enable-libvvp
-          make -j$(nproc) check
+          make -j$(nproc)
+          LD_LIBRARY_PATH=./vvp make check
           sudo make install
       - name: Test
         run: ./.github/test.sh
