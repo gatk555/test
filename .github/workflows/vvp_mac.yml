@@ -12,8 +12,6 @@ jobs:
       - name: Install dependencies
         run: |
           brew install bison
-          brew install pipx
-          pipx install docopt
       - name: Build, check and install
         run: |
           export PATH="/usr/local/opt/bison/bin:$PATH"
