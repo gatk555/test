@@ -1,4 +1,4 @@
-name: test VVP - Mac
+name: Build iverilog - Mac
 on:
   workflow_dispatch:
 jobs:
@@ -7,8 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: gatk555/iverilog
-          ref: libvvp
+          repository: steveicarus/iverilog
+          ref: master
       - name: Install dependencies
         run: |
           brew install bison
@@ -22,3 +22,16 @@ jobs:
           sudo make install
       - name: Test
         run: ./.github/test.sh
+      - name: Extract
+        run: |
+          mkdir -p save/bin save/lib save/include save/man/man1
+          mv /usr/local/bin/iveri* save/bin
+          mv /usr/local/bin/vvp save/bin
+          mv /usr/local/include/iverilog save/include
+          for i in ivl libvpi.a libvvp.so libveriuser.a ; do mv /usr/local/lib/$i save/lib ; done
+          for i in iverilog.1 iverilog-vpi.1 vvp.1 ; do mv /usr/local/man/man1/$i save/man/man1 ; done
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Icarus Verilog with libvvp, MacOS/ARM64
+          path: save
