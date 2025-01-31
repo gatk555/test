@@ -20,6 +20,7 @@ jobs:
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
           mkdir release
+          chmod a+x ./compile_macos_clang_M2.sh
           ./compile_macos_clang_M2.sh
           if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install arm64
