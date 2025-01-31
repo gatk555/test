@@ -21,10 +21,17 @@ jobs:
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
           mkdir release
           chmod a+x ./compile_macos_clang_M2.sh
-          ./compile_macos_clang_M2.sh
-          if [ ! -f release/src/ngspice ]; then false; fi
+          ./compile_macos_clang_M2.sh || true
+          mkdir build
+          cp config.log configure build
+      - name: Save arm64
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ngspice pre-master-45, Macos arm64
+          path: build
       - name: Install arm64
         run: |
+          if [ ! -f release/src/ngspice ]; then false; fi
           cd ..
           mkdir build
           for i in bin lib share ; do
@@ -35,8 +42,3 @@ jobs:
           echo 'This binary package of ngspice was built at https://github.com/gatk555/ngspice.' > build/README.ngspice
           echo 'The source code came from the pre-master-45 branch.' >> build/README.ngspice
           echo 'Install to /usr/local.' >> build/README.ngspice
-      - name: Save arm64
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ngspice pre-master-45, Macos arm64
-          path: build
