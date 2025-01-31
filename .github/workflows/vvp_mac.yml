@@ -14,7 +14,7 @@ jobs:
           brew install automake bison
       - name: Build, check and install
         run: |
-          export PATH="/usr/local/opt/bison/bin:$PATH"
+          export PATH="/opt/homebrew/opt/bison/bin:$PATH"
           sh autoconf.sh
           ./configure --enable-libvvp
           make -j$(nproc) check
