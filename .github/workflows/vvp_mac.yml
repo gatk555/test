@@ -18,8 +18,8 @@ jobs:
           sh autoconf.sh
           ./configure --enable-libvvp
           make -j$(nproc)
-          LD_LIBRARY_PATH=./vvp make check
           sudo make install
+          make check
       - name: Test
         run: ./.github/test.sh
       - name: Extract
