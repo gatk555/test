@@ -1,68 +1,43 @@
-# Probe VM
-name: Link IVL DLLs
+name: Build ngspice with an MSYS variant
 on:
   workflow_dispatch:
 
 jobs:
-  run:
+  build-win_msys:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
-      - uses: actions/checkout@v4
-      - uses: ilammy/msvc-dev-cmd@v1
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: MINGW64
+          msystem: UCRT64
           update: true
-      - uses: dawidd6/action-download-artifact@v3
+          install: >
+            base-devel
+            mingw-w64-ucrt-x86_64-toolchain
+            autotools
+      - name: Flex and Bison
+        shell: cmd
+        run: |
+          md ..\flex-bison
+          cd ..\flex-bison
+          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
+          unzip win_flex_bison-2.5.25
+      - uses: actions/checkout@v4
         with:
-         repo: gatk555/iverilog
-         workflow: win.yml
-         workflow_conclusion: ""
-         run_number: 3
-         name: MINGW64-x86_64
-         path: .
-      - name: Install
-        shell: msys2 {0}
-        run: |
-          pacman -U --noconfirm *.zst
-          which vvp
+          repository: gatk555/ngspice
+          ref: ga_test
       - name: Build
-        shell: cmd
         run: |
-          cd btest\a\b
-          aux-ivl.bat
-      - name: Build test.exe
-        shell: cmd
-        run: |
-          cd vlog
-          echo Testing components
-          copy ..\btest\a\b\verilog\libvvp.lib .
-          copy ..\btest\a\b\verilog\ivlng.lib .
-          copy ..\btest\a\b\verilog\ivlng.dll .
-          copy ..\btest\a\b\verilog\shim.vpi ivlng.vpi
-          dir ..\btest\src\xspice\verilog
-          echo Compiling CL.EXE /O2 /Fetest.exe  /I..\btest\src\xspice\verilog /I..\btest\src\include test.c
-          CL.EXE /O2 /Fetest.exe  /I..\btest\src\xspice\verilog /I..\btest\src\include test.c
-          copy D:\a\_temp\msys64\mingw64\lib\libvvp.dll .
-          dir
-          echo ============ ivlng.dll ===============
-          dumpbin /dependents ivlng.dll
-          echo ============ ivlng.vpi ===============
-          dumpbin /dependents ivlng.vpi
-          echo ============ test.exe ===============
-          dumpbin /dependents test.exe
-      - name: Run in MSYS
-        shell: msys2 {0}
-        run: |
-          cd vlog
-          ls -l
-          echo ============ libvvp.dll ===============
-          ldd  libvvp.dll
-          echo ============ ivlng.dll ===============
-          ldd ivlng.dll
-          echo ============ ivlng.vpi ===============
-          file ivlng.vpi
-          echo ============ test.exe ===============
-          ldd test.exe
-          echo ============ Run.exe ===============
-          ./test.exe 555
+          ./compile_min.sh
+          cp /ucrt64/bin/libgomp-1.dll /C/Spice64/bin
+          cp /ucrt64/bin/libstdc++-6.dll /C/Spice64/bin
+          cp /ucrt64/bin/libgcc_s_seh-1.dll /C/Spice64/bin
+          cp /ucrt64/bin/libwinpthread-1.dll /C/Spice64/bin
+          cp src/include/ngspice/config.h /c/spice64
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Ngspice, Windows 64-bit with MSYS and UCRT64
+          path: C:\Spice64
