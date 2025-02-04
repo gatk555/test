@@ -26,11 +26,11 @@ jobs:
           install: >
             base-devel
             mingw-w64-x86_64-toolchain
-            autotools libreadline-devel mingw-w64-x86_64-ncurses
+            autotools libreadline-devel
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: bd2a2144dcaccc4f62846014aee4a228ba3412c9
+          ref: ga_test
       - name: Build
         run: |
           ./autogen.sh
@@ -40,6 +40,7 @@ jobs:
           make
           make install
           ldd release/src/ngspice.exe || true
+          cp src/include/ngspice/config.h /c/spice64
       - uses: actions/checkout@v4
       - name: Add DLL
         shell: cmd
