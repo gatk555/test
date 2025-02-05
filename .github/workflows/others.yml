@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: gh_test
+          ref: ga_test
       - name: Install Dependencies
         run: |
           brew install automake libtool readline ncurses bison
@@ -20,7 +20,7 @@ jobs:
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
           chmod a+x ./compile_macos_clang_M2.sh
-          ./compile_macos_clang_M2.sh || true
+          ./compile_macos_gcc.sh || true
           ls
           mkdir build
           cp configure build
