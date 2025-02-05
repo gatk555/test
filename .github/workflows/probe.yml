@@ -5,10 +5,11 @@ on:
 jobs:
   build-win_cygwin:
     runs-on: windows-2019
-    defaults:
-      run:
-        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr {0}
     steps:
+      - name: Dummy start
+        shell: cmd
+        run: |
+          pwd
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v4
         with:
@@ -18,8 +19,9 @@ jobs:
           repository: gatk555/ngspice
           ref: ga_test
       - name: Build
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr {0}
         run: |
-          cd /d/a/test/test
+	  cd /d/a/test/test
           ls -l
           chmod a+x *.sh
           ./compile_min.sh
