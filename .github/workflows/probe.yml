@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v4
-          with:
-            packages: gcc-g++ flex bison
+        with:
+          packages: gcc-g++ flex bison
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
