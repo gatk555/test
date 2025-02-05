@@ -17,7 +17,8 @@ jobs:
       - name: Build
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr {0}
         run: |
-          cd d:\\a\\test\\test
+          pwd
+          cd d:\\\\a\\\\test\\\\test
           ls -l
           chmod a+x *.sh
           ./compile_min.sh
