@@ -19,7 +19,7 @@ jobs:
           ref: ga_test
       - name: Build
         run: |
-	  cd /d/a/test/test
+          cd /d/a/test/test
           ls -l
           chmod a+x *.sh
           ./compile_min.sh
