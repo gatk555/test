@@ -19,6 +19,8 @@ jobs:
           ref: ga_test
       - name: Build
         run: |
+          ls -l
+          chmod a+x *.sh
           ./compile_min.sh
       - name: Save
         uses: actions/upload-artifact@v4
