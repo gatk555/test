@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-2019
     defaults:
       run:
-        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr {0}
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail {0}
     steps:
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v4
