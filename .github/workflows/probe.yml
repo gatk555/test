@@ -19,7 +19,6 @@ jobs:
           repository: gatk555/ngspice
           ref: ga_test
       - name: Build
-        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr {0}
         run: |
 	  cd /d/a/test/test
           ls -l
