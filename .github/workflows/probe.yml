@@ -1,13 +1,13 @@
-name: Build ngspice with CYGWIB
+name: Build ngspice with CYGWIN
 on:
   workflow_dispatch:
 
 jobs:
   build-win_cygwin:
-    runs-on: windows-latest
+    runs-on: windows-2019
     defaults:
       run:
-        shell: msys2 {0}
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr {0}
     steps:
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v4
