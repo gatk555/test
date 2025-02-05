@@ -6,11 +6,6 @@ jobs:
   build-win_cygwin:
     runs-on: windows-2019
     steps:
-      - name: Dummy start
-        shell: cmd
-        run: |
-          pwd
-          dir
       - name: Set up Cygwin
         uses: egor-tensin/setup-cygwin@v4
         with:
@@ -22,7 +17,7 @@ jobs:
       - name: Build
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr {0}
         run: |
-          cd d:\a\test\test
+          cd d:\\a\\test\\test
           ls -l
           chmod a+x *.sh
           ./compile_min.sh
