@@ -18,12 +18,11 @@ jobs:
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
       - name: Build arm64
         run: |
-          which gcc clang
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
           ./autogen.sh
           mkdir release
           cd release
-          ../configure --with-x --enable-cider --with-readline=/opt/homebrew/opt/readline CC=gcc-14 CFLAGS="-m64 -O2 -I/opt/X11/include/freetype2 -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/ncurses/include" LDFLAGS="-m64 -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/ncurses/lib -L/opt/X11/lib -L/usr/local/lib -lomp" || true
+          ../configure --with-x --enable-cider --with-readline=/opt/homebrew/opt/readline CC=clang CFLAGS="-m64 -O2 -I/opt/X11/include/freetype2 -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/ncurses/include" LDFLAGS="-m64 -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/ncurses/lib -L/opt/X11/lib -L/usr/local/lib -lomp" || true
           make || true
           mkdir ../build
           cp config.log ../configure ../build
