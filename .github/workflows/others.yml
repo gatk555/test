@@ -9,18 +9,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
-          ref: ga_test
+          ref: gh_test
       - name: Install Dependencies
         run: |
-          brew install automake libtool readline ncurses bison
+          brew install automake libtool ncurses bison
           # compile_macos_gcc.sh expects this path.  Kludge it.
           sudo mkdir -p /opt/X11/include
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
       - name: Build arm64
         run: |
-          set
-          unset CC CXX
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+          export CC=gcc-14
           chmod a+x ./compile_macos_clang_M2.sh
           ./compile_macos_gcc.sh || true
           ls
