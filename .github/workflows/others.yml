@@ -18,6 +18,8 @@ jobs:
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
       - name: Build arm64
         run: |
+          set
+          unset CC CXX
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
           chmod a+x ./compile_macos_clang_M2.sh
           ./compile_macos_gcc.sh || true
