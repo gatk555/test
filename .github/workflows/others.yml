@@ -30,7 +30,7 @@ jobs:
           cd release
           sudo make install
           mkdir build
-          for i in bin lib share man/man1 ; do
+          for i in bin lib share share/man/man1 ; do
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice* build/$i/
           done
