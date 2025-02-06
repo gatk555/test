@@ -27,6 +27,8 @@ jobs:
           if [ ! -f src/ngspice ]; then false; fi
       - name: Install arm64
         run: |
+          cd release
+          sudo make install
           mkdir build
           for i in bin lib share man/man1 ; do
             mkdir -p build/$i
