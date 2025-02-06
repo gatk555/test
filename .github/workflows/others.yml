@@ -19,14 +19,12 @@ jobs:
       - name: Build arm64
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
-          export CC=gcc-14
-          chmod a+x ./compile_macos_clang_M2.sh
-          ./compile_macos_gcc.sh || true
-          ls
-          echo ===== ls release
-          ls release
-          mkdir build
-          cp release/config.log configure build
+          mkdir release
+          cd release
+          ../configure --with-x --enable-cider --with-readline=/opt/homebrew/opt/readline CC=gcc-14 CFLAGS="-m64 -O2 -I/opt/X11/include/freetype2 -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/ncurses/include" LDFLAGS="-m64 -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/ncurses/lib -L/opt/X11/lib -L/usr/local/lib -lomp"
+          make
+          mkdir ../build
+          cp config.log ../configure ../build
       - name: Save arm64
         uses: actions/upload-artifact@v4
         with:
