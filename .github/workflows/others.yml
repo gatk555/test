@@ -12,7 +12,7 @@ jobs:
           ref: gh_test
       - name: Install Dependencies
         run: |
-          brew install automake libtool ncurses bison
+          brew install automake libtool ncurses bison libxaw
           # compile_macos_gcc.sh expects this path.  Kludge it.
           sudo mkdir -p /opt/X11/include
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
@@ -23,7 +23,7 @@ jobs:
           ./autogen.sh
           mkdir release
           cd release
-          ../configure --with-x --enable-cider --with-readline=/opt/homebrew/opt/readline CC=clang CFLAGS="-m64 -O2 -I/opt/X11/include/freetype2 -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/ncurses/include" LDFLAGS="-m64 -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/ncurses/lib -L/opt/X11/lib -L/usr/local/lib -lomp" || true
+          ../configure  --disable-openmp --with-x --enable-cider --with-readline=/opt/homebrew/opt/readline CC=clang CFLAGS="-m64 -O2 -I/opt/X11/include/freetype2 -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/ncurses/include" LDFLAGS="-m64 -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/ncurses/lib -L/opt/X11/lib -L/usr/local/lib" || true
           make || true
           mkdir ../build
           cp config.log ../configure ../build
