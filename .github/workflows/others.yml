@@ -19,6 +19,7 @@ jobs:
       - name: Build arm64
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+          clang -v
           ./autogen.sh
           mkdir release
           cd release
