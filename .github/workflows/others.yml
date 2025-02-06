@@ -22,7 +22,8 @@ jobs:
           chmod a+x ./compile_macos_clang_M2.sh
           ./compile_macos_gcc.sh || true
           ls
-	  ls release
+          echo ===== ls release
+          ls release
           mkdir build
           cp release/config.log configure build
       - name: Save arm64
