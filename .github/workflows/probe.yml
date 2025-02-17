@@ -10,7 +10,7 @@ jobs:
         with:
           repo: gatk555/ngspice
           workflow: others.yml
-          name: Ngspice pre-master-45, Windows X86-64
+          name: Ngspice pre-master-45, Windows 64-bit with MSYS and UCRT64
           path: C:\Spice64
       - uses: actions/checkout@v3
       - name: Run
