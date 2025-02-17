@@ -4,7 +4,7 @@ on:
 
 jobs:
   build-win_cygwin:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
       - uses: dawidd6/action-download-artifact@v2
         with:
