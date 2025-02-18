@@ -10,6 +10,9 @@ jobs:
         with:
           msystem: ucrt64
           update: true
+          install: >
+            base-devel
+            mingw-w64-x86_64-toolchain
       - uses: dawidd6/action-download-artifact@v8
         with:
           repo: gatk555/test
