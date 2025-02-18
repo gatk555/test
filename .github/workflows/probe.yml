@@ -1,55 +1,19 @@
-name: Build and test console with MINGW64
+name: Test 100W.sp
 on:
   workflow_dispatch:
 
 jobs:
-  build-win_cygwin:
+  test:
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
     steps:
-      - uses: msys2/setup-msys2@v2
+      - uses: dawidd6/action-download-artifact@v2
         with:
-          msystem: MINGW64
-          update: true
-          install: >
-            base-devel
-            mingw-w64-x86_64-toolchain
-            autotools
-      - name: Flex and Bison
-        shell: cmd
-        run: |
-          md ..\flex-bison
-          cd ..\flex-bison
-          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
-          unzip win_flex_bison-2.5.25
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/ngspice
-          ref: gh_pm45
-      - name: Build
-        run: |
-          ./autogen.sh
-          mkdir release
-          cd release
-          ../configure --with-wingui=no --enable-cider prefix="C:/Spice64" CFLAGS="-m64 -O2" LDFLAGS="-m64 -s"
-          make -j4
-          make install
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/test
-      - name: Add DLL
-        shell: cmd
-        run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ngspice pre-master-45, Windows 64-bit with MSYS and MINGW64
+          repo: gatk555/test
+          workflow: probe.yml
+	  run_number: 105
+          name: Ngspice pre-master-45, Windows 64-bit with MSYS and UCRT64
           path: C:\Spice64
+      - uses: actions/checkout@v3
       - name: Run
-        shell: cmd
         run: |
           C:\spice64\bin\ngspice.exe 100W.sp
