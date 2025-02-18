@@ -6,6 +6,10 @@ jobs:
   test:
     runs-on: windows-latest
     steps:
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: ucrt64
+          update: true
       - uses: dawidd6/action-download-artifact@v8
         with:
           repo: gatk555/test
@@ -15,6 +19,11 @@ jobs:
           name: Ngspice pre-master-45, Windows 64-bit with MSYS and UCRT64
           path: C:\Spice64
       - uses: actions/checkout@v3
-      - name: Run
+      - name: Run in MSYS
+        shell: msys2 {0}
+        run: |
+          ldd /c/spice64/bin/ngspice
+          /c/spice64/bin/ngspice 100W.sp
+      - name: Run in CMD
         run: |
           C:\spice64\bin\ngspice.exe 100W.sp
