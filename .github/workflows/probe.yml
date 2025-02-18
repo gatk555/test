@@ -1,4 +1,4 @@
-name: Build and test console with CRTL64
+name: Build and test console with MINGW64
 on:
   workflow_dispatch:
 
@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: ucrt64
+          msystem: MINGW64
           update: true
           install: >
             base-devel
-            mingw-w64-ucrt-x86_64-toolchain
+            mingw-w64-x86_64-toolchain
             autotools
       - name: Flex and Bison
         shell: cmd
@@ -47,9 +47,9 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Ngspice pre-master-45, Windows 64-bit with MSYS and UCRT64
+          name: Ngspice pre-master-45, Windows 64-bit with MSYS and MINGW64
           path: C:\Spice64
       - name: Run
         shell: cmd
         run: |
-          C:\spice64\bin\ngspice_con.exe 100W.sp
+          C:\spice64\bin\ngspice.exe 100W.sp
