@@ -6,10 +6,11 @@ jobs:
   test:
     runs-on: windows-latest
     steps:
-      - uses: dawidd6/action-download-artifact@v2
+      - uses: dawidd6/action-download-artifact@v8
         with:
           repo: gatk555/test
           workflow: probe.yml
+          workflow_conclusion: ""
           run_number: 105
           name: Ngspice pre-master-45, Windows 64-bit with MSYS and UCRT64
           path: C:\Spice64
