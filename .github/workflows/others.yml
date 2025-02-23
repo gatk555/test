@@ -19,7 +19,7 @@ jobs:
           sudo ln -s /usr/local/include/freetype2 /opt/X11/include/freetype2
       - name: Save SHA for Windows
         run: |
-          echo "HEAD_DESC=`git log -1`" >> "$GITHUB_ENV"
+          echo "HEAD_DESC=\"`git log -1`\"" >> "$GITHUB_ENV"
       - name: Build X86_64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
@@ -148,9 +148,9 @@ jobs:
           echo Create README.ngspice
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > README.ngspice
           echo 'The source code came from the pre-master-45 branch with head revision:' >> README.ngspice
-          echo >> README.ngspice
-          echo $HEAD_DESC >> README.ngspice
-          echo >> README.ngspice
+          echo "" >> README.ngspice
+          echo ${{ env.HEAD_DESC }} >> /usr/local/README.ngspice
+          echo "" >> README.ngspice
           echo Install to C:\Spice64\. >> README.ngspice
       - uses: actions/checkout@v4
         with:
@@ -197,9 +197,9 @@ jobs:
           echo Create README.ngspice
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > C:\Spice64\README.ngspice
           echo 'The source code came from the pre-master-45 branch with head revision:' >> /usr/local/README.ngspice
-          echo >> /usr/local/README.ngspice
-          echo $HEAD_DESC >> /usr/local/README.ngspice
-          echo >> /usr/local/README.ngspice
+          echo "" >> /usr/local/README.ngspice
+          echo ${{ env.HEAD_DESC }} >> /usr/local/README.ngspice
+          echo "" >> /usr/local/README.ngspice
           echo Install to C:\Spice64\. >> C:\Spice64\README.ngspice
       - uses: actions/checkout@v4
         with:
