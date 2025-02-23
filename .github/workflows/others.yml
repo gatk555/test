@@ -98,7 +98,7 @@ jobs:
           name: Ngspice pre-master-45, Macos ARM64
           path: release/build
 
-build-win-X64:
+  build-win-X64:
     runs-on: windows-latest
     steps:
       - name: Flex and Bison
