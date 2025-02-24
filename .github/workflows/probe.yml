@@ -1,37 +1,18 @@
-name: Test 100W.sp
+name: Test environment
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: windows-latest
-    steps:
-      - uses: msys2/setup-msys2@v2
+    runs-on: macos-13
+      - uses: actions/checkout@v4
         with:
-          msystem: ucrt64
-          update: true
-          install: >
-            base-devel
-            mingw-w64-x86_64-toolchain
-      - uses: dawidd6/action-download-artifact@v8
-        with:
-          repo: gatk555/test
-          workflow: probe.yml
-          workflow_conclusion: ""
-          run_number: 105
-          name: Ngspice pre-master-45, Windows 64-bit with MSYS and UCRT64
-          path: C:\Spice64
-      - uses: actions/checkout@v3
-      - name: Run in MSYS
-        shell: msys2 {0}
+          repository: gatk555/ngspice
+          ref: gh_pm45
+      - name: Save SHA for Windows
         run: |
-          cp /ucrt64/bin/libgomp-1.dll /C/Spice64/bin
-          cp /mingw64/bin/libstdc++-6.dll /C/Spice64/bin
-          cp /mingw64/bin/libgcc_s_seh-1.dll /C/Spice64/bin
-          cp /mingw64/bin/libwinpthread-1.dll /C/Spice64/bin
-          ldd /c/spice64/bin/ngspice || true
-          echo Run it.
-          /c/spice64/bin/ngspice 100W.sp
-      - name: Run in CMD
-        run: |
-          C:\spice64\bin\ngspice.exe 100W.sp
+          echo $GITHUB_ENV
+          echo Try it
+          echo "HEAD_DESC=\"`git log -1 --pretty=oneline`\"" >> "$GITHUB_ENV"
+          echo Test it
+          echo ${{ env.HEAD_DESC }}
