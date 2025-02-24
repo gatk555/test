@@ -5,22 +5,26 @@ on:
 jobs:
   test:
     runs-on: macos-13
+    outputs:
+      HEAD_DESC: ${{ steps.set-output.outputs.HEAD_DESC }}
     steps:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
           ref: gh_pm45
       - name: Save SHA for Windows
+        id: set-output
         run: |
           echo $GITHUB_ENV
           cat $GITHUB_ENV
           echo Try it
           echo \"`git log -1 --pretty=oneline`\"
-          echo "HEAD_DESC=\"`git log -1 --pretty=oneline`\"" >> "$GITHUB_ENV"
+          echo "HEAD_DESC=\"`git log -1 --pretty=oneline`\"" >> "$GITHUB_OUTPUT"
   windows:
     runs-on: windows-latest
+    needs: test
     steps:
       - name: Test it
         shell: cmd
         run: |
-          echo %HEAD_DESC%
+          echo ${{ needs.test.outputs.HEAD_DESC }}
