@@ -1,30 +1,31 @@
-name: Test environment
+name: Test 100W.sp
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: macos-13
-    outputs:
-      HEAD_DESC: ${{ steps.set-output.outputs.HEAD_DESC }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/ngspice
-          ref: gh_pm45
-      - name: Save SHA for Windows
-        id: set-output
-        run: |
-          echo $GITHUB_ENV
-          cat $GITHUB_ENV
-          echo Try it
-          echo \"`git log -1 --pretty=oneline`\"
-          echo "HEAD_DESC=\"`git log -1 --pretty=oneline`\"" >> "$GITHUB_OUTPUT"
-  windows:
     runs-on: windows-latest
-    needs: test
     steps:
-      - name: Test it
-        shell: cmd
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: ucrt64
+          update: true
+          install: >
+            base-devel
+            mingw-w64-x86_64-toolchain
+      - uses: dawidd6/action-download-artifact@v8
+        with:
+          repo: gatk555/test
+          workflow: probe.yml
+          workflow_conclusion: ""
+          name: Ngspice pre-master-45, Windows 64-bit with MSYS and UCRT64
+          path: C:\Spice64
+      - uses: actions/checkout@v3
+      - name: Run in MSYS
+        shell: msys2 {0}
         run: |
-          echo ${{ needs.test.outputs.HEAD_DESC }}
+          echo Run it.
+          /c/spice64/bin/ngspice 100W.sp
+      - name: Run in CMD
+        run: |
+          C:\spice64\bin\ngspice.exe 100W.sp
