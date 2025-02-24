@@ -17,15 +17,9 @@ jobs:
           echo Try it
           echo \"`git log -1 --pretty=oneline`\"
           echo "HEAD_DESC=\"`git log -1 --pretty=oneline`\"" >> "$GITHUB_ENV"
-          echo Test it
-          echo ${{ env.HEAD_DESC }}
-          echo Show ENV
-          env
   windows:
     runs-on: windows-latest
     steps:
       - name: Test it
         run: |
-          echo ${{ env.HEAD_DESC }}
-          echo Show ENV
-          env
+          echo $HEAD_DESC
