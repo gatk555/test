@@ -25,7 +25,9 @@ jobs:
         shell: msys2 {0}
         run: |
           echo Run it.
-          /c/spice64/bin/ngspice 100W.sp
+          /c/spice64/bin/ngspice -o t.log 100W.sp
+          cat t.log
       - name: Run in CMD
         run: |
-          C:\spice64\bin\ngspice.exe 100W.sp
+          C:\spice64\bin\ngspice.exe  -o t.log 100W.sp
+          type t.log

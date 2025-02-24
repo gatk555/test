@@ -75,6 +75,8 @@ alter vin ac = 1
 noise V(out) Vin dec 10 10 100K
 setplot noise2
 plot inoise_spectrum
+rusage
+quit
 .endc
 *
 .model IRFP240 VDMOS nchan
