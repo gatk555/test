@@ -5,6 +5,7 @@ on:
 jobs:
   test:
     runs-on: macos-13
+    steps:
       - uses: actions/checkout@v4
         with:
           repository: gatk555/ngspice
