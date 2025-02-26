@@ -31,4 +31,4 @@ jobs:
         run: |
           echo Run it.
           /c/spice64/bin/ngspice -o t.log 100W.sp
-          cat t.log
+          ls -l
