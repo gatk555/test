@@ -25,6 +25,7 @@ jobs:
         run: |
           C:\spice64\bin\ngspice.exe  -o t.log 100W.sp
           type t.log
+	  dir
       - name: Run in MSYS
         shell: msys2 {0}
         run: |
