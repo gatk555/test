@@ -16,7 +16,7 @@ jobs:
       - uses: dawidd6/action-download-artifact@v8
         with:
           repo: gatk555/test
-          workflow: others.yml
+          workflow: win_dev_msys.yml
           workflow_conclusion: ""
           name: Ngspice Test, Windows 64-bit with MSYS and UCRT64
           path: C:\Spice64
