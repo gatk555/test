@@ -24,7 +24,6 @@ jobs:
           sudo mkdir -m777 local
       - name: Build
         run: |
-          ./compile_linux_shared.sh
           ./compile_linux.sh
           mkdir releasesh
           cd releasesh
