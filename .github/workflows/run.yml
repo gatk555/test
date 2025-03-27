@@ -22,7 +22,7 @@ jobs:
           copy ..\..\include\sharedspice.h ngspice
           CL.EXE /O2 /I..\..\include shx.c
           cd ..
-          copy ..\..\share\ngspice\scripts\spinit .
+          copy ..\share\ngspice\scripts\spinit .
           shared\shx -l ..\bin-dll\ngspice.dll < shared\t.shx
           md results
           copy *.raw results
