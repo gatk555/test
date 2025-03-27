@@ -37,68 +37,28 @@ jobs:
           md visualc\%cms%
           move visualc\xspice\%cms%\*.cm visualc\%cms%
           msbuild %opt% visualc\KLU/KLU_COMPLEX.vcxproj
+          msbuild %opt% visualc\vngspice.vcxproj
+          msbuild %opt% visualc\sharedspice.vcxproj
           set config=console_release
           set opt=-property:Configuration=%config% -property:Platform=%plat%
           msbuild %opt% visualc\vngspice.vcxproj
-          md C:\Spice64\examples\ghdl
-          xcopy /i examples\xspice\ghdl C:\Spice64\examples\ghdl
-          md C:\Spice64\examples\verilator
-          xcopy /i examples\xspice\verilator C:\Spice64\examples\verilator
-      - uses: actions/checkout@v4
-      - name: Add DLL
-        shell: cmd
-        run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
+          copy visualc\vngspice\Release.x64\ngspice.exe C:\Spice64\bin\gui.exe
+          md c:\Spice64\bin-dll
+          copy visualc\sharedspice\Release.x64\ngspice.dll c:\Spice64\bin-dll
+          copy visualc\sharedspice\Release.x64\ngspice.exp c:\Spice64\bin-dll
+          copy visualc\sharedspice\Release.x64\ngspice.lib c:\Spice64\bin-dll
+          c:
+          cd \Spice64
+          move bin\ngspice.exe bin\ngspice_con.exe
+          move bin\gui.exe bin\ngspice.exe
+          echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > README.ngspice
+          echo "The source code came from the ga_test branch." >> README.ngspice
+          echo( >> README.ngspice
+          echo Install to C:\Spice64\. >> README.ngspice
+          md C:\Spice64\examples\shared
+          xcopy /i examples\xspice\shared C:\Spice64\examples\shared
       - name: Save
         uses: actions/upload-artifact@v4
         with:
           name: Dev, Windows 64-bit
-          path: C:\Spice64
-  build-win_msys:
-    runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
-    steps:
-      - uses: msys2/setup-msys2@v2
-        with:
-          msystem: ucrt64
-          update: true
-          install: >
-            base-devel
-            mingw-w64-ucrt-x86_64-toolchain
-            autotools
-      - name: Flex and Bison
-        shell: cmd
-        run: |
-          md ..\flex-bison
-          cd ..\flex-bison
-          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
-          unzip win_flex_bison-2.5.25
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/ngspice
-          ref: ga_test
-      - name: Build
-        run: |
-          ./compile_min.sh
-          echo Create README.ngspice
-          echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > C:/Spice64/README.ngspice
-          echo The source code came from the ga_test branch. >> C:/Spice64/README.ngspice
-          echo Install to C:/Spice64\. >> C:/Spice64/README.ngspice
-          cp -r examples/xspice/ghdl /c/Spice64/examples
-          cp -r examples/xspice/verilator/ /c/Spice64/examples
-      - uses: actions/checkout@v4
-        with:
-          repository: gatk555/test
-      - name: Add DLL
-        shell: cmd
-        run: |
-          unzip libomp.zip
-          copy libomp140.x86_64.dll C:\Spice64\bin\vcomp140.dll
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Ngspice dev, Windows 64-bit console version with MSYS and UCRT64
           path: C:\Spice64
