@@ -18,13 +18,12 @@ jobs:
         run: |
           C:
           cd \Spice64\examples\shared
-          md ngspice
-          copy ..\..\include\sharedspice.h ngspice
           CL.EXE /O2 /I..\..\include shx.c
           cd ..
           copy ..\share\ngspice\scripts\spinit .
           shared\shx -l ..\bin-dll\ngspice.dll < shared\t.shx
           md results
+          copy shared\shx.exe results
           copy *.raw results
       - name: Save
         uses: actions/upload-artifact@v4
