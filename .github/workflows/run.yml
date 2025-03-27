@@ -6,52 +6,24 @@ jobs:
   run:
     runs-on: windows-latest
     steps:
-      - uses: msys2/setup-msys2@v2
+      - uses: dawidd6/action-download-artifact@v8
         with:
-          msystem: MINGW64
-          update: true
-          install: mingw-w64-x86_64-verilator
-      - uses: dawidd6/action-download-artifact@v2
-        with:
-         workflow: test.yml
-         run_number: 40
-         name: Test, Windows 64-bit
-         path: C:\Spice64_KLU
-      - uses: actions/checkout@v3
+          repo: gatk555/test
+          workflow: win_dev.yml
+          name: Dev, Windows 64-bit
+          path: C:\Spice64
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Run
         shell: cmd
         run: |
-          copy adc_batch.cir c:\
-          copy verilated.mk d:\a\_temp\msys64\mingw64\share\verilator\include
-          cd \
           C:
-          md \mingw64\share\verilator\include\vltstd
-          copy d:\a\_temp\msys64\mingw64\share\verilator\include\*.* \mingw64\share\verilator\include
-          copy d:\a\_temp\msys64\mingw64\share\verilator\include\vltstd\*.* \mingw64\share\verilator\include\vltstd
-          md \mingw64\share\verilator\bin
-          copy d:\a\_temp\msys64\mingw64\share\verilator\bin\*.* \mingw64\share\verilator\bin
-          copy d:\a\_temp\msys64\mingw64\bin\*.* \mingw64\bin
-          echo Running vlnggen
-          dir \Spice64_KLU\share\ngspice\scripts\src
-          \Spice64_KLU\bin\ngspice -b -o log.txt vlnggen  /Spice64_KLU/share/ngspice/examples/xspice/verilator/adc.v
-          type log.txt
-          dir  adc_obj_dir
-          echo Testing ...
-          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc.raw adc_batch.cir
-          type log.txt
-          del adc.DLL
-          echo Try CL.
-          cd adc_obj_dir
-          CL /O2 /LD /EHsc /Fe..\adc.DLL /I. /IC:\mingw64\share\verilator\include\vltstd /IC:\mingw64\share\verilator\include Vlng__ALL.cpp verilator_shim.cpp C:\mingw64\share\verilator\include\verilated.cpp C:\mingw64\share\verilator\include\verilated_threads.cpp /link /DLL /EXPORT:Cosim_setup
-          dir
-          cd ..
-          \Spice64_KLU\bin\ngspice -b -o log.txt -r adc_msvc.raw \adc_batch.cir
-          type log.txt
+          cd \Spice64\examples\shared
+          CL.EXE /O2 /I..\..\include shx.c
+          shx -l ..\..\bin-dll\ngspice.dll < t.shx
           md results
           copy *.raw results
       - name: Save
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Results
-          path: c:\results
+          path: c:\spice64\examples\shared\results
