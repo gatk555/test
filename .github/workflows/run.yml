@@ -21,8 +21,9 @@ jobs:
           md ngspice
           copy ..\..\include\sharedspice.h ngspice
           CL.EXE /O2 /I..\..\include shx.c
+          cd ..
           copy ..\..\share\ngspice\scripts\spinit .
-          shx -l ..\..\bin-dll\ngspice.dll < t.shx
+          shared\shx -l ..\bin-dll\ngspice.dll < shared\t.shx
           md results
           copy *.raw results
       - name: Save
