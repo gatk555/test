@@ -48,7 +48,7 @@ jobs:
           copy visualc\sharedspice\Release.x64\ngspice.exp c:\Spice64\bin-dll
           copy visualc\sharedspice\Release.x64\ngspice.lib c:\Spice64\bin-dll
           md c:\Spice64\include
-          copy src\ngspice\sharedspice.h c:\Spice64\include
+          copy src\include\ngspice\sharedspice.h c:\Spice64\include
           md C:\Spice64\examples\shared
           xcopy /i examples\shared C:\Spice64\examples\shared
           c:
