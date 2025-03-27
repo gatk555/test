@@ -20,9 +20,8 @@ jobs:
           cd \Spice64\examples\shared
           md ngspice
           copy ..\..\include\sharedspice.h ngspice
-          dir
-          dir ngspice
           CL.EXE /O2 /I..\..\include shx.c
+          copy ..\..\share\ngspice\scripts\spinit .
           shx -l ..\..\bin-dll\ngspice.dll < t.shx
           md results
           copy *.raw results
