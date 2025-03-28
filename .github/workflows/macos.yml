@@ -23,6 +23,8 @@ jobs:
           chmod a+x compile_macos_clang.sh
           ./compile_macos_clang.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
+          ./compile_macos_shared.sh || true
+          if [ ! -f releasesh/src/.libs/libngspice.so ]; then false; fi
       - name: Install X86_64
         run: |
           cd release
@@ -33,11 +35,15 @@ jobs:
             mkdir -p build/$i
             cp -r /usr/local/$i/ngspice build/$i/
           done
-          mkdir -p build/share/ngspice/examples/ghdl
-          cp examples/xspice/ghdl/* build/share/ngspice/examples/ghdl
-          mkdir -p build/share/ngspice/examples/verilator
-          cp examples/xspice/verilator/* build/share/ngspice/examples/verilator
+          mkdir -p build/share/ngspice/examples/shared
+          cp releasesh/src/.libs/libngspice.so build/lib/ngspice
+          cp examples/shared/* build/share/ngspice/examples/shared
           ls -R build/share/ngspice/examples
+      - name: Build shx.
+        run: |
+          cd examples/shared
+          gcc -I../../src/include/ngspice -o shx shx.c
+          mv shx ../../build/bin
       - name: Save X86_64
         uses: actions/upload-artifact@v4
         with:
