@@ -20,11 +20,9 @@ jobs:
       - name: Build X86_64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
-          ./compile_macos_shared.sh || true
+          ../configure  --disable-openmp --enable-cider --with-ngshared CC=clang CFLAGS="-m64 -O2  LDFLAGS="-m64 -L/usr/local/lib"
+          make -j3
           if [ ! -f releasesh/src/.libs/libngspice.so ]; then false; fi
-          chmod a+x compile_macos_clang.sh
-          ./compile_macos_clang.sh || true # Will fail to install
-          if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install X86_64
         run: |
           cd release
