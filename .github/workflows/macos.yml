@@ -20,11 +20,11 @@ jobs:
       - name: Build X86_64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
+          ./compile_macos_shared.sh || true
+          if [ ! -f releasesh/src/.libs/libngspice.so ]; then false; fi
           chmod a+x compile_macos_clang.sh
           ./compile_macos_clang.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
-          ./compile_macos_shared.sh || true
-          if [ ! -f releasesh/src/.libs/libngspice.so ]; then false; fi
       - name: Install X86_64
         run: |
           cd release
