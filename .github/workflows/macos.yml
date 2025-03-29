@@ -25,8 +25,8 @@ jobs:
           cd releasesh
           ../configure  --disable-openmp --enable-cider --with-ngshared CC=clang CFLAGS="-m64 -O2"  LDFLAGS="-m64 -L/usr/local/lib"
           make -j3
-          ls  releasesh/src/.libs
-          if [ ! -f releasesh/src/.libs/libngspice.so ]; then false; fi
+          ls  src/.libs
+          if [ ! -f src/.libs/libngspice.so ]; then false; fi
       - name: Install X86_64
         run: |
           cd release
