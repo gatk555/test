@@ -20,13 +20,15 @@ jobs:
       - name: Build X86_64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
-          ./autogen.sh
+          chmod a+x compile_macos_clang.sh
+          ./compile_macos_clang.sh || true # Will fail to install
+          if [ ! -f release/src/ngspice ]; then false; fi
           mkdir releasesh
           cd releasesh
           ../configure  --disable-openmp --enable-cider --with-ngshared CC=clang CFLAGS="-m64 -O2"  LDFLAGS="-m64 -L/usr/local/lib"
           make -j3
           ls  src/.libs
-          if [ ! -f src/.libs/libngspice.so ]; then false; fi
+          if [ ! -f src/.libs/libngspice.dylib ]; then false; fi
       - name: Install X86_64
         run: |
           cd release
@@ -38,7 +40,7 @@ jobs:
             cp -r /usr/local/$i/ngspice build/$i/
           done
           mkdir -p build/share/ngspice/examples/shared
-          cp releasesh/src/.libs/libngspice.so build/lib/ngspice
+          cp releasesh/src/.libs/libngspice.dylib build/lib/ngspice
           cp examples/shared/* build/share/ngspice/examples/shared
           ls -R build/share/ngspice/examples
       - name: Build shx.
@@ -46,12 +48,6 @@ jobs:
           cd examples/shared
           gcc -I../../src/include/ngspice -o shx shx.c
           mv shx ../../build/bin
-      - name: Fail
-        run: |
-          false
-          chmod a+x compile_macos_clang.sh
-          ./compile_macos_clang.sh || true # Will fail to install
-          if [ ! -f release/src/ngspice ]; then false; fi
       - name: Save X86_64
         uses: actions/upload-artifact@v4
         with:
