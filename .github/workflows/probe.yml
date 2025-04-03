@@ -11,7 +11,6 @@ jobs:
         with:
           cpu: arm1176
           base_image: raspios_lite:latest
-          copy_artifact_path: simavr.tar.gz
           image_additional_mb: 1024
           commands: |
             df -h /
@@ -25,8 +24,7 @@ jobs:
         with:
           cpu: cortex-a53
           base_image: raspios_lite_arm64:latest
-          copy_artifact_path: simavr.tar.gz
           image_additional_mb: 1024
           commands: |
             df -h /
-            sudo apt-get install -y build-essential git make gcc-avr avr-libc libelf-dev freeglut3-dev patchelf file
+            sudo apt-get install -y build-essential make gcc-avr avr-libc libelf-dev freeglut3-dev patchelf file
