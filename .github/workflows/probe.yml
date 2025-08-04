@@ -1,33 +1,30 @@
-name: Test ARM action
+# Probe bison on Windows
+name: Probe
 on:
   workflow_dispatch:
 
 jobs:
-  build-aarch64:
-    runs-on: ubuntu-22.04
+  try_it:
+    runs-on: windows-latest
     steps:
+      - name: Flex and Bison
+        run: |
+          md ..\flex-bison
+          cd ..\flex-bison
+          curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
+          unzip win_flex_bison-2.5.25
       - uses: actions/checkout@v4
         with:
-          repository: gatk555/simavr
-          ref: main
-          fetch-depth: 0
-      - uses: pguyot/arm-runner-action@v2
-        id: build_image
+          repository: gatk555/ngspice
+          ref: ga_test
+      - name: Test
+        shell: cmd
+        run: |
+          md tmp-bison
+          dir
+          ..\flex-bison\win_bison.exe --output=.\tmp-bison\parse_bison.c --defines=.\tmp-bison\parse_bison.y.h src\frontend\parse-bison.y
+      - name: Save
+        uses: actions/upload-artifact@v4
         with:
-          cpu: cortex-a53
-          base_image: raspios_lite_arm64:latest
-          copy_artifact_path: simavr.tar.gz
-          image_additional_mb: 1024
-          commands: |
-            df -h /
-            sudo apt-get install -y build-essential make gcc-avr avr-libc libelf-dev freeglut3-dev patchelf file
-            make -j4 build-simavr V=1 RELEASE=1
-            mkdir simavr_installed
-            make -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
-            file simavr_installed/bin/*
-            patchelf --remove-needed ./libsimavr.so.1 simavr_installed/bin/simavr || true
-            patchelf --add-needed libsimavr.so.1 simavr_installed/bin/simavr
-            patchelf --set-rpath '$ORIGIN/../lib/' simavr_installed/bin/simavr
-            ldd simavr_installed/bin/*
-            simavr_installed/bin/simavr --list-cores || true
-            tar -cvf simavr.tar.gz -C simavr_installed .
+          name: Bison_output
+          path: ./tmp-bison
