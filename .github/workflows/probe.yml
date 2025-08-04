@@ -22,7 +22,7 @@ jobs:
         run: |
           md tmp-bison
           dir
-          ..\flex-bison\win_bison.exe --output=.\tmp-bison\parse_bison.c --defines=.\tmp-bison\parse_bison.y.h src\frontend\parse-bison.y
+          ..\flex-bison\win_bison.exe --output=.\tmp-bison\parse_bison.c src\frontend\parse-bison.y
       - name: Save
         uses: actions/upload-artifact@v4
         with:
