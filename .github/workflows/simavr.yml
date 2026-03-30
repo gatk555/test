@@ -55,6 +55,7 @@ jobs:
       - name: CI-Build
         run: |
           export PATH=$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin:$PATH
+          ls $(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin
           make  V=1
           mkdir simavr_installed
           make -k install DESTDIR=$(pwd)/simavr_installed/ || true
@@ -225,7 +226,6 @@ jobs:
   build-darwin-arm64:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v6
       - name: Install Dependencies
         run: |
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install make libelf freeglut patchelf
@@ -233,6 +233,10 @@ jobs:
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install libelf
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install avr-gcc@9 avr-binutils
           export PATH="/usr/local/opt/avr-gcc@9/bin:$PATH"
+      - uses: actions/checkout@v6
+        with:
+          repository: buserror/simavr
+          ref: master
       - name: CI-Build
         run: |
           avr-gcc --version || true
