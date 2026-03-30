@@ -54,7 +54,7 @@ jobs:
           echo "$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin" >> $GITHUB_PATH
       - name: CI-Build
         run: |
-          PATH=$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin:$PATH
+          export PATH=$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin:$PATH
           make  V=1
           mkdir simavr_installed
           make -k install DESTDIR=$(pwd)/simavr_installed/ || true
@@ -104,7 +104,7 @@ jobs:
         run: | 
           sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386 gcc-9:i386 binutils:i386 cpp-9:i386 libelf-dev:i386 libdwarf-dev:i386 freeglut3-dev:i386 gcc-avr avr-libc patchelf
+          sudo apt-get install -y libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386 gcc-9:i386 binutils:i386 cpp-9:i386 libelf-dev:i386 freeglut3-dev:i386 gcc-avr avr-libc patchelf
           ls -l /usr/bin/*gcc*
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 10
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 20
@@ -233,9 +233,6 @@ jobs:
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install libelf
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install avr-gcc@9 avr-binutils
           export PATH="/usr/local/opt/avr-gcc@9/bin:$PATH"
-      - uses: actions/checkout@v6
-        with:
-          repository: gatk555/simavr
       - name: CI-Build
         run: |
           avr-gcc --version || true
@@ -270,7 +267,6 @@ jobs:
         run: |
           clang --version
           export CFLAGS="-DGL_SILENCE_DEPRECATION"
-          ln -s /usr/local/Cellar/avr-gcc@9/9.5.0//avr/include/avr simavr/cores/avr
           make -j4 build-simavr V=1 RELEASE=1
           mkdir simavr_installed
           make -k install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
