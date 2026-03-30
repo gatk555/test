@@ -26,6 +26,10 @@ jobs:
           make -k install DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           file simavr_installed/bin/*
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Windows 64-bit
@@ -51,6 +55,8 @@ jobs:
           unzip avr-gcc-14.1.0-x86-windows.zip
           ls -l
           rm avr-gcc-14.1.0-x86-windows.zip
+          echo "$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin"
+          ls $(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin
           echo "$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin" >> $GITHUB_PATH
       - name: CI-Build
         run: |
@@ -61,6 +67,10 @@ jobs:
           make -k install DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           file simavr_installed/bin/*
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Windows 32-bit
@@ -88,6 +98,10 @@ jobs:
           patchelf --set-rpath '$ORIGIN/../lib/' simavr_installed/bin/simavr
           ldd simavr_installed/bin/*
           simavr_installed/bin/simavr --list-cores || true
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - name: Tar files
         run: tar -cvf simavr.tar.gz -C simavr_installed .
       - uses: actions/upload-artifact@v6
@@ -122,6 +136,10 @@ jobs:
           patchelf --set-rpath '$ORIGIN/../lib/' simavr_installed/bin/simavr
           ldd simavr_installed/bin/*
           simavr_installed/bin/simavr --list-cores || true
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - name: Tar files
         run: tar -cvf simavr.tar.gz -C simavr_installed .
       - uses: actions/upload-artifact@v6
@@ -156,6 +174,10 @@ jobs:
             ldd simavr_installed/bin/*
             simavr_installed/bin/simavr --list-cores || true
             tar -cvf simavr.tar.gz -C simavr_installed .
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Linux ARMv7l
@@ -188,6 +210,10 @@ jobs:
             ldd simavr_installed/bin/*
             simavr_installed/bin/simavr --list-cores || true
             tar -cvf simavr.tar.gz -C simavr_installed .
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Linux ARMv6l
@@ -219,6 +245,10 @@ jobs:
             ldd simavr_installed/bin/*
             simavr_installed/bin/simavr --list-cores || true
             tar -cvf simavr.tar.gz -C simavr_installed .
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Linux AArch64
@@ -250,6 +280,10 @@ jobs:
           simavr_installed/bin/simavr --list-cores || true
       - name: Tar files
         run: tar -cvf simavr.tar.gz -C simavr_installed .
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Mac OS ARM 64-bit
