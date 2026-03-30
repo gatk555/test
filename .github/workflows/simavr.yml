@@ -71,7 +71,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: gatk555/simavr
-          ref: main
       - name: Install Dependencies
         run: |
           sudo apt-get update
@@ -99,7 +98,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: gatk555/simavr
-          ref: main
       - name: Install Dependencies
         run: | 
           sudo dpkg --add-architecture i386
@@ -133,7 +131,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: gatk555/simavr
-          ref: main
       - uses: pguyot/arm-runner-action@v2
         id: build_image
         with:
@@ -165,7 +162,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: gatk555/simavr
-          ref: main
       - uses: pguyot/arm-runner-action@v2
         id: build_image
         with:
@@ -197,7 +193,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: gatk555/simavr
-          ref: main
       - uses: pguyot/arm-runner-action@v2
         id: build_image
         with:
@@ -238,7 +233,7 @@ jobs:
           fetch-depth: 0
       - name: Install avr-gcc
         run: |
-          set here = `pwd`
+          set here=`pwd`
           mkdir -p /usr/local/Cellar/avr-gcc@9 
           cd /usr/local/Cellar/avr-gcc@9
           unzip $here/tools/avr-gcc9-macos-x64.zip
@@ -248,7 +243,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: gatk555/simavr
-          ref: main
       - name: CI-Build
         run: |
           export PATH="/usr/local/Cellar/avr-gcc@9/9.5.0/bin:/usr/local/Cellar/avr-binutils/2.45.1/bin:$PATH"
