@@ -78,7 +78,6 @@ jobs:
         run: |
           ln -s /usr/lib/avr/include/avr simavr/cores/avr
           make  V=1 RELEASE=1 || true
-          cat /tmp/simavr_conf.log
           mkdir simavr_installed
           make  install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
           file simavr_installed/bin/*
@@ -145,9 +144,9 @@ jobs:
             df -h /
             sudo apt-get update
             sudo apt-get install -y build-essential make gcc-avr avr-libc libelf-dev libdwarf-dev freeglut3-dev patchelf file
-            make -j4  V=1 RELEASE=1
+            make   V=1 RELEASE=1
             mkdir simavr_installed
-            make -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
+            make  install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
             file simavr_installed/bin/*
             patchelf --remove-needed ./libsimavr.so.1 simavr_installed/bin/simavr || true
             patchelf --add-needed libsimavr.so.1 simavr_installed/bin/simavr
@@ -208,9 +207,9 @@ jobs:
           commands: |
             df -h /
             sudo apt-get install -y build-essential make gcc-avr avr-libc libelf-dev libdwarf-dev freeglut3-dev patchelf file
-            make -j4  V=1 RELEASE=1
+            make   V=1 RELEASE=1
             mkdir simavr_installed
-            make -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
+            make  install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
             file simavr_installed/bin/*
             patchelf --remove-needed ./libsimavr.so.1 simavr_installed/bin/simavr || true
             patchelf --add-needed libsimavr.so.1 simavr_installed/bin/simavr
@@ -240,9 +239,9 @@ jobs:
           avr-gcc --version || true
           clang --version
           export CFLAGS="-DGL_SILENCE_DEPRECATION"
-          make -j4 V=1 RELEASE=1
+          make V=1 RELEASE=1
           mkdir simavr_installed
-          make -k -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
+          make -k install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
           file simavr_installed/bin/*
           otool -L simavr_installed/bin/*
           simavr_installed/bin/simavr --list-cores || true
@@ -267,17 +266,15 @@ jobs:
           ref: master
       - name: CI-Build
         run: |
-          avr-gcc --version || true
           clang --version
           export CFLAGS="-DGL_SILENCE_DEPRECATION"
           ln -s /usr/local/Cellar/avr-gcc@9/9.5.0//avr/include/avr simavr/cores/avr
           make -j4 build-simavr V=1 RELEASE=1
           mkdir simavr_installed
-          make -k -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
+          make -k install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
           file simavr_installed/bin/*
           otool -L simavr_installed/bin/*
           simavr_installed/bin/simavr --list-cores || true
-          cat /tmp/simavr_conf.log
       - name: Tar files
         run: tar -cvf simavr.tar.gz -C simavr_installed .
       - uses: actions/upload-artifact@v6
