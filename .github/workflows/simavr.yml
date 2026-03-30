@@ -77,7 +77,8 @@ jobs:
           sudo apt-get install -y build-essential make gcc-avr avr-libc libelf-dev libdwarf-dev freeglut3-dev patchelf
       - name: CI-Build
         run: |
-          make build-simavr
+          ln -s /usr/lib/avr/include/avr simavr/cores/avr
+          make build-simavr V=1 RELEASE=1
           mkdir simavr_installed
           make  install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
           file simavr_installed/bin/*
@@ -250,6 +251,7 @@ jobs:
           avr-gcc --version || true
           clang --version
           export CFLAGS="-DGL_SILENCE_DEPRECATION"
+          ln -s /usr/local/Cellar/avr-gcc@9/9.5.0//avr/include/avr simavr/cores/avr
           make -j4 build-simavr V=1 RELEASE=1
           mkdir simavr_installed
           make -k -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
