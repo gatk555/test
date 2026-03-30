@@ -222,6 +222,36 @@ jobs:
         with:
           name: Linux AArch64
           path: simavr.tar.gz
+  build-darwin-arm64:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Dependencies
+        run: |
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew install make libelf freeglut patchelf
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew tap osx-cross/avr
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew install libelf
+          export PATH="/usr/local/opt/avr-gcc@9/bin:$PATH"
+      - uses: actions/checkout@v6
+        with:
+          repository: gatk555/simavr
+      - name: CI-Build
+        run: |
+          avr-gcc --version || true
+          clang --version
+          export CFLAGS="-DGL_SILENCE_DEPRECATION"
+          make -j4 V=1 RELEASE=1
+          mkdir simavr_installed
+          make -k -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
+          file simavr_installed/bin/*
+          otool -L simavr_installed/bin/*
+          simavr_installed/bin/simavr --list-cores || true
+      - name: Tar files
+        run: tar -cvf simavr.tar.gz -C simavr_installed .
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Mac OS ARM 64-bit
+          path: simavr.tar.gz
   build-darwin-x64:
     # this is currently macos-11, Big Sur
     runs-on: macos-15-intel
@@ -237,7 +267,6 @@ jobs:
           ref: master
       - name: CI-Build
         run: |
-          export PATH="/usr/local/Cellar/avr-gcc@9/9.5.0/bin:/usr/local/Cellar/avr-binutils/2.45.1/bin:$PATH"
           avr-gcc --version || true
           clang --version
           export CFLAGS="-DGL_SILENCE_DEPRECATION"
