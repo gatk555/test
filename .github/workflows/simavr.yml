@@ -21,7 +21,7 @@ jobs:
       - name: CI-Build
         run: |
           echo 'Running in MSYS2!'
-          make  V=1
+          make  build-simavr build-tests V=1
           mkdir simavr_installed
           make -k install DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
@@ -54,6 +54,7 @@ jobs:
           echo "$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin" >> $GITHUB_PATH
       - name: CI-Build
         run: |
+          PATH=$(pwd)/avr-gcc-14.1.0-x86-windows/avr-gcc-14.1.0-x86-windows/bin:$PATH
           make  V=1
           mkdir simavr_installed
           make -k install DESTDIR=$(pwd)/simavr_installed/ || true
@@ -73,7 +74,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential make gcc-avr avr-libc libelf-dev libdwarf-dev freeglut3-dev patchelf
+          sudo apt-get install -y build-essential make gcc-avr avr-libc libelf-dev freeglut3-dev patchelf
       - name: CI-Build
         run: |
           ln -s /usr/lib/avr/include/avr simavr/cores/avr
@@ -230,6 +231,7 @@ jobs:
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install make libelf freeglut patchelf
           HOMEBREW_NO_INSTALL_FROM_API=1 brew tap osx-cross/avr
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install libelf
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew install avr-gcc@9 avr-binutils
           export PATH="/usr/local/opt/avr-gcc@9/bin:$PATH"
       - uses: actions/checkout@v6
         with:
