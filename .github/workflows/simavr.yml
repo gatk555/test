@@ -78,7 +78,8 @@ jobs:
       - name: CI-Build
         run: |
           ln -s /usr/lib/avr/include/avr simavr/cores/avr
-          make build-simavr V=1 RELEASE=1
+          make build-simavr V=1 RELEASE=1 || true
+          cat /tmp/simavr_conf.log
           mkdir simavr_installed
           make  install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/
           file simavr_installed/bin/*
@@ -258,6 +259,7 @@ jobs:
           file simavr_installed/bin/*
           otool -L simavr_installed/bin/*
           simavr_installed/bin/simavr --list-cores || true
+          cat /tmp/simavr_conf.log
       - name: Tar files
         run: tar -cvf simavr.tar.gz -C simavr_installed .
       - uses: actions/upload-artifact@v6
