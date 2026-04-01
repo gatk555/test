@@ -4,7 +4,7 @@ on:
 
 jobs:
   build-macos-x86_64:
-    runs-on: macos-15-intel
+    runs-on: macos-14-intel
     steps:
       - uses: actions/checkout@v6
         with:
@@ -53,9 +53,8 @@ jobs:
           for i in bin lib share ; do
             sudo rm -rf /usr/local/$i/ngspice
           done
-
   build-macos-arm64:
-    runs-on: macos-15
+    runs-on: macos-14
     outputs:
       HEAD_DESC: ${{ steps.set-output.outputs.HEAD_DESC }}
     steps:
