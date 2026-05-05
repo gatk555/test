@@ -76,6 +76,7 @@ jobs:
       - name: Build arm64
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+          chmod a+x compile_macos_clang_M2.sh
           ./compile_macos_clang_M2.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install arm64
@@ -186,6 +187,8 @@ jobs:
           install: >
             base-devel
             mingw-w64-ucrt-x86_64-toolchain
+            mingw-w64-ucrt-x86_64-libsndfile
+            mingw-w64-ucrt-x86_64-libsamplerate
             autotools
       - name: Flex and Bison
         shell: cmd
