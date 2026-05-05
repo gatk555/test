@@ -76,12 +76,8 @@ jobs:
       - name: Build arm64
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
-          ./autogen.sh
-          mkdir release
-          cd release
-          ../configure  --disable-openmp --with-x --enable-cider --with-readline=/opt/homebrew/opt/readline CC=clang CFLAGS="-m64 -O2 -I/opt/X11/include/freetype2 -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/ncurses/include" LDFLAGS="-m64 -L/opt/homebrew/opt/readline/lib -L/usr/local/lib"
-          make -j3
-          if [ ! -f src/ngspice ]; then false; fi
+          ./compile_macos_clang_M2.sh || true # Will fail to install
+          if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install arm64
         run: |
           cd release
