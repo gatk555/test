@@ -114,6 +114,15 @@ jobs:
           cd ..\flex-bison
           curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
           unzip win_flex_bison-2.5.25
+      - name: Soundfiles
+        run: |
+          cd ..
+          curl.exe -L -O "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2-win64.zip"
+          unzip libsndfile-1.2.2-win64.zip
+          rename libsndfile-1.2.2-win64 libsndfile
+          curl.exe -L -O "https://github.com/libsndfile/libsamplerate/releases/download/0.2.2/libsamplerate-0.2.2-win64.zip"
+          unzip libsamplerate-0.2.2-win64.zip
+          rename libsamplerate-0.2.2-win64.zip libsamplerate
       - uses: actions/checkout@v6
         with:
           repository: gatk555/ngspice
