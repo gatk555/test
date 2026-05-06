@@ -115,6 +115,7 @@ jobs:
           curl.exe -L -O "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip"
           unzip win_flex_bison-2.5.25
       - name: Soundfiles
+        shell: cmd
         run: |
           cd ..
           curl.exe -L -O "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2-win64.zip"
