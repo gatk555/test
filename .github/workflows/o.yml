@@ -231,8 +231,14 @@ jobs:
           cp /ucrt64/bin/libstdc++-6.dll /C/Spice64/bin
           cp /ucrt64/bin/libgcc_s_seh-1.dll /C/Spice64/bin
           cp /ucrt64/bin/libwinpthread-1.dll /C/Spice64/bin
-          cp libsndfile/bin/sndfile.dll /C/Spice64/bin
-          cp libsamplerate/bin/samplerate.dll /C/Spice64/bin
+          cp /ucrt64/bin/libsndfile-1.dll /C/Spice64/bin
+          cp /ucrt64/bin/libsamplerate-0.dll /C/Spice64/bin
+      - name: Add OSDI files
+        shell: cmd
+        run: |
+          curl.exe -L -O "https://github.com/dwarning/VA-Models/releases/download/v2.2/VA-Models-osdilibs.zip"
+          unzip VA-Models-osdilibs.zip
+          copy osdilibs\*.osdi C:\Spice64\lib\ngspice
       - name: Save
         uses: actions/upload-artifact@v6
         with:
