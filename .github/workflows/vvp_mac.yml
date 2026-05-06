@@ -48,7 +48,7 @@ jobs:
       - name: Build, check and install
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
-	  which bison
+          which bison
           autoconf
           ./configure --enable-libvvp
           make -j$(nproc)
