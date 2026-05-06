@@ -33,7 +33,7 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '>=3.5'
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           repository: steveicarus/iverilog
           ref: master
@@ -44,7 +44,7 @@ jobs:
           make -j$(nproc) check
           make install
       - name: Save
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Iverilog with libvvp, Windows 64-bit (UCRT64)
           path: C:\ivl
@@ -52,12 +52,7 @@ jobs:
         run: |
           cd msys2
           makepkg-mingw --noconfirm --noprogressbar -sCLf
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: Iverilog with libvvp, MSYS (UCRT64) package for Windows 64-bit
           path: msys2/*.zst
-      - name: Test
-        run: |
-          export PATH=$PATH:/c/ivl/bin
-          cp /c/ivl/lib/libvvp.DLL /c/ivl/bin
-          echo Do not run./.github/test.sh
