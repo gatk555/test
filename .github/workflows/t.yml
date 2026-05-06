@@ -23,13 +23,11 @@ jobs:
           curl.exe -L -O "https://github.com/libsndfile/libsamplerate/releases/download/0.2.2/libsamplerate-0.2.2-win64.zip"
           unzip libsamplerate-0.2.2-win64.zip
           rename libsamplerate-0.2.2-win64 libsamplerate
-          dir
-          dir libsamplerate
       - uses: actions/checkout@v6
         with:
           repository: gatk555/ngspice
           ref: gh_pm47
-      - uses: microsoft/setup-msbuild@v2
+      - uses: microsoft/setup-msbuild@v3
       - name: Build
         shell: cmd
         run: |
