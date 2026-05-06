@@ -27,7 +27,7 @@ jobs:
           cp /usr/local/bin/vvp save/bin
           cp /usr/local/include/iverilog/* save/include
           cp -r /usr/local/lib/ivl save/lib
-          for i in libvpi.a libvvp.so libveriuser.a ; do cp /usr/local/lib/$i save/lib ; done
+          for i in libvpi.a libvvp.so ; do cp /usr/local/lib/$i save/lib ; done
           for i in iverilog.1 iverilog-vpi.1 vvp.1 ; do cp /usr/local/man/man1/$i save/man/man1 ; done
       - name: Save
         uses: actions/upload-artifact@v6
@@ -47,7 +47,7 @@ jobs:
           brew install bison
       - name: Build, check and install
         run: |
-          export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+          export PATH="/usr/local/opt/bison/bin:$PATH"
           which bison
           autoconf
           ./configure --enable-libvvp
@@ -61,7 +61,7 @@ jobs:
           cp /usr/local/bin/vvp save/bin
           cp /usr/local/include/iverilog/* save/include
           cp -r /usr/local/lib/ivl save/lib
-          for i in libvpi.a libvvp.so libveriuser.a ; do cp /usr/local/lib/$i save/lib ; done
+          for i in libvpi.a libvvp.so ; do cp /usr/local/lib/$i save/lib ; done
           for i in iverilog.1 iverilog-vpi.1 vvp.1 ; do cp /usr/local/man/man1/$i save/man/man1 ; done
       - name: Save
         uses: actions/upload-artifact@v6
