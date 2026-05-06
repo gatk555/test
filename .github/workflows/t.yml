@@ -24,7 +24,7 @@ jobs:
           unzip libsamplerate-0.2.2-win64.zip
           rename libsamplerate-0.2.2-win64.zip libsamplerate
           dir
-          dir libsamplerate\include
+          dir libsamplerate
       - uses: actions/checkout@v6
         with:
           repository: gatk555/ngspice
