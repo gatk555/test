@@ -11,7 +11,7 @@ jobs:
           ref: master
       - name: Install dependencies
         run: |
-          apt install gperf
+          sudo apt-get install gperf
       - name: Build, check and install
         run: |
           export PATH="/opt/homebrew/opt/bison/bin:$PATH"
