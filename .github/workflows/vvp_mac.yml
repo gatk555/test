@@ -31,7 +31,7 @@ jobs:
           name: Icarus Verilog with libvvp Linux-X64
           path: save
 
-build-mac-arm:
+  build-mac-arm:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v6
