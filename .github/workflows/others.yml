@@ -168,12 +168,10 @@ jobs:
           echo ${{ needs.build-macos-arm64.outputs.HEAD_DESC }} >> README.ngspice
           echo( >> README.ngspice
           echo Install to C:\Spice64\. >> README.ngspice
-      - uses: actions/checkout@v6
-        with:
-          repository: gatk555/test
       - name: Add OSDI files
         shell: cmd
         run: |
+          curl.exe -L -O "https://github.com/dwarning/VA-Models/releases/download/v2.2/VA-Models-osdilibs.zip"
           unzip windows_osdi.zip
           copy *.osdi C:\Spice64\lib\ngspice
       - name: Save
