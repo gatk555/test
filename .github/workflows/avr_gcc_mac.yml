@@ -24,9 +24,9 @@ jobs:
           cp -r /usr/local/lib/avr-gcc lib
           mkdir opt
           cp -r /usr/local/opt/avr-binutils opt
-          cp -r usr/local/opt/avr-gcc@9 opt
+          cp -r /usr/local/opt/avr-gcc@9 opt
           mkdir Cellar
-          cp -r usr/local/Cellar/avr-* Cellar
+          cp -r /usr/local/Cellar/avr-* Cellar
       - name: Tar files
         run: tar -cf avr-gcc.tar.gz -C local .
       - uses: actions/upload-artifact@v4
