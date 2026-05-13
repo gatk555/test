@@ -1,0 +1,21 @@
+name: Build avr-gcc for Mac X64.
+on: [workflow_dispatch]
+
+jobs:
+  build-darwin-x64:
+    # macos-latest is an ARM architecture runner, you need to use the suffix -intel
+    runs-on: macos-15-intel
+    steps:
+      - name: Install Dependencies
+        run: | 
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew install make
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew tap osx-cross/avr
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew install avr-gcc@9 avr-binutils
+          export PATH="/usr/local/opt/avr-gcc@9/bin:$PATH"
+      - name: Copy files
+        run: |
+          find /usr/local -name 'avr*'
+          mkdir local
+          cd local
+          mkdir bin
+          cp /usr/local/opt/avr-gcc@9/bin/* bin
