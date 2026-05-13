@@ -18,4 +18,18 @@ jobs:
           mkdir local
           cd local
           mkdir bin
-          cp /usr/local/opt/avr-gcc@9/bin/* bin
+          cp /usr/local/bin/avr-* bin
+          mkdir lib
+          cp -r /usr/local/lib/avr lib
+          cp -r /usr/local/lib/avr-gcc lib
+          mkdir opt
+          cp -r /usr/local/opt/avr-binutils opt
+          cp -r usr/local/opt/avr-gcc@9 opt
+          mkdir Cellar
+          cp -r usr/local/Cellar/avr-* Cellar
+      - name: Tar files
+        run: tar -cf avr-gcc.tar.gz -C local .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVR-GCC for Mac OS Intel 64-bit
+          path: avr-gcc.tar.gz
