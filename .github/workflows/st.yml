@@ -17,7 +17,7 @@ jobs:
         run: |
           h=`pwd`
           cd /usr/local
-          tar xvf $h/*.tar
+          tar xvf $h/*.tar.gz
       - uses: actions/checkout@v6
         with:
           repository: buserror/simavr
