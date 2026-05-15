@@ -1,0 +1,45 @@
+name: Test Simavr Mac X64 build.
+on: [workflow_dispatch]
+
+jobs:
+  mac:
+    runs-on: macos-15-intel
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: dawidd6/action-download-artifact@v8
+        with:
+         workflow: avr_gcc_mac.yml
+         name: AVR-GCC for Mac OS Intel 64-bit
+         path: .
+         use_unzip: true
+      - name: Expand tar
+        run: |
+          h=`pwd`
+          cd /usr/local
+          tar xvf $h/*.tar
+      - uses: actions/checkout@v6
+        with:
+          repository: buserror/simavr
+          ref: master
+      - name: Install Dependencies
+        run: | 
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew install make libelf freeglut patchelf 
+          HOMEBREW_NO_INSTALL_FROM_API=1 brew tap osx-cross/avr
+      - name: CI-Build
+        run: |
+          avr-gcc --version || true
+          clang --version
+          export CFLAGS="-DGL_SILENCE_DEPRECATION"
+          make -j4 build-simavr V=1 RELEASE=1
+          mkdir simavr_installed
+          make -k -j4 install RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
+          file simavr_installed/bin/*
+          otool -L simavr_installed/bin/*
+          simavr_installed/bin/simavr --list-cores || true
+      - name: Tar files
+        run: tar -cvf simavr.tar.gz -C simavr_installed .
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Mac OS Intel 64-bit
+          path: simavr.tar.gz
