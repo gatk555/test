@@ -38,6 +38,10 @@ jobs:
           file simavr_installed/bin/*
           otool -L simavr_installed/bin/*
           simavr_installed/bin/simavr --list-cores || true
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
       - name: Tar files
         run: tar -cvf simavr.tar.gz -C simavr_installed .
       - uses: actions/upload-artifact@v6

@@ -11,7 +11,6 @@ jobs:
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install make
           HOMEBREW_NO_INSTALL_FROM_API=1 brew tap osx-cross/avr
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install avr-gcc@9 avr-binutils
-          export PATH="/usr/local/opt/avr-gcc@9/bin:$PATH"
       - name: Copy files
         run: |
           find /usr/local -name 'avr*'
@@ -22,6 +21,8 @@ jobs:
           mkdir lib
           cp -r /usr/local/lib/avr lib
           cp -r /usr/local/lib/avr-gcc lib
+          mkdir lib/gcc
+          cp -r /usr/local/lib/gcc/avr lib/gcc
           mkdir opt
           cp -r /usr/local/opt/avr-binutils opt
           cp -r /usr/local/opt/avr-gcc@9 opt
