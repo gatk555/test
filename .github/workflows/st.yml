@@ -29,6 +29,7 @@ jobs:
       - name: CI-Build
         run: |
           xcrun --show-sdk-path || true
+          ls /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include || true
           export PATH="/usr/local/opt/avr-gcc@9/bin:/usr/local/opt/avr-gcc@9/libexec/gcc/avr/9.5.0:$PATH"
           avr-gcc --version || true
           clang --version
