@@ -28,7 +28,7 @@ jobs:
           HOMEBREW_NO_INSTALL_FROM_API=1 brew tap osx-cross/avr
       - name: CI-Build
         run: |
-          find /usr/include -name string.h
+          xcrun --show-sdk-path || true
           export PATH="/usr/local/opt/avr-gcc@9/bin:/usr/local/opt/avr-gcc@9/libexec/gcc/avr/9.5.0:$PATH"
           avr-gcc --version || true
           clang --version
