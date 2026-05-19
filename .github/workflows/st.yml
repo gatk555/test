@@ -29,11 +29,10 @@ jobs:
       - name: CI-Build
         run: |
           xcrun --show-sdk-path || true
-          find /Applications/Xcode_16.4.app/Contents/Developer -name '*.h' || true
           export PATH="/usr/local/opt/avr-gcc@9/bin:/usr/local/opt/avr-gcc@9/libexec/gcc/avr/9.5.0:$PATH"
           avr-gcc --version || true
           clang --version
-          export CFLAGS="-DGL_SILENCE_DEPRECATION"
+          export CFLAGS="-DGL_SILENCE_DEPRECATION -I/Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
           make -j4 V=1 RELEASE=1
           mkdir simavr_installed
           make -k -j4 install-all RELEASE=1 DESTDIR=$(pwd)/simavr_installed/ || true
