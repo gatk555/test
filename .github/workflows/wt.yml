@@ -27,15 +27,15 @@ jobs:
         shell: msys2 {0}
         run: |
           cd simavr
-          make
+          gmake
           mkdir simavr_installed
-          make -k install DESTDIR=$(pwd)/simavr_installed/ || true
+          gmake -k install DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           file simavr_installed/bin/*
       - name: Tests
         run: |
           cd tests
-          make run_tests
+          gmake run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Windows 64-bit
