@@ -22,7 +22,10 @@ jobs:
             mingw-w64-ucrt-x86_64-gcc
             mingw-w64-ucrt-x86_64-make
             mingw-w64-ucrt-x86_64-libelf
+            mingw-w64-ucrt-x86_64-libdwarf
             mingw-w64-ucrt-x86_64-pkgconf
+            mingw-w64-ucrt-x86_64-avr-toolchain
+            mingw-w64-ucrt-x86_64-freeglut
 
       - name: Build libsimavr
         shell: msys2 {0}
