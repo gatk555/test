@@ -1,0 +1,38 @@
+    name: Build libsimavr on Windows (MSYS2 UCRT64)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          repository: gatk555/simavr
+          ref: test
+
+      - name: Set up MSYS2 (UCRT64)
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-make
+            mingw-w64-ucrt-x86_64-libelf
+            mingw-w64-ucrt-x86_64-pkgconf
+
+      - name: Build libsimavr
+        shell: msys2 {0}
+        run: |
+          cd simavr
+          make
+          mkdir simavr_installed
+          make -k install DESTDIR=$(pwd)/simavr_installed/ || true
+          mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
+          file simavr_installed/bin/*
+      - name: Tests
+        run: |
+          cd tests
+          make run_tests
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Windows 64-bit
+          path: simavr_installed
