@@ -17,7 +17,8 @@ jobs:
         with:
           msystem: UCRT64
           update: true
-          install: >-
+          install: >
+            base-devel
             mingw-w64-ucrt-x86_64-gcc
             mingw-w64-ucrt-x86_64-make
             mingw-w64-ucrt-x86_64-libelf
@@ -27,15 +28,15 @@ jobs:
         shell: msys2 {0}
         run: |
           cd simavr
-          gmake
+          make
           mkdir simavr_installed
-          gmake -k install DESTDIR=$(pwd)/simavr_installed/ || true
+          make -k install DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           file simavr_installed/bin/*
       - name: Tests
         run: |
           cd tests
-          gmake run_tests
+          make run_tests
       - uses: actions/upload-artifact@v6
         with:
           name: Windows 64-bit
