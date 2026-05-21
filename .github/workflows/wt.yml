@@ -5,6 +5,9 @@ jobs:
   ucrt64:
     name: Build libsimavr on Windows (MSYS2 UCRT64)
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -28,7 +31,6 @@ jobs:
             mingw-w64-ucrt-x86_64-freeglut
 
       - name: Build libsimavr
-        shell: msys2 {0}
         run: |
           cd simavr
           make
@@ -38,7 +40,6 @@ jobs:
           file simavr_installed/bin/*
       - name: Tests
         run: |
-          echo $PATH
           which avr-gcc | true
           cd tests
           make run_tests
