@@ -1,6 +1,10 @@
+name: Build libsimavr on Windows (MSYS2 UCRT64)
+on: [workflow_dispatch]
+
+jobs:
+  ucrt64:
     name: Build libsimavr on Windows (MSYS2 UCRT64)
     runs-on: windows-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
