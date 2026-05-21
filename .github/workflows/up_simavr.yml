@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - uses: msys2/setup-msys2@v2
         with:
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - uses: msys2/setup-msys2@v2
         with:
@@ -64,7 +64,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - name: Install Dependencies
         run: |
@@ -96,7 +96,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - name: Install Dependencies
         run: | 
@@ -130,7 +130,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - uses: pguyot/arm-runner-action@v2
         id: build_image
@@ -164,7 +164,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - uses: pguyot/arm-runner-action@v2
         id: build_image
@@ -198,7 +198,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - uses: pguyot/arm-runner-action@v2
         id: build_image
@@ -232,7 +232,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - name: Install Dependencies
         run: | 
@@ -260,7 +260,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: buserror/simavr
+          repository: gatk555/simavr
           ref: test
       - name: Install Dependencies
         run: | 
