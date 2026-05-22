@@ -31,7 +31,7 @@ jobs:
         run: |
           dumpbin /dependents simavr_installed/bin/simavr.exe
           dumpbin /dependents simavr_installed/lin/charlcd.elf
-   - name: Tests
+      - name: Tests
         run: |
           cd tests
           make run_tests
