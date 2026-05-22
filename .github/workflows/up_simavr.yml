@@ -26,6 +26,7 @@ jobs:
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           cp /mingw64/bin/libfreeglut.dll simavr_installed/bin
           file simavr_installed/bin/*
+      - uses: lorenalexm/install-dumpbin-action@main
       - name: dumpbin
         shell: cmd
         run: |
