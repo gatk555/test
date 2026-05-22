@@ -26,7 +26,12 @@ jobs:
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           cp /mingw64/bin/libfreeglut.dll simavr_installed/bin
           file simavr_installed/bin/*
-      - name: Tests
+      - name: dumpbin
+        shell: cmd
+        run: |
+          dumpbin /dependents simavr_installed/bin/simavr.exe
+          dumpbin /dependents simavr_installed/lin/charlcd.elf
+   - name: Tests
         run: |
           cd tests
           make run_tests
