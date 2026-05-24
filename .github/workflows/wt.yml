@@ -42,8 +42,8 @@ jobs:
       - name: dumpbin
         shell: cmd
         run: |
-          'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\bin\Hostx86\x64\dumpbin' /dependents simavr_installed/bin/simavr.exe
-          'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\bin\Hostx86\x64\dumpbin' /dependents simavr_installed/lin/charlcd.elf
+          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\bin\Hostx86\x64\dumpbin" /dependents simavr_installed/bin/simavr.exe
+          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\bin\Hostx86\x64\dumpbin" /dependents simavr_installed/lin/charlcd.elf
       - name: Tests
         run: |
           which avr-gcc | true
