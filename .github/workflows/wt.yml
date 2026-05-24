@@ -38,6 +38,13 @@ jobs:
           make -k install DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           file simavr_installed/bin/*
+      - uses: microsoft/setup-msbuild@v3
+      - name: dumpbin
+        shell: cmd
+        run: |
+          set PATH
+          dumpbin /dependents simavr_installed/bin/simavr.exe
+          dumpbin /dependents simavr_installed/lin/charlcd.elf
       - name: Tests
         run: |
           which avr-gcc | true
