@@ -43,6 +43,9 @@ jobs:
         shell: cmd
         run: |
           set PATH
+          C:
+          cd \Program Files\Microsoft Visual Studio\2022\
+          dir /s dumpbin.*
           dumpbin /dependents simavr_installed/bin/simavr.exe
           dumpbin /dependents simavr_installed/lin/charlcd.elf
       - name: Tests
