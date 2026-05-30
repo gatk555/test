@@ -39,6 +39,8 @@ jobs:
           file simavr_installed/bin/*
           ldd simavr_installed/bin/simavr.exe
           ldd simavr_installed/examples/charlcd.elf
+          cp /ucrt64/bin/libwinpthread-1.dll simavr_installed/examples
+          cp /ucrt64/bin/libfreeglut.dll simavr_installed/examples
       - uses: microsoft/setup-msbuild@v3
       - name: dumpbin
         shell: cmd

@@ -24,7 +24,8 @@ jobs:
           mkdir simavr_installed
           make -k install-all DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
-          cp /mingw64/bin/libfreeglut.dll simavr_installed/bin
+          cp /mingw64/bin/libwinpthread-1.dll simavr_installed/examples
+          cp /mingw64/bin/libfreeglut.dll simavr_installed/examples
           file simavr_installed/bin/*
       - name: Tests
         run: |
