@@ -35,7 +35,7 @@ jobs:
           cd simavr
           make
           mkdir simavr_installed
-          make -k install DESTDIR=$(pwd)/simavr_installed/ || true
+          make -k install-all DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           file simavr_installed/bin/*
       - uses: microsoft/setup-msbuild@v3
