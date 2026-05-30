@@ -37,6 +37,8 @@ jobs:
           make -k install-all DESTDIR=$(pwd)/simavr_installed/ || true
           mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
           file simavr_installed/bin/*
+          ldd simavr_installed/bin/simavr.exe
+          ldd simavr_installed/examples/charlcd.elf
       - uses: microsoft/setup-msbuild@v3
       - name: dumpbin
         shell: cmd
