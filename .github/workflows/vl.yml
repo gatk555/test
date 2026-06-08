@@ -1,0 +1,31 @@
+name: Test Verilator MacOS
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: macos-latest
+    steps:
+      - name: Install Dependencies
+        run: |
+          brew install libxaw verilator
+      - uses: dawidd6/action-download-artifact@v8
+        with:
+         repo: gatk555/ngspice
+         workflow: others.yml
+         name: Ngspice pre-master-47, Macos ARM64
+         path: /usr/local
+      - uses: actions/checkout@v6
+      - name: Run
+        run: |
+          chmod a+x /usr/local/bin/ngspice
+          echo Testing ...
+	  ngspice vlnggen adc.v
+          ngspice -b -r adc.raw adc_batch.cir
+          mkdir ~/results
+          cp *.raw ~/results
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Results
+          path: ~/results
