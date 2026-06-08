@@ -15,6 +15,7 @@ jobs:
          workflow: others.yml
          name: Ngspice pre-master-47, Macos ARM64
          path: /usr/local
+         use_unzip: true
       - uses: actions/checkout@v6
       - name: Run
         run: |
