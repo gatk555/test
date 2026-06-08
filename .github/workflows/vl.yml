@@ -20,7 +20,7 @@ jobs:
         run: |
           chmod a+x /usr/local/bin/ngspice
           echo Testing ...
-	  ngspice vlnggen adc.v
+          ngspice vlnggen adc.v
           ngspice -b -r adc.raw adc_batch.cir
           mkdir ~/results
           cp *.raw ~/results
