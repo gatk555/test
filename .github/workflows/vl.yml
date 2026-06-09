@@ -18,7 +18,7 @@ jobs:
          skip_unpack: true
       - name: Run
         run: |
-          set sd=`pwd`
+          sd=`pwd`
           echo SD=$sd
           cd /usr/local/
           echo $sd/'Ngspice pre-master-47, Macos ARM64.zip'
