@@ -19,9 +19,9 @@ jobs:
       - name: Run
         run: |
           sd=`pwd`
-          echo SD=$sd
+          ls -ld /usr/local
+          sudo chmod a+rwx /usr/local || true
           cd /usr/local/
-          echo $sd/'Ngspice pre-master-47, Macos ARM64.zip'
           unzip $sd/'Ngspice pre-master-47, Macos ARM64.zip'
           cd $sd
           chmod a+x /usr/local/bin/ngspice
