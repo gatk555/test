@@ -19,8 +19,7 @@ jobs:
       - name: Run
         run: |
           sd=`pwd`
-          ls -ld /usr/local
-          sudo chmod a+rwx /usr/local || true
+          sudo chmod a+rwx /usr/local /usr/local/share /usr/local/share /usr/local/share/man /usr/local/share/man/man1 || true
           cd /usr/local/
           unzip $sd/'Ngspice pre-master-47, Macos ARM64.zip'
           cd $sd
