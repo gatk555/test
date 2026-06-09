@@ -9,17 +9,19 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install libxaw verilator
+      - uses: actions/checkout@v6
       - uses: dawidd6/action-download-artifact@v8
         with:
          repo: gatk555/ngspice
          workflow: others.yml
          name: Ngspice pre-master-47, Macos ARM64
          skip_unpack: true
-      - uses: actions/checkout@v6
       - name: Run
         run: |
           set sd=`pwd`
+          echo SD=$sd
           cd /usr/local/
+          echo $sd/'Ngspice pre-master-47, Macos ARM64.zip'
           unzip $sd/'Ngspice pre-master-47, Macos ARM64.zip'
           cd $sd
           chmod a+x /usr/local/bin/ngspice
