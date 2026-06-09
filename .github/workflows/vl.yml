@@ -15,10 +15,14 @@ jobs:
          workflow: others.yml
          name: Ngspice pre-master-47, Macos ARM64
          path: /usr/local
-         use_unzip: true
+         skip_unpack: true
       - uses: actions/checkout@v6
       - name: Run
         run: |
+          set sd=`pwd`
+          cd /usr/local/
+          unzip $sd/'Ngspice pre-master-47, Macos ARM64.zip'
+          cd $sd
           chmod a+x /usr/local/bin/ngspice
           echo Testing ...
           ngspice vlnggen adc.v
