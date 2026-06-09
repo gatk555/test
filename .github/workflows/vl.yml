@@ -12,16 +12,16 @@ jobs:
       - uses: actions/checkout@v6
       - uses: dawidd6/action-download-artifact@v8
         with:
-         repo: gatk555/ngspice
+         repo: gatk555/test
          workflow: others.yml
-         name: Ngspice pre-master-47, Macos ARM64
+         name: Ngspice Test, Macos ARM64
          skip_unpack: true
       - name: Run
         run: |
           sd=`pwd`
           sudo chmod a+rwx /usr/local /usr/local/share /usr/local/share /usr/local/share/man /usr/local/share/man/man1 || true
           cd /usr/local/
-          unzip $sd/'Ngspice pre-master-47, Macos ARM64.zip'
+          unzip $sd/'Ngspice Test, Macos ARM64.zip'
           cd $sd
           chmod a+x /usr/local/bin/ngspice
           echo Testing ...
