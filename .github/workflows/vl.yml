@@ -16,6 +16,7 @@ jobs:
          workflow: others.yml
          name: Ngspice Test, Macos ARM64
          skip_unpack: true
+         workflow_conclusion: ""
       - name: Run
         run: |
           sd=`pwd`
