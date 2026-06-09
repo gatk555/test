@@ -14,7 +14,6 @@ jobs:
          repo: gatk555/ngspice
          workflow: others.yml
          name: Ngspice pre-master-47, Macos ARM64
-         path: /usr/local
          skip_unpack: true
       - uses: actions/checkout@v6
       - name: Run
