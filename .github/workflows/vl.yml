@@ -67,6 +67,7 @@ jobs:
         run: |
           echo Testing ...
           c:\spice64\bin\ngspice vlnggen adc.v
+          dir
           c:\spice64\bin\ngspice -b -r adc.raw adc_batch.cir
           mkdir results
           copy *.raw ~/results
