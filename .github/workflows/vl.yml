@@ -1,9 +1,9 @@
-name: Test Verilator MacOS
+name: Test Verilator MacOS and Windows
 on:
   workflow_dispatch:
 
 jobs:
-  run:
+  macos:
     runs-on: macos-latest
     steps:
       - name: Install Dependencies
@@ -34,5 +34,46 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v4
         with:
-          name: Results
+          name: Results_Macos
           path: ~/results
+  win:
+    runs-on: windows-latest
+    steps:
+      - uses: msys2/setup-msys2@v3
+        with:
+          msystem: ucrt64
+          update: true
+          install: >
+            mingw-w64-ucrt-x86_64-verilator
+      - uses: actions/checkout@v6
+      - uses: dawidd6/action-download-artifact@v8
+        with:
+         repo: gatk555/test
+         workflow: others.yml
+         name: Ngspice Test, Windows X86-64
+         path C:\Spice64
+         workflow_conclusion: ""
+      - name: Soundfiles
+        shell: cmd
+        run: |
+          cd ..
+          curl.exe -L -O "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2-win64.zip"
+          unzip libsndfile-1.2.2-win64.zip
+          move libsndfile-1.2.2-win64 c:\Spice64\bin\libsndfile
+          curl.exe -L -O "https://github.com/libsndfile/libsamplerate/releases/download/0.2.2/libsamplerate-0.2.2-win64.zip"
+          unzip libsamplerate-0.2.2-win64.zip
+          move libsamplerate-0.2.2-win64 c:\Spice64\bin\libsamplerate
+      - name: Run
+        run: |
+          sd=`pwd`
+          echo Testing ...
+          ngspice vlnggen adc.v
+          ls
+          ngspice -b -r adc.raw adc_batch.cir
+          mkdir results
+          copy *.raw ~/results
+      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
+          name: Results_Macos
+          path: results

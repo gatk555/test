@@ -172,7 +172,7 @@ jobs:
         shell: cmd
         run: |
           curl.exe -L -O "https://github.com/dwarning/VA-Models/releases/download/v2.2/VA-Models-osdilibs.zip"
-          unzip windows_osdi.zip
+          unzip VA-Models-osdilibs.zip
           copy *.osdi C:\Spice64\lib\ngspice
       - name: Save
         uses: actions/upload-artifact@v6
