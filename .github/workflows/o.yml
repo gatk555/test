@@ -194,7 +194,7 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
-      - uses: msys2/setup-msys2@v3
+      - uses: msys2/setup-msys2@v2
         with:
           msystem: ucrt64
           update: true
