@@ -51,7 +51,7 @@ jobs:
          repo: gatk555/test
          workflow: others.yml
          name: Ngspice Test, Windows X86-64
-         path C:\Spice64
+         path: C:\Spice64
          workflow_conclusion: ""
       - name: Soundfiles
         shell: cmd
@@ -65,7 +65,6 @@ jobs:
           move libsamplerate-0.2.2-win64 c:\Spice64\bin\libsamplerate
       - name: Run
         run: |
-          sd=`pwd`
           echo Testing ...
           ngspice vlnggen adc.v
           ls
