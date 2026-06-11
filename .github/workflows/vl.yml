@@ -41,7 +41,7 @@ jobs:
           ls
           /c/spice64/bin/ngspice_con -b -r adc.raw adc_batch.cir
           mkdir results
-          copy *.raw ~/results
+          cp *.raw ~/results
       - name: Save
         uses: actions/upload-artifact@v6
         with:
