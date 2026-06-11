@@ -30,13 +30,21 @@ jobs:
           curl.exe -L -O "https://github.com/libsndfile/libsamplerate/releases/download/0.2.2/libsamplerate-0.2.2-win64.zip"
           unzip libsamplerate-0.2.2-win64.zip
           move libsamplerate-0.2.2-win64\bin\samplerate.dll c:\Spice64\bin
-      - name: Run
+      - name: Run in MSYS
+        shell: msys2 {0}
+        run: |
+          echo $PATH
+          echo Testing ...
+          c:\spice64\bin\ngspice_con vlnggen adc.v
+          ls
+          c:\spice64\bin\ngspice_con -b -r adc.raw adc_batch.cir
+          mkdir results
+          copy *.raw ~/results
+      - name: Run in CMD
         run: |
           echo %PATH%
           dir c:\mingw64
           dir c:\mingw64\bin
-          dir c:\ucrt64
-          dir c:\ucrt64\bin
           echo Testing ...
           c:\spice64\bin\ngspice_con vlnggen adc.v
           dir
