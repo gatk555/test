@@ -36,18 +36,9 @@ jobs:
           echo $PATH
           cygpath -m /ucrt64/bin
           echo Testing ...
-          /c/spice64/bin/ngspice_con vlnggen adc.v
+          /c/spice64/bin/ngspice_con ./vlnggen adc.v
           ls
           /c/spice64/bin/ngspice_con -b -r adc.raw adc_batch.cir
-          mkdir results
-          copy *.raw ~/results
-      - name: Run in CMD
-        run: |
-          set
-          echo Testing ...
-          c:\spice64\bin\ngspice_con vlnggen adc.v
-          dir
-          c:\spice64\bin\ngspice_con -b -r adc.raw adc_batch.cir
           mkdir results
           copy *.raw ~/results
       - name: Save
