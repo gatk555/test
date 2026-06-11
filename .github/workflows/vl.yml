@@ -34,6 +34,7 @@ jobs:
         shell: msys2 {0}
         run: |
           echo $PATH
+          cygpath -m /ucrt64/bin
           echo Testing ...
           /c/spice64/bin/ngspice_con vlnggen adc.v
           ls
