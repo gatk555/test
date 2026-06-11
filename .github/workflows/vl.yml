@@ -12,7 +12,7 @@ jobs:
           msystem: ucrt64
           update: true
           install: >
-            make mingw-w64-ucrt-x86_64-verilator mingw-w64-ucrt-x86_64-toolchain
+            make mingw-w64-ucrt-x86_64-verilator mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-verilator-gcc
       - uses: actions/checkout@v6
       - uses: dawidd6/action-download-artifact@v8
         with:
