@@ -32,6 +32,11 @@ jobs:
           move libsamplerate-0.2.2-win64\bin\samplerate.dll c:\Spice64\bin
       - name: Run
         run: |
+          echo %PATH%
+          dir c:\mingw64
+          dir c:\mingw64\bin
+          dir c:\ucrt64
+          dir c:\ucrt64\bin
           echo Testing ...
           c:\spice64\bin\ngspice_con vlnggen adc.v
           dir
