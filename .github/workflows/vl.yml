@@ -35,9 +35,9 @@ jobs:
         run: |
           echo $PATH
           echo Testing ...
-          c/spice64/bin/ngspice_con vlnggen adc.v
+          /c/spice64/bin/ngspice_con vlnggen adc.v
           ls
-          c/spice64/bin/ngspice_con -b -r adc.raw adc_batch.cir
+          /c/spice64/bin/ngspice_con -b -r adc.raw adc_batch.cir
           mkdir results
           copy *.raw ~/results
       - name: Run in CMD
