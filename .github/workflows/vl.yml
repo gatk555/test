@@ -3,39 +3,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  macos:
-    runs-on: macos-latest
-    steps:
-      - name: Install Dependencies
-        run: |
-          brew install libxaw verilator libsndfile libsamplerate
-      - uses: actions/checkout@v6
-      - uses: dawidd6/action-download-artifact@v8
-        with:
-         repo: gatk555/test
-         workflow: others.yml
-         name: Ngspice Test, Macos ARM64
-         skip_unpack: true
-         workflow_conclusion: ""
-      - name: Run
-        run: |
-          sd=`pwd`
-          sudo chmod a+rwx /usr/local /usr/local/share /usr/local/share /usr/local/share/man /usr/local/share/man/man1 || true
-          cd /usr/local/
-          unzip $sd/'Ngspice Test, Macos ARM64.zip'
-          cd $sd
-          chmod a+x /usr/local/bin/ngspice
-          echo Testing ...
-          ngspice vlnggen adc.v
-          ls
-          ngspice -b -r adc.raw adc_batch.cir
-          mkdir ~/results
-          cp *.raw ~/results
-      - name: Save
-        uses: actions/upload-artifact@v4
-        with:
-          name: Results_Macos
-          path: ~/results
   win:
     runs-on: windows-latest
     steps:
@@ -66,13 +33,13 @@ jobs:
       - name: Run
         run: |
           echo Testing ...
-          c:\spice64\bin\ngspice vlnggen adc.v
+          c:\spice64\bin\ngspice_con vlnggen adc.v
           dir
-          c:\spice64\bin\ngspice -b -r adc.raw adc_batch.cir
+          c:\spice64\bin\ngspice_con -b -r adc.raw adc_batch.cir
           mkdir results
           copy *.raw ~/results
       - name: Save
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Results_Macos
           path: results
