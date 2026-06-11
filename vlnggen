@@ -40,6 +40,7 @@ if $oscompiled = 1 | $oscompiled = 2 | $oscompiled = 8 // Windows (MINGW, Cygwin
    set windows=1
    set dirsep1="\\"
    set dirsep2="/"
+   // Extra flags to fix undefined symbols.
    setcs cflags="-CFLAGS -std=c++14 -CFLAGS -DVL_TIME_CONTEXT $cflags"
    if $oscompiled = 1 // MINGW: verilator is a Perl wrapper, needs MSYS2 shell
       set run_verilator="sh -c \"verilator"
@@ -56,13 +57,11 @@ else
    set run_verilator_close=""
 end
 
-if $oscompiled = 7 // MacOS: use clang and allow undefined weak symbols.
+if $oscompiled = 7 // MacOS: use clang and allow suppress a weak symbol.
    set macos=1
-   setcs ld_magic="-Wl,-undefined,dynamic_lookup"
-   setcs cflags="--CFLAGS $ld_magic $cflags --compiler clang"
+   setcs cflags="-CFLAGS -DVL_TIME_CONTEXT $cflags --compiler clang"
 else
    set macos=0
-   setcs ld_magic=""
 end
 
 // Check for an input.h file in the current directory.  If present it may
@@ -328,7 +327,7 @@ if $bad = 0
    setcs tail="__ALL.a"
    setcs v_lib="$objdir/$prefix$tail"          // Like Vlng__ALL.a
 
-   shell g++ --shared $v_objs $v_lib $ld_magic -pthread -lpthread -o $soname
+   shell g++ --shared $v_objs $v_lib -pthread -lpthread -o $soname
 else
    // Assume we have CL.EXE and use that.  A script avoids multiple \escapes.
 
