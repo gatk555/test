@@ -1,5 +1,5 @@
 name: Build Binaries
-on: [push, pull_request, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
   build-win64:
@@ -265,6 +265,7 @@ jobs:
       - name: Install Dependencies
         run: | 
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install make libelf freeglut patchelf 
+          brew trust osx-cross/avr
           HOMEBREW_NO_INSTALL_FROM_API=1 brew tap osx-cross/avr
           HOMEBREW_NO_INSTALL_FROM_API=1 brew install avr-gcc@9 avr-binutils
           export PATH="/usr/local/opt/avr-gcc@9/bin:$PATH"
