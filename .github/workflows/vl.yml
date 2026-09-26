@@ -79,5 +79,5 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v6
         with:
-          name: Results_Macos
+          name: Results_Windows
           path: results

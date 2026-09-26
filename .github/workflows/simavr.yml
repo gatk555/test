@@ -3,7 +3,6 @@ on: [workflow_dispatch]
 
 jobs:
   build-win64:
-    name: Build libsimavr on Windows (MSYS2 UCRT64)
     runs-on: windows-latest
     defaults:
       run:
