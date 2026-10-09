@@ -23,7 +23,7 @@ jobs:
       - name: Build X86_64
         run: |
           PATH='/usr/local/opt/bison/bin:'$PATH
-          ./compile_macos_clang.sh || true # Will fail to install
+          NGSPICE_MAKES=3 ./compile_macos_clang.sh || true # Will fail to install
           if [ ! -f release/src/ngspice ]; then false; fi
       - name: Install X86_64
         run: |
@@ -209,7 +209,7 @@ jobs:
           ref: ga_test
       - name: Build
         run: |
-          ./compile_min.sh
+          NGSPICE_MAKES=3 ./compile_min.sh
           echo Create README.ngspice
           echo This binary build of ngspice was built at https://github.com/gatk555/ngspice. > /c/Spice64/README.ngspice
           echo 'The source code came from the Test branch with head revision:' >> /c/Spice64/README.ngspice
