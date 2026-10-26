@@ -64,7 +64,7 @@ jobs:
         with:
           msystem: MINGW32
           update: true
-          install: make mingw-w64-i686-toolchain mingw-w64-i686-libelf mingw-w64-i686-freeglut unzip
+          install: make mingw-w64-i686-toolchain mingw-w64-i686-freeglut unzip
       - name: CI-Build
         run: |
           make build-simavr V=1
