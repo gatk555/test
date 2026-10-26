@@ -163,7 +163,7 @@ jobs:
         with:
           repository: gatk555/simavr
           ref: test
-      - uses: pguyot/arm-runner-action@v2
+      - uses: gatk555/arm-runner-action@v2
         id: build_image
         with:
           cpu: cortex-a7
@@ -197,7 +197,7 @@ jobs:
         with:
           repository: gatk555/simavr
           ref: test
-      - uses: pguyot/arm-runner-action@v2
+      - uses: gatk555/arm-runner-action@v2
         id: build_image
         with:
           cpu: arm1176
