@@ -9,7 +9,7 @@ jobs:
         shell: msys2 {0}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
@@ -50,10 +50,36 @@ jobs:
           name: Windows 64-bit
           path: simavr_installed
 
+  build-win32:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          repository: gatk555/simavr
+          ref: test
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW32
+          update: true
+          install: make mingw-w64-i686-toolchain mingw-w64-i686-libelf mingw-w64-i686-freeglut unzip
+      - name: CI-Build
+        run: |
+          make build-simavr V=1
+          mkdir simavr_installed
+          make -k install DESTDIR=$(pwd)/simavr_installed/ || true
+          mv simavr_installed/bin/simavr simavr_installed/bin/simavr.exe
+          file simavr_installed/bin/*
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Windows 32-bit
+          path: simavr_installed
   build-lin64:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
@@ -85,7 +111,7 @@ jobs:
   build-lin32:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
@@ -133,7 +159,7 @@ jobs:
   build-armv7l:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
@@ -167,7 +193,7 @@ jobs:
   build-armv6l:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
@@ -201,7 +227,7 @@ jobs:
   build-aarch64:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
@@ -235,7 +261,7 @@ jobs:
     # macos-latest is an ARM architecture runner, you need to use the suffix -intel
     runs-on: macos-15-intel
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
@@ -263,7 +289,7 @@ jobs:
   build-darwin-arm64:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: gatk555/simavr
           ref: test
